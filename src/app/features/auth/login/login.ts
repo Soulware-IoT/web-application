@@ -18,6 +18,9 @@ import { Router } from '@angular/router';
       <button (click)="login(email.value, password.value)" style="padding:.5rem 1.5rem;cursor:pointer">
         Sign in
       </button>
+      <button (click)="loginWithGoogle()" style="padding:.5rem 1.5rem;cursor:pointer">
+        Continue with Google
+      </button>
       <a routerLink="/register">Don't have an account? Register</a>
     </main>
   `,
@@ -33,6 +36,16 @@ export class Login {
       this.error.set(error.message);
     } else {
       this.router.navigateByUrl('/app');
+    }
+  }
+
+  protected async loginWithGoogle() {
+    const { error } = await this.supabase.supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: { redirectTo: `${window.location.origin}/auth-callback` },
+    });
+    if (error) {
+      this.error.set(error.message);
     }
   }
 }

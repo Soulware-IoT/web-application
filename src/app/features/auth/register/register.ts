@@ -32,7 +32,11 @@ export class Register {
   protected readonly message = signal<string | null>(null);
 
   protected async register(email: string, password: string) {
-    const { error } = await this.supabase.supabase.auth.signUp({ email, password });
+    const { error } = await this.supabase.supabase.auth.signUp({
+      email,
+      password,
+      options: { emailRedirectTo: `${window.location.origin}/auth-callback` },
+    });
     if (error) {
       this.error.set(error.message);
     } else {

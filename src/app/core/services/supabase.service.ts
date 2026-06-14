@@ -7,6 +7,16 @@ export class SupabaseService {
   private readonly client: SupabaseClient = createClient(
     environment.supabaseUrl,
     environment.supabaseKey,
+    {
+      auth: {
+        flowType: 'pkce',
+        persistSession: true,
+        autoRefreshToken: true,
+        // Lo manejamos manualmente en AuthCallback para poder reenviar al
+        // deep link de mobile antes de consumir el code en la web.
+        detectSessionInUrl: false,
+      },
+    },
   );
 
   readonly session = signal<Session | null>(null);
