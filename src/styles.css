@@ -1,3 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import 'tailwindcss';
+
+.nav-item:hover {
+  background-color: #F2F5FA;
+  color: #1a1a1a;
+}
+
+.active-nav-item {
+  background-color: #0E3B63 !important;
+  color: #ffffff !important;
+}
+
+.mobile-drawer {
+  transform: translateY(-6px);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: transform 0.2s ease, opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.mobile-drawer.open {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
