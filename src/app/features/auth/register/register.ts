@@ -7,6 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { TranslocoService, TranslocoPipe } from '@jsverse/transloco';
 import { SupabaseService } from '../../../core/services/supabase.service';
 import { GoogleButton } from '../../../shared/components/google-button/google-button';
 import { PasswordField } from '../../../shared/components/password-field/password-field';
@@ -21,12 +22,13 @@ function passwordsMatch(group: AbstractControl): ValidationErrors | null {
 @Component({
   selector: 'app-register',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [ReactiveFormsModule, RouterLink, GoogleButton, PasswordField],
+  imports: [ReactiveFormsModule, RouterLink, TranslocoPipe, GoogleButton, PasswordField],
   templateUrl: './register.html',
 })
 export class Register {
   private readonly supabase = inject(SupabaseService);
   private readonly fb = inject(FormBuilder);
+  private readonly transloco = inject(TranslocoService);
 
   protected readonly error = signal<string | null>(null);
   protected readonly message = signal<string | null>(null);
@@ -59,7 +61,7 @@ export class Register {
       this.error.set(error.message);
       return;
     }
-    this.message.set('Revisa tu correo para confirmar tu cuenta.');
+    this.message.set(this.transloco.translate('auth.register.success'));
   }
 
   // Arrow function para preservar `this` al pasarla como input al GoogleButton.

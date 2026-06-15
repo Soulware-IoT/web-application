@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { TranslocoPipe } from '@jsverse/transloco';
 import { SupabaseService } from '../../../core/services/supabase.service';
 import { GoogleButton } from '../../../shared/components/google-button/google-button';
 import { PasswordField } from '../../../shared/components/password-field/password-field';
@@ -8,7 +9,7 @@ import { PasswordField } from '../../../shared/components/password-field/passwor
 @Component({
   selector: 'app-login',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [ReactiveFormsModule, RouterLink, GoogleButton, PasswordField],
+  imports: [ReactiveFormsModule, RouterLink, TranslocoPipe, GoogleButton, PasswordField],
   templateUrl: './login.html',
 })
 export class Login {

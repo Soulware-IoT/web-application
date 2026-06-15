@@ -1,18 +1,13 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslocoPipe } from '@jsverse/transloco';
 import { SupabaseService } from '../../core/services/supabase.service';
 
 @Component({
   selector: 'app-dashboard',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
-    <main style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100dvh;gap:1rem;font-family:sans-serif">
-      <h1>Dashboard</h1>
-      <p>You are authenticated. This is a protected page.</p>
-      <p>Logged in as: <strong>{{ email() }}</strong></p>
-      <button (click)="logout()" style="padding:.5rem 1.5rem;cursor:pointer">Sign out</button>
-    </main>
-  `,
+  imports: [TranslocoPipe],
+  templateUrl: './dashboard.html',
 })
 export class Dashboard {
   private readonly supabase = inject(SupabaseService);

@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, input, signal } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { TranslocoPipe } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-password-field',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, TranslocoPipe],
   templateUrl: './password-field.html',
 })
 export class PasswordField {

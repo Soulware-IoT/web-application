@@ -1,0 +1,53 @@
+{
+  "common": {
+    "email": "Email",
+    "email_invalid": "Enter a valid email address.",
+    "password": "Password",
+    "or": "or"
+  },
+  "auth": {
+    "login": {
+      "title": "Sign in",
+      "submit": "Sign in",
+      "submitting": "Signing in…",
+      "no_account": "Don't have an account?",
+      "register_link": "Register"
+    },
+    "register": {
+      "title": "Create account",
+      "submit": "Create account",
+      "submitting": "Creating…",
+      "password_min": "Password must be at least 6 characters.",
+      "confirm_password": "Confirm password",
+      "confirm_password_required": "Please confirm your password.",
+      "passwords_mismatch": "Passwords don't match.",
+      "success": "Check your email to confirm your account.",
+      "has_account": "Already have an account?",
+      "login_link": "Sign in"
+    },
+    "callback": {
+      "loading": "Processing…",
+      "opening_app": "Opening the app…",
+      "error_title": "Authentication error",
+      "back_to_login": "Back to login",
+      "open_app_title": "Open in the app",
+      "open_app_desc": "We couldn't open the Cocina360 app. Is it installed on this device?",
+      "download_app": "Download the app",
+      "continue_browser": "Continue in browser"
+    },
+    "google": {
+      "label": "Continue with Google",
+      "connecting": "Connecting…"
+    },
+    "password_toggle": {
+      "show": "Show password",
+      "hide": "Hide password"
+    }
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "description": "You are authenticated. This is a protected page.",
+    "logged_in_as": "Logged in as:",
+    "sign_out": "Sign out"
+  }
+}

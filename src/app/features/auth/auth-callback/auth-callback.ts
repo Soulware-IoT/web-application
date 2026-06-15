@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslocoService, TranslocoPipe } from '@jsverse/transloco';
 import { EmailOtpType, Session } from '@supabase/supabase-js';
 import { environment } from '../../../../environments/environment';
 import { SupabaseService } from '../../../core/services/supabase.service';
@@ -28,18 +29,21 @@ import { SupabaseService } from '../../../core/services/supabase.service';
 @Component({
   selector: 'app-auth-callback',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [TranslocoPipe],
   templateUrl: './auth-callback.html',
 })
 export class AuthCallback implements OnInit {
   private readonly supabase = inject(SupabaseService);
   private readonly router = inject(Router);
+  private readonly transloco = inject(TranslocoService);
 
   protected readonly error = signal<string | null>(null);
-  protected readonly status = signal('Processing callback…');
+  protected readonly status = signal('');
   protected readonly showDownload = signal(false);
   protected readonly downloadUrl = environment.appDownloadUrl;
 
   async ngOnInit(): Promise<void> {
+    this.status.set(this.transloco.translate('auth.callback.loading'));
     const query = new URLSearchParams(window.location.search);
     const hash = new URLSearchParams(window.location.hash.replace(/^#/, ''));
 
@@ -112,7 +116,7 @@ export class AuthCallback implements OnInit {
    * muestra el fallback de descarga.
    */
   private openAppWithFallback(session: Session): void {
-    this.status.set('Opening the app…');
+    this.status.set(this.transloco.translate('auth.callback.opening_app'));
     const params = new URLSearchParams({
       access_token: session.access_token,
       refresh_token: session.refresh_token,

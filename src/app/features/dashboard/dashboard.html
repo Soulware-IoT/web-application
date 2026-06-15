@@ -1,0 +1,15 @@
+<main class="flex min-h-dvh flex-col items-center justify-center gap-4 px-4 py-8" style="background-color: #F3F5FA">
+  <h1 class="text-2xl font-bold" style="color: #1a1a1a">{{ 'dashboard.title' | transloco }}</h1>
+  <p class="text-sm" style="color: #4A4A4F">{{ 'dashboard.description' | transloco }}</p>
+  <p class="text-sm" style="color: #4A4A4F">
+    {{ 'dashboard.logged_in_as' | transloco }} <strong>{{ email() }}</strong>
+  </p>
+  <button
+    type="button"
+    (click)="logout()"
+    class="rounded-[2px] border px-6 py-2.5 text-sm font-semibold"
+    style="border-color: #C5C5CC; color: #1a1a1a; background-color: #fff"
+  >
+    {{ 'dashboard.sign_out' | transloco }}
+  </button>
+</main>
