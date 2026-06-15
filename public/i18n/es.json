@@ -1,0 +1,53 @@
+{
+  "common": {
+    "email": "Correo",
+    "email_invalid": "Ingresa un correo válido.",
+    "password": "Contraseña",
+    "or": "o"
+  },
+  "auth": {
+    "login": {
+      "title": "Iniciar sesión",
+      "submit": "Iniciar sesión",
+      "submitting": "Entrando…",
+      "no_account": "¿No tienes cuenta?",
+      "register_link": "Regístrate"
+    },
+    "register": {
+      "title": "Crear cuenta",
+      "submit": "Crear cuenta",
+      "submitting": "Creando…",
+      "password_min": "La contraseña debe tener al menos 6 caracteres.",
+      "confirm_password": "Confirmar contraseña",
+      "confirm_password_required": "Confirma tu contraseña.",
+      "passwords_mismatch": "Las contraseñas no coinciden.",
+      "success": "Revisa tu correo para confirmar tu cuenta.",
+      "has_account": "¿Ya tienes cuenta?",
+      "login_link": "Inicia sesión"
+    },
+    "callback": {
+      "loading": "Procesando…",
+      "opening_app": "Abriendo la app…",
+      "error_title": "Error de autenticación",
+      "back_to_login": "Volver al inicio",
+      "open_app_title": "Abre la app",
+      "open_app_desc": "No pudimos abrir la app de Cocina360. ¿Está instalada en este dispositivo?",
+      "download_app": "Descargar la app",
+      "continue_browser": "Continuar en el navegador"
+    },
+    "google": {
+      "label": "Continuar con Google",
+      "connecting": "Conectando…"
+    },
+    "password_toggle": {
+      "show": "Mostrar contraseña",
+      "hide": "Ocultar contraseña"
+    }
+  },
+  "dashboard": {
+    "title": "Panel principal",
+    "description": "Estás autenticado. Esta es una página protegida.",
+    "logged_in_as": "Conectado como:",
+    "sign_out": "Cerrar sesión"
+  }
+}

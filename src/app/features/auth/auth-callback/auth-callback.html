@@ -1,0 +1,53 @@
+<main class="flex min-h-dvh flex-col items-center justify-center px-4 py-8" style="background-color: #F3F5FA">
+  @if (error()) {
+    <div class="w-full max-w-sm rounded-lg bg-white p-8 text-center" style="box-shadow: 0 4px 24px rgba(0,0,0,0.06)">
+      <h1 class="mb-3 text-xl font-bold" style="color: #1a1a1a">{{ 'auth.callback.error_title' | transloco }}</h1>
+      <p class="mb-6 text-sm" style="color: #4A4A4F">{{ error() }}</p>
+      <a
+        href="/login"
+        class="inline-block rounded-[2px] px-6 py-2.5 text-sm font-semibold text-white"
+        style="background-color: #000"
+      >
+        {{ 'auth.callback.back_to_login' | transloco }}
+      </a>
+    </div>
+  } @else if (showDownload()) {
+    <div class="w-full max-w-sm rounded-lg bg-white p-8 text-center" style="box-shadow: 0 4px 24px rgba(0,0,0,0.06)">
+      <h1 class="mb-3 text-xl font-bold" style="color: #1a1a1a">{{ 'auth.callback.open_app_title' | transloco }}</h1>
+      <p class="mb-6 text-sm" style="color: #4A4A4F">{{ 'auth.callback.open_app_desc' | transloco }}</p>
+      <div class="flex flex-col gap-3">
+        <a
+          [href]="downloadUrl"
+          class="block rounded-[2px] px-4 py-2.5 text-center text-sm font-semibold text-white"
+          style="background-color: #000"
+        >
+          {{ 'auth.callback.download_app' | transloco }}
+        </a>
+        <button
+          type="button"
+          (click)="continueInBrowser()"
+          class="rounded-[2px] border px-4 py-2.5 text-sm font-semibold"
+          style="border-color: #C5C5CC; color: #1a1a1a; background-color: #fff"
+        >
+          {{ 'auth.callback.continue_browser' | transloco }}
+        </button>
+      </div>
+    </div>
+  } @else {
+    <div class="flex flex-col items-center gap-4 text-center">
+      <svg
+        aria-hidden="true"
+        class="animate-spin"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        width="32"
+        height="32"
+      >
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="#0E3B63" stroke-width="3" />
+        <path class="opacity-75" fill="#0E3B63" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
+      </svg>
+      <p class="text-sm font-medium" style="color: #4A4A4F">{{ status() }}</p>
+    </div>
+  }
+</main>

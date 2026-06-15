@@ -1,0 +1,56 @@
+<main class="flex min-h-dvh items-center justify-center px-4 py-8" style="background-color: #F3F5FA">
+  <div class="w-full max-w-sm rounded-lg bg-white p-8" style="box-shadow: 0 4px 24px rgba(0,0,0,0.06)">
+
+    <h1 class="mb-6 text-center text-2xl font-bold" style="color: #1a1a1a">{{ 'auth.login.title' | transloco }}</h1>
+
+    <form [formGroup]="form" (ngSubmit)="login()" class="flex flex-col gap-4" novalidate>
+      <div class="flex flex-col gap-1.5">
+        <label for="email" class="text-sm font-medium" style="color: #4A4A4F">{{ 'common.email' | transloco }}</label>
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          autocomplete="email"
+          class="rounded-[2px] border px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-offset-0"
+          style="border-color: #C5C5CC; background-color: #F2F5FA; color: #1a1a1a; --tw-ring-color: #0E3B6333"
+        />
+        @if (form.controls.email.touched && form.controls.email.invalid) {
+          <p class="text-xs text-red-600">{{ 'common.email_invalid' | transloco }}</p>
+        }
+      </div>
+
+      <app-password-field
+        [control]="form.controls.password"
+        fieldId="password"
+        [label]="'common.password' | transloco"
+        autocomplete="current-password"
+      />
+
+      @if (error()) {
+        <p role="alert" class="rounded bg-red-50 px-3 py-2 text-sm text-red-700">{{ error() }}</p>
+      }
+
+      <button
+        type="submit"
+        [disabled]="loading()"
+        class="rounded-[2px] px-4 py-2.5 text-sm font-semibold text-white transition disabled:opacity-60"
+        style="background-color: #000"
+      >
+        {{ loading() ? ('auth.login.submitting' | transloco) : ('auth.login.submit' | transloco) }}
+      </button>
+    </form>
+
+    <div class="my-5 flex items-center gap-3 text-xs" style="color: #4A4A4F">
+      <span class="h-px flex-1" style="background-color: #C5C5CC"></span>
+      {{ 'common.or' | transloco }}
+      <span class="h-px flex-1" style="background-color: #C5C5CC"></span>
+    </div>
+
+    <app-google-button [action]="signInWithGoogle" />
+
+    <p class="mt-6 text-center text-sm" style="color: #4A4A4F">
+      {{ 'auth.login.no_account' | transloco }}
+      <a routerLink="/register" class="font-semibold underline" style="color: #1a1a1a">{{ 'auth.login.register_link' | transloco }}</a>
+    </p>
+  </div>
+</main>
