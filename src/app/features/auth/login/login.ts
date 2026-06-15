@@ -1,51 +1,53 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
 import { SupabaseService } from '../../../core/services/supabase.service';
-import { Router } from '@angular/router';
+import { GoogleButton } from '../../../shared/components/google-button/google-button';
+import { PasswordField } from '../../../shared/components/password-field/password-field';
 
 @Component({
   selector: 'app-login',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RouterLink],
-  template: `
-    <main style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100dvh;gap:1rem;font-family:sans-serif">
-      <h1>Login</h1>
-      <input #email type="email" placeholder="Email" style="padding:.5rem;width:260px" />
-      <input #password type="password" placeholder="Password" style="padding:.5rem;width:260px" />
-      @if (error()) {
-        <p style="color:red">{{ error() }}</p>
-      }
-      <button (click)="login(email.value, password.value)" style="padding:.5rem 1.5rem;cursor:pointer">
-        Sign in
-      </button>
-      <button (click)="loginWithGoogle()" style="padding:.5rem 1.5rem;cursor:pointer">
-        Continue with Google
-      </button>
-      <a routerLink="/register">Don't have an account? Register</a>
-    </main>
-  `,
+  imports: [ReactiveFormsModule, RouterLink, GoogleButton, PasswordField],
+  templateUrl: './login.html',
 })
 export class Login {
   private readonly supabase = inject(SupabaseService);
   private readonly router = inject(Router);
-  protected readonly error = signal<string | null>(null);
+  private readonly fb = inject(FormBuilder);
 
-  protected async login(email: string, password: string) {
+  protected readonly error = signal<string | null>(null);
+  protected readonly loading = signal(false);
+
+  protected readonly form = this.fb.nonNullable.group({
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required]],
+  });
+
+  protected async login(): Promise<void> {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
+    this.error.set(null);
+    this.loading.set(true);
+    const { email, password } = this.form.getRawValue();
     const { error } = await this.supabase.supabase.auth.signInWithPassword({ email, password });
+    this.loading.set(false);
     if (error) {
       this.error.set(error.message);
-    } else {
-      this.router.navigateByUrl('/app');
+      return;
     }
+    this.router.navigateByUrl('/app');
   }
 
-  protected async loginWithGoogle() {
+  // Arrow function para preservar `this` al pasarla como input al GoogleButton.
+  protected readonly signInWithGoogle = async (): Promise<void> => {
+    this.error.set(null);
     const { error } = await this.supabase.supabase.auth.signInWithOAuth({
       provider: 'google',
       options: { redirectTo: `${window.location.origin}/auth-callback` },
     });
-    if (error) {
-      this.error.set(error.message);
-    }
-  }
+    if (error) this.error.set(error.message);
+  };
 }
