@@ -28,27 +28,7 @@ import { SupabaseService } from '../../../core/services/supabase.service';
 @Component({
   selector: 'app-auth-callback',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
-    <main style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100dvh;gap:1rem;font-family:sans-serif">
-      @if (error()) {
-        <h1>Authentication error</h1>
-        <p style="color:red">{{ error() }}</p>
-        <a href="/login">Back to login</a>
-      } @else if (showDownload()) {
-        <h1>Open in the app</h1>
-        <p>We couldn't open the Cocina360 app. Is it installed on this device?</p>
-        <a [href]="downloadUrl" style="padding:.5rem 1.5rem;border:1px solid #333;border-radius:6px;text-decoration:none">
-          Download the app
-        </a>
-        <button (click)="continueInBrowser()" style="padding:.5rem 1.5rem;cursor:pointer">
-          Continue in browser
-        </button>
-      } @else {
-        <h1>Signing you in…</h1>
-        <p>{{ status() }}</p>
-      }
-    </main>
-  `,
+  templateUrl: './auth-callback.html',
 })
 export class AuthCallback implements OnInit {
   private readonly supabase = inject(SupabaseService);
