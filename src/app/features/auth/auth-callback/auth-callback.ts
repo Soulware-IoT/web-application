@@ -79,6 +79,12 @@ export class AuthCallback implements OnInit {
   ): Promise<{ session: Session | null; error: string | null; isEmailFlow: boolean }> {
     const code = query.get('code');
     if (code) {
+      if (query.get('platform') === 'mobile') {
+        const params = new URLSearchParams({ code });
+        window.location.href = `${environment.mobileDeepLink}?${params.toString()}`;
+        return { session: null, error: null, isEmailFlow: false };
+      }
+
       const { data, error } = await this.supabase.supabase.auth.exchangeCodeForSession(code);
       return { session: data.session, error: error?.message ?? null, isEmailFlow: false };
     }
