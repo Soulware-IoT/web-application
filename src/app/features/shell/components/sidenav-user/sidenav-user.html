@@ -1,15 +1,19 @@
 <div class="grid gap-3 border-t px-4 py-4" style="border-color: #e2e8f0">
   <div class="grid grid-cols-[36px_1fr] items-center gap-3">
     <div
-      class="grid h-9 w-9 place-items-center rounded-full text-xs font-bold text-white"
+      class="grid h-9 w-9 place-items-center overflow-hidden rounded-full text-xs font-bold text-white"
       style="background-color: #0E3B63"
-      [attr.aria-label]="name"
+      [attr.aria-label]="name()"
     >
-      {{ initials }}
+      @if (avatarUrl()) {
+        <img [src]="avatarUrl()" [alt]="name()" width="36" height="36" class="h-9 w-9 object-cover" />
+      } @else {
+        {{ initials() }}
+      }
     </div>
     <div class="grid">
-      <span class="truncate text-sm font-semibold leading-tight" style="color: #1a1a1a">{{ name }}</span>
-      <span class="truncate text-xs" style="color: #4A4A4F">{{ email }}</span>
+      <span class="truncate text-sm font-semibold leading-tight" style="color: #1a1a1a">{{ name() }}</span>
+      <span class="truncate text-xs" style="color: #4A4A4F">{{ email() }}</span>
     </div>
   </div>
 
