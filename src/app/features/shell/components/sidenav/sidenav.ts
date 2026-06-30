@@ -4,11 +4,12 @@ import { filter } from 'rxjs';
 import { SidenavBrand } from '../sidenav-brand/sidenav-brand';
 import { SidenavNav } from '../sidenav-nav/sidenav-nav';
 import { SidenavUser } from '../sidenav-user/sidenav-user';
+import { SidenavOrgSelector } from '../sidenav-org-selector/sidenav-org-selector';
 
 @Component({
   selector: 'app-sidenav',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [SidenavBrand, SidenavNav, SidenavUser],
+  imports: [SidenavBrand, SidenavNav, SidenavUser, SidenavOrgSelector],
   templateUrl: './sidenav.html',
 })
 export class Sidenav implements OnInit {
