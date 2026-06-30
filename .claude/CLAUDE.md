@@ -43,6 +43,14 @@ feature-component/
 - The folder hierarchy must reflect actual consumption: if a set of sub-components is only consumed by one parent component, they live inside that parent's folder — not in a sibling `components/` folder at a higher level.
 - Only add a `components/` intermediary folder when there are multiple peer components at that level. A single component does not warrant the extra layer.
 
+### Spacing and Layout
+
+Use `gap` (grid/flex) to space sibling elements. Do **not** use `padding` as a structural tool to push siblings apart — that creates per-element values that diverge over time and break as the layout evolves.
+
+- Sibling spacing → `gap` on the parent grid/flex container.
+- Internal element inset → `padding` on the **container itself**, declared once.
+- Never create a wrapper `<div>` whose sole purpose is to add padding around a child.
+
 ### Components
 
 - Keep components small and focused on a single responsibility

@@ -33,7 +33,7 @@
   [class.open]="isOpen()"
   style="top: 57px; background-color: #fff; border-top: 1px solid #e2e8f0; box-shadow: 0 8px 24px rgba(0,0,0,0.08)"
 >
-  <div class="px-3 py-3 border-b" style="border-color: #e2e8f0">
+  <div class="px-3 py-2 border-b" style="border-color: #e2e8f0">
     <app-sidenav-org-selector />
   </div>
   <app-sidenav-nav />
@@ -46,13 +46,11 @@
   style="grid-template-rows: auto 1fr auto; background-color: #fff; border-right: 1px solid #e2e8f0; position: sticky; top: 0"
   aria-label="Sidebar"
 >
-  <div>
-    <div class="px-5 pt-5 pb-3">
+  <div class="grid gap-2 px-3 pt-4 pb-2">
+    <div class="px-2.5">
       <app-sidenav-brand />
     </div>
-    <div class="px-3 pb-3">
-      <app-sidenav-org-selector />
-    </div>
+    <app-sidenav-org-selector />
   </div>
   <app-sidenav-nav />
   <app-sidenav-user />
