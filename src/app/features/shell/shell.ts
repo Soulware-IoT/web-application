@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Sidenav } from './components/sidenav/sidenav';
+import { Sidenav } from './sidenav/sidenav';
 
 @Component({
   selector: 'app-shell',

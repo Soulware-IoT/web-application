@@ -7,12 +7,15 @@ import {
   signal,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { OrganizationService } from '../../../../core/services/organization.service';
-import { OrganizationResponse } from '../../../../core/models/organization.model';
+import { OrganizationService } from '../../../../../core/services/organization.service';
+import { OrganizationResponse } from '../../../../../core/models/organization.model';
+import { OrgSelectorTrigger } from './components/org-selector-trigger/org-selector-trigger';
+import { OrgSelectorDropdown } from './components/org-selector-dropdown/org-selector-dropdown';
 
 @Component({
   selector: 'app-sidenav-org-selector',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [OrgSelectorTrigger, OrgSelectorDropdown],
   templateUrl: './sidenav-org-selector.html',
   host: {
     '(document:click)': 'onDocumentClick($event)',
@@ -26,14 +29,10 @@ export class SidenavOrgSelector {
 
   protected readonly organizations = this.orgService.organizations;
   protected readonly activeOrg = this.orgService.activeOrg;
-  protected readonly loading = this.orgService.loading;
   protected readonly open = signal(false);
 
-  /// True only once the fetch has resolved with an empty list.
-  protected readonly isEmpty = computed(() => this.organizations()?.length === 0);
-  /// True while the very first fetch is still in flight.
   protected readonly isLoading = computed(
-    () => this.loading() && this.organizations() === null,
+    () => this.orgService.loading() && this.organizations() === null,
   );
 
   protected toggle(): void {
@@ -52,10 +51,6 @@ export class SidenavOrgSelector {
   protected createOrganization(): void {
     this.close();
     this.router.navigateByUrl('/app/organizations/new');
-  }
-
-  protected initial(name: string): string {
-    return name.trim().charAt(0).toUpperCase() || '?';
   }
 
   protected onDocumentClick(event: MouseEvent): void {

@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnInit, inject, signal } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
-import { SidenavBrand } from '../sidenav-brand/sidenav-brand';
-import { SidenavNav } from '../sidenav-nav/sidenav-nav';
-import { SidenavUser } from '../sidenav-user/sidenav-user';
-import { SidenavOrgSelector } from '../sidenav-org-selector/sidenav-org-selector';
+import { SidenavBrand } from './components/sidenav-brand/sidenav-brand';
+import { SidenavNav } from './components/sidenav-nav/sidenav-nav';
+import { SidenavUser } from './components/sidenav-user/sidenav-user';
+import { SidenavOrgSelector } from './components/sidenav-org-selector/sidenav-org-selector';
 
 @Component({
   selector: 'app-sidenav',

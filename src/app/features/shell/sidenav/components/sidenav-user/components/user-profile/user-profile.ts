@@ -1,19 +1,18 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
-import { Router } from '@angular/router';
-import { SupabaseService } from '../../../../core/services/supabase.service';
-import { ProfileService } from '../../../../core/services/profile.service';
+import { ProfileService } from '../../../../../../../core/services/profile.service';
+import { SupabaseService } from '../../../../../../../core/services/supabase.service';
 
 @Component({
-  selector: 'app-sidenav-user',
+  selector: 'app-user-profile',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './sidenav-user.html',
+  templateUrl: './user-profile.html',
 })
-export class SidenavUser {
-  private readonly supabase = inject(SupabaseService);
+export class UserProfile {
   private readonly profileService = inject(ProfileService);
-  private readonly router = inject(Router);
+  private readonly supabase = inject(SupabaseService);
 
   private readonly profile = this.profileService.profile;
+  protected readonly loading = this.profileService.loading;
 
   protected readonly email = computed(
     () => this.profile()?.email ?? this.supabase.session()?.user?.email ?? '',
@@ -30,13 +29,7 @@ export class SidenavUser {
   });
 
   protected readonly avatarUrl = computed(() => this.profile()?.avatarUrl ?? '');
-
   protected readonly initials = computed(() => this.initialsFrom(this.name()));
-
-  protected async logout(): Promise<void> {
-    await this.supabase.supabase.auth.signOut();
-    this.router.navigateByUrl('/login');
-  }
 
   private localPart(email: string): string {
     return email.split('@')[0] ?? '';

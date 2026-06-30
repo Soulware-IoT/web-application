@@ -13,7 +13,7 @@ export class OrganizationService {
 
   readonly organizations = signal<OrganizationResponse[] | null>(null);
   readonly activeOrg = signal<OrganizationResponse | null>(null);
-  readonly loading = signal(false);
+  readonly loading = signal(true);
 
   private loaded = false;
 
@@ -22,10 +22,12 @@ export class OrganizationService {
       const loggedIn = !!this.supabase.session()?.user?.id;
       if (loggedIn && !this.loaded) {
         this.loaded = true;
+        this.loading.set(true);
         this.load();
       }
       if (!loggedIn) {
         this.loaded = false;
+        this.loading.set(true);
         this.organizations.set(null);
         this.activeOrg.set(null);
       }
