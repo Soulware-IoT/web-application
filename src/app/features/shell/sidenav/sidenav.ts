@@ -3,13 +3,13 @@ import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 import { SidenavBrand } from './components/sidenav-brand/sidenav-brand';
 import { SidenavNav } from './components/sidenav-nav/sidenav-nav';
-import { SidenavUser } from './components/sidenav-user/sidenav-user';
+import { SidenavBottom } from './components/sidenav-bottom/sidenav-bottom';
 import { SidenavOrgSelector } from './components/sidenav-org-selector/sidenav-org-selector';
 
 @Component({
   selector: 'app-sidenav',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [SidenavBrand, SidenavNav, SidenavUser, SidenavOrgSelector],
+  imports: [SidenavBrand, SidenavNav, SidenavBottom, SidenavOrgSelector],
   templateUrl: './sidenav.html',
 })
 export class Sidenav implements OnInit {

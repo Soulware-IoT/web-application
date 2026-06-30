@@ -6,6 +6,6 @@ import { SignOutButton } from './components/sign-out-button/sign-out-button';
   selector: 'app-sidenav-user',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [UserProfile, SignOutButton],
-  templateUrl: './sidenav-user.html',
+  templateUrl: './sidenav-bottom.html',
 })
-export class SidenavUser {}
+export class SidenavBottom {}
