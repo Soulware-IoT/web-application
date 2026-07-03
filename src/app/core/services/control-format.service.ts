@@ -1,7 +1,11 @@
 import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { ControlFormatResponse, LifecycleActionName } from '../models/control-format.model';
+import {
+  ControlFormatResponse,
+  FieldInput,
+  LifecycleActionName,
+} from '../models/control-format.model';
 import { NotificationService, httpErrorMessage } from '../notifications/notification.service';
 
 const TRANSITION_MESSAGE: Record<LifecycleActionName, string> = {
@@ -22,6 +26,8 @@ export class ControlFormatService {
   readonly loadingProcessIds = signal<ReadonlySet<string>>(new Set());
   /** The format shown in the detail pane on the right. */
   readonly format = signal<ControlFormatResponse | null>(null);
+  /** True while the detail pane's format is being fetched. */
+  readonly formatLoading = signal(false);
 
   formatsFor(processId: string): ControlFormatResponse[] | undefined {
     return this.formatsByProcess()[processId];
@@ -84,6 +90,37 @@ export class ControlFormatService {
   }
 
   /**
+   * Replaces the format's fields wholesale (draft only). The UI assembles the
+   * complete valid state and sends it as a single PUT.
+   */
+  replaceFields(formatId: string, fields: FieldInput[]): Promise<ControlFormatResponse | null> {
+    return new Promise((resolve) => {
+      this.http
+        .put<ControlFormatResponse>(`${environment.apiUrl}/formats/${formatId}/fields`, { fields })
+        .subscribe({
+          next: (updated) => {
+            this.format.set(updated);
+            this.formatsByProcess.update((map) => {
+              const list = map[updated.processId];
+              if (!list) return map;
+              return {
+                ...map,
+                [updated.processId]: list.map((f) => (f.id === updated.id ? updated : f)),
+              };
+            });
+            this.notifications.success('Campos guardados');
+            resolve(updated);
+          },
+          error: (err) => {
+            console.error('[ControlFormatService] failed to replace fields', err);
+            this.notifications.error(httpErrorMessage(err));
+            resolve(null);
+          },
+        });
+    });
+  }
+
+  /**
    * Runs a lifecycle transition (activate/suspend/resume/cease) and reflects
    * the new status in both the detail pane and the cached sidebar list.
    */
@@ -116,11 +153,16 @@ export class ControlFormatService {
 
   /** Loads a single format for the detail pane (also covers deep links). */
   loadDetail(id: string): void {
+    this.formatLoading.set(true);
     this.http.get<ControlFormatResponse>(`${environment.apiUrl}/formats/${id}`).subscribe({
-      next: (format) => this.format.set(format),
+      next: (format) => {
+        this.format.set(format);
+        this.formatLoading.set(false);
+      },
       error: (err) => {
         console.error('[ControlFormatService] failed to load format detail', err);
         this.format.set(null);
+        this.formatLoading.set(false);
       },
     });
   }

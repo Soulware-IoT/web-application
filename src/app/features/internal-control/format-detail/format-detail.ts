@@ -1,16 +1,21 @@
-import { ChangeDetectionStrategy, Component, effect, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, inject, signal, untracked } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs';
 import { ControlFormatService } from '../../../core/services/control-format.service';
+import { UnsavedChangesService } from '../../../core/unsaved-changes/unsaved-changes.service';
 import { FormatStatusMenu } from '../components/format-status-menu/format-status-menu';
+import { FormatSchemaEditor } from '../components/format-schema-editor/format-schema-editor';
+import { FormatDetailSkeleton } from './format-detail-skeleton';
 
 @Component({
   selector: 'app-format-detail',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [FormatStatusMenu],
+  imports: [FormatStatusMenu, FormatSchemaEditor, FormatDetailSkeleton],
   template: `
-    @if (format(); as f) {
+    @if (loading()) {
+      <app-format-detail-skeleton />
+    } @else if (format(); as f) {
       <div class="grid h-full gap-6 p-8" style="grid-template-rows: auto 1fr">
         <!-- Header: big name (marquee-truncated) + status label -->
         <header class="grid gap-2">
@@ -25,34 +30,69 @@ import { FormatStatusMenu } from '../components/format-status-menu/format-status
           </div>
         </header>
 
-        <!-- Registries area (coming soon) -->
-        <section
-          class="grid place-items-center rounded-lg border border-dashed"
-          style="border-color: #e2e8f0"
-        >
-          <p class="text-sm" style="color: #94a3b8">
-            Aquí se cargarán los registros del formato — próximamente.
-          </p>
-        </section>
+        <!-- Draft: column designer · Non-draft: data grid -->
+        @if (f.status === 'draft') {
+          <app-format-schema-editor [format]="f" />
+        } @else {
+          <section
+            class="grid place-items-center rounded-lg border border-dashed"
+            style="border-color: #e2e8f0"
+          >
+            <p class="text-sm" style="color: #94a3b8">
+              Aquí se cargará la grilla de registros — próximamente.
+            </p>
+          </section>
+        }
+      </div>
+    } @else {
+      <div class="grid h-full place-items-center p-8">
+        <p class="text-sm" style="color: #64748b">No se pudo cargar el formato.</p>
       </div>
     }
   `,
 })
 export class FormatDetail {
   private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
   private readonly formatService = inject(ControlFormatService);
+  private readonly unsaved = inject(UnsavedChangesService);
 
   private readonly formatId = toSignal(
     this.route.paramMap.pipe(map((params) => params.get('formatId'))),
     { initialValue: null },
   );
 
+  /** The format actually loaded into view; lags `formatId` while we confirm. */
+  private readonly loadedId = signal<string | null>(null);
+
   protected readonly format = this.formatService.format;
+  protected readonly loading = this.formatService.formatLoading;
 
   constructor() {
+    // Switching format reuses this component (only the param changes), so the
+    // CanDeactivate guard never fires — we intercept the change here instead.
     effect(() => {
       const id = this.formatId();
-      if (id) this.formatService.loadDetail(id);
+      const current = untracked(() => this.loadedId());
+      if (!id || id === current) return;
+
+      if (untracked(() => this.unsaved.isDirty())) {
+        this.unsaved.confirm().then((leave) => {
+          if (leave) {
+            this.load(id);
+          } else if (current) {
+            // Revert the URL; the re-run then sees id === current and no-ops.
+            this.router.navigate(['/app/internal-control/formats', current]);
+          }
+        });
+      } else {
+        this.load(id);
+      }
     });
+  }
+
+  private load(id: string): void {
+    this.loadedId.set(id);
+    this.formatService.loadDetail(id);
   }
 }
