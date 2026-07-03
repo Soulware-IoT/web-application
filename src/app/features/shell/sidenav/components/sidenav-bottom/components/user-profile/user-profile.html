@@ -29,8 +29,16 @@
       style="background-color: #0E3B63"
       [attr.aria-label]="name()"
     >
-      @if (avatarUrl()) {
-        <img [src]="avatarUrl()" [alt]="name()" width="36" height="36" class="h-9 w-9 object-cover" />
+      @if (showAvatar()) {
+        <img
+          [src]="avatarSrc()"
+          [alt]="name()"
+          width="36"
+          height="36"
+          class="h-9 w-9 object-cover"
+          referrerpolicy="no-referrer"
+          (error)="onAvatarError()"
+        />
       } @else {
         {{ initials() }}
       }

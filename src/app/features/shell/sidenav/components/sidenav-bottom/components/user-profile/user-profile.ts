@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { ProfileService } from '../../../../../../../core/services/profile.service';
 import { SupabaseService } from '../../../../../../../core/services/supabase.service';
 
@@ -28,8 +28,21 @@ export class UserProfile {
     );
   });
 
-  protected readonly avatarUrl = computed(() => this.profile()?.avatarUrl ?? '');
+  private readonly avatarUrl = computed(() => this.profile()?.avatarUrl ?? '');
   protected readonly initials = computed(() => this.initialsFrom(this.name()));
+
+  /** URL that failed to load; the avatar falls back to initials while it matches. */
+  private readonly brokenAvatarUrl = signal('');
+
+  /** Only show the image while it has a URL that hasn't failed to load. */
+  protected readonly showAvatar = computed(
+    () => !!this.avatarUrl() && this.avatarUrl() !== this.brokenAvatarUrl(),
+  );
+  protected readonly avatarSrc = this.avatarUrl;
+
+  protected onAvatarError(): void {
+    this.brokenAvatarUrl.set(this.avatarUrl());
+  }
 
   private localPart(email: string): string {
     return email.split('@')[0] ?? '';
