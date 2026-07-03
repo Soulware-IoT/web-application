@@ -1,11 +1,20 @@
 import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { ControlFormatResponse } from '../models/control-format.model';
+import { ControlFormatResponse, LifecycleActionName } from '../models/control-format.model';
+import { NotificationService, httpErrorMessage } from '../notifications/notification.service';
+
+const TRANSITION_MESSAGE: Record<LifecycleActionName, string> = {
+  activate: 'Formato activado',
+  suspend: 'Formato suspendido',
+  resume: 'Formato reanudado',
+  cease: 'Formato cesado',
+};
 
 @Injectable({ providedIn: 'root' })
 export class ControlFormatService {
   private readonly http = inject(HttpClient);
+  private readonly notifications = inject(NotificationService);
 
   /** Formats already fetched, keyed by their parent process id. */
   readonly formatsByProcess = signal<Record<string, ControlFormatResponse[]>>({});
@@ -62,10 +71,12 @@ export class ControlFormatService {
               ...map,
               [processId]: [...(map[processId] ?? []), format],
             }));
+            this.notifications.success('Formato creado');
             resolve(format);
           },
           error: (err) => {
             console.error('[ControlFormatService] failed to create format', err);
+            this.notifications.error(httpErrorMessage(err));
             resolve(null);
           },
         });
@@ -76,7 +87,7 @@ export class ControlFormatService {
    * Runs a lifecycle transition (activate/suspend/resume/cease) and reflects
    * the new status in both the detail pane and the cached sidebar list.
    */
-  transition(id: string, action: string): Promise<ControlFormatResponse | null> {
+  transition(id: string, action: LifecycleActionName): Promise<ControlFormatResponse | null> {
     return new Promise((resolve) => {
       this.http
         .post<ControlFormatResponse>(`${environment.apiUrl}/formats/${id}/${action}`, {})
@@ -91,10 +102,12 @@ export class ControlFormatService {
                 [updated.processId]: list.map((f) => (f.id === updated.id ? updated : f)),
               };
             });
+            this.notifications.success(TRANSITION_MESSAGE[action]);
             resolve(updated);
           },
           error: (err) => {
             console.error('[ControlFormatService] failed to transition format', err);
+            this.notifications.error(httpErrorMessage(err));
             resolve(null);
           },
         });

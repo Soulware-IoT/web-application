@@ -3,11 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { OrganizationService } from './organization.service';
 import { ControlProcessResponse } from '../models/control-process.model';
+import { NotificationService, httpErrorMessage } from '../notifications/notification.service';
 
 @Injectable({ providedIn: 'root' })
 export class ControlProcessService {
   private readonly http = inject(HttpClient);
   private readonly orgService = inject(OrganizationService);
+  private readonly notifications = inject(NotificationService);
 
   readonly processes = signal<ControlProcessResponse[] | null>(null);
   readonly loading = signal(true);
@@ -35,12 +37,16 @@ export class ControlProcessService {
     this.http
       .patch<ControlProcessResponse>(`${environment.apiUrl}/control-processes/${id}`, { name })
       .subscribe({
-        next: (updated) =>
+        next: (updated) => {
           this.processes.update((list) =>
             list?.map((p) => (p.id === id ? updated : p)) ?? list,
-          ),
-        error: (err) =>
-          console.error('[ControlProcessService] failed to rename control process', err),
+          );
+          this.notifications.success('Proceso renombrado');
+        },
+        error: (err) => {
+          console.error('[ControlProcessService] failed to rename control process', err);
+          this.notifications.error(httpErrorMessage(err));
+        },
       });
   }
 
