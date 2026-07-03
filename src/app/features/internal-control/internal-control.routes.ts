@@ -7,8 +7,7 @@ export const internalControlRoutes: Routes = [
       import('./process-placeholder/process-placeholder').then((m) => m.ProcessPlaceholder),
   },
   {
-    path: ':processId',
-    loadComponent: () =>
-      import('./process-detail/process-detail').then((m) => m.ProcessDetail),
+    path: 'formats/:formatId',
+    loadComponent: () => import('./format-detail/format-detail').then((m) => m.FormatDetail),
   },
 ];
