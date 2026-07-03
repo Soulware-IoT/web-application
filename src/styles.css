@@ -20,6 +20,34 @@
   animation: fade-in 0.5s ease-in-out both;
 }
 
+/* Reveal-on-hover for truncated nav labels. The inner text only slides when it
+   actually overflows: min(0px, 100cqw - 100%) is 0 when the text fits its
+   container and a negative offset (the overflow amount) when it doesn't. */
+.marquee {
+  overflow: hidden;
+  white-space: nowrap;
+  container-type: inline-size;
+}
+.marquee-inner {
+  display: inline-block;
+  transform: translateX(0);
+}
+@keyframes marquee-reveal {
+  0%   { transform: translateX(0); opacity: 1; }                                 /* inicio visible (coincide con el estado base → sin flicker) */
+  15%  { transform: translateX(0); opacity: 1; }                                 /* pausa antes de deslizar */
+  55%  { transform: translateX(min(0px, calc(100cqw - 100%))); opacity: 1; }     /* desliza hasta el final */
+  75%  { transform: translateX(min(0px, calc(100cqw - 100%))); opacity: 1; }     /* pausa en el final */
+  85%  { transform: translateX(min(0px, calc(100cqw - 100%))); opacity: 0; }     /* fade out en el final */
+  86%  { transform: translateX(0); opacity: 0; }                                 /* reposiciona al inicio, invisible */
+  100% { transform: translateX(0); opacity: 1; }                                 /* fade in en el inicio */
+}
+/* Se dispara solo (hover sobre el texto) o cuando un ancestro `.group` recibe
+   hover — así el marquee es reutilizable tanto suelto como dentro de una fila. */
+.marquee:hover .marquee-inner,
+.group:hover .marquee-inner {
+  animation: marquee-reveal 7s ease-in-out 0.2s infinite;
+}
+
 .mobile-drawer {
   transform: translateY(-6px);
   opacity: 0;

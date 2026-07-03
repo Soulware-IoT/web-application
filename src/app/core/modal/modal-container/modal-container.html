@@ -1,0 +1,41 @@
+<!-- ── Backdrop ──────────────────────────────────────────────────────────── -->
+<div
+  class="animate-fade-in fixed inset-0 z-50 grid place-items-center p-4"
+  style="background-color: rgba(15, 23, 42, 0.45)"
+  (click)="onBackdropClick($event)"
+>
+  <!-- ── Panel ───────────────────────────────────────────────────────────── -->
+  <div
+    #panel
+    role="dialog"
+    aria-modal="true"
+    [attr.aria-labelledby]="title() ? titleId : null"
+    tabindex="-1"
+    class="grid w-full max-w-md gap-4 rounded-lg bg-white p-5 shadow-xl outline-none"
+    (keydown.Tab)="onTab($any($event), false)"
+    (keydown.shift.Tab)="onTab($any($event), true)"
+  >
+    <!-- Header -->
+    <div class="grid items-start gap-3" style="grid-template-columns: 1fr auto">
+      @if (title()) {
+        <h2 [id]="titleId" class="text-base font-semibold" style="color: #1a1a1a">
+          {{ title() }}
+        </h2>
+      } @else {
+        <span></span>
+      }
+      <button
+        type="button"
+        (click)="ref.close()"
+        aria-label="Cerrar"
+        class="grid h-7 w-7 place-items-center rounded-[2px] transition-colors hover:bg-gray-100"
+        style="color: #4A4A4F"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+
+    <!-- Projected content -->
+    <ng-container [ngComponentOutlet]="content()" [ngComponentOutletInjector]="contentInjector" />
+  </div>
+</div>

@@ -20,6 +20,8 @@ export const shellRoutes: Routes = [
   {
     path: 'internal-control',
     loadComponent: () => import('../internal-control/internal-control').then((m) => m.InternalControl),
+    loadChildren: () =>
+      import('../internal-control/internal-control.routes').then((m) => m.internalControlRoutes),
   },
   {
     path: 'security',
