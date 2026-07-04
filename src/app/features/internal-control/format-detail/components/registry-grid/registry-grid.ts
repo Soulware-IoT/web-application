@@ -16,6 +16,8 @@ import {
 } from '../../../../../core/models/control-format.model';
 import { ControlRegistryResponse } from '../../../../../core/models/control-registry.model';
 import { ControlRegistryService } from '../../../../../core/services/control-registry.service';
+import { ModalService } from '../../../../../core/modal/modal.service';
+import { AddRegistryModal } from './add-registry-modal/add-registry-modal';
 
 /** Per-column client-side filter, discriminated by the field type it applies to. */
 type ColumnFilter =
@@ -36,8 +38,12 @@ const FILTERABLE: ReadonlySet<FieldType> = new Set<FieldType>(['text', 'number',
 })
 export class RegistryGrid {
   private readonly registryService = inject(ControlRegistryService);
+  private readonly modal = inject(ModalService);
 
   readonly format = input.required<ControlFormatResponse>();
+
+  /** New registries are only accepted while the format is active. */
+  protected readonly canAdd = computed(() => this.format().status === 'active');
 
   /** Placeholder rendered for missing/empty cell values. */
   protected readonly EMPTY = '—';
@@ -87,6 +93,18 @@ export class RegistryGrid {
 
   constructor() {
     effect(() => this.registryService.loadForFormat(this.format().id));
+  }
+
+  /** Opens the data-entry modal and appends the resulting registry. */
+  protected async addRecord(): Promise<void> {
+    const format = this.format();
+    const ref = this.modal.open<Record<string, unknown>>(AddRegistryModal, {
+      title: 'Agregar registro',
+      data: { format },
+    });
+
+    const data = await ref.closed;
+    if (data) await this.registryService.create(format.id, data);
   }
 
   protected typeColor(type: FieldType): string {

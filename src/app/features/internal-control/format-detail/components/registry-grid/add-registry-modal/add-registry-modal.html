@@ -1,0 +1,105 @@
+<form class="grid gap-4" [formGroup]="form" (ngSubmit)="save()">
+  <div class="grid max-h-[60vh] gap-4 overflow-y-auto pr-1">
+    @for (field of fields; track field.id) {
+      @let error = errorFor(field);
+      <div class="grid gap-1.5">
+        <label [for]="'reg-' + field.key" class="text-sm font-medium" style="color: #1a1a1a">
+          {{ field.label }}
+          @if (field.required && field.type !== 'boolean') {
+            <span aria-hidden="true" style="color: #dc2626">*</span>
+            <span class="sr-only">(requerido)</span>
+          }
+        </label>
+
+        @switch (field.type) {
+          @case ('boolean') {
+            <input
+              [id]="'reg-' + field.key"
+              type="checkbox"
+              [formControlName]="field.key"
+              class="h-4 w-4 justify-self-start"
+            />
+          }
+          @case ('number') {
+            <input
+              [id]="'reg-' + field.key"
+              type="number"
+              [formControlName]="field.key"
+              [step]="numberStep(field)"
+              [attr.aria-invalid]="error ? true : null"
+              [attr.aria-describedby]="error ? 'err-' + field.key : null"
+              class="rounded-[3px] border px-3 py-2 text-sm outline-none focus:border-[#0E3B63]"
+              [style.border-color]="error ? '#dc2626' : '#e2e8f0'"
+              style="color: #1a1a1a"
+            />
+          }
+          @case ('date') {
+            <input
+              [id]="'reg-' + field.key"
+              type="date"
+              [formControlName]="field.key"
+              [attr.aria-invalid]="error ? true : null"
+              [attr.aria-describedby]="error ? 'err-' + field.key : null"
+              class="rounded-[3px] border px-3 py-2 text-sm outline-none focus:border-[#0E3B63]"
+              [style.border-color]="error ? '#dc2626' : '#e2e8f0'"
+              style="color: #1a1a1a"
+            />
+          }
+          @case ('select') {
+            <select
+              [id]="'reg-' + field.key"
+              [formControlName]="field.key"
+              [attr.aria-invalid]="error ? true : null"
+              [attr.aria-describedby]="error ? 'err-' + field.key : null"
+              class="rounded-[3px] border bg-white px-3 py-2 text-sm outline-none focus:border-[#0E3B63]"
+              [style.border-color]="error ? '#dc2626' : '#e2e8f0'"
+              style="color: #1a1a1a"
+            >
+              <option value="">Seleccionar…</option>
+              @for (option of selectOptions[field.key]; track option) {
+                <option [value]="option">{{ option }}</option>
+              }
+            </select>
+          }
+          @default {
+            <input
+              [id]="'reg-' + field.key"
+              type="text"
+              [formControlName]="field.key"
+              [attr.aria-invalid]="error ? true : null"
+              [attr.aria-describedby]="error ? 'err-' + field.key : null"
+              class="rounded-[3px] border px-3 py-2 text-sm outline-none focus:border-[#0E3B63]"
+              [style.border-color]="error ? '#dc2626' : '#e2e8f0'"
+              style="color: #1a1a1a"
+            />
+          }
+        }
+
+        @if (error) {
+          <p [id]="'err-' + field.key" class="text-xs" style="color: #dc2626">{{ error }}</p>
+        }
+      </div>
+    } @empty {
+      <p class="text-sm" style="color: #64748b">Este formato no tiene campos definidos.</p>
+    }
+  </div>
+
+  <div class="grid grid-flow-col justify-end gap-2">
+    <button
+      type="button"
+      (click)="ref.close()"
+      class="rounded-[3px] px-3 py-2 text-sm font-medium transition-colors hover:bg-gray-100"
+      style="color: #4A4A4F"
+    >
+      Cancelar
+    </button>
+    <button
+      type="submit"
+      [disabled]="form.invalid"
+      class="rounded-[3px] px-3 py-2 text-sm font-semibold text-white transition-opacity disabled:opacity-50"
+      style="background-color: #0E3B63"
+    >
+      Agregar
+    </button>
+  </div>
+</form>
