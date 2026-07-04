@@ -1,21 +1,15 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { TranslocoPipe } from '@jsverse/transloco';
 import {
   OrganizationMemberResponse,
   PermissionLevel,
 } from '../../../../core/models/organization-member.model';
 
-/** Etiquetas legibles para el nivel de permiso más alto de cada miembro. */
-const LEVEL_LABEL: Record<PermissionLevel, string> = {
-  none: 'Sin acceso',
-  assignee: 'Colaborador',
-  lieutenant: 'Supervisor',
-  admin: 'Administrador',
-};
-
 /** Listado de miembros de la organización con su rol principal. */
 @Component({
   selector: 'app-organization-members',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [TranslocoPipe],
   template: `
     <section
       class="grid gap-6 rounded-2xl border p-6"
@@ -23,9 +17,11 @@ const LEVEL_LABEL: Record<PermissionLevel, string> = {
     >
       <header class="grid items-center gap-4" style="grid-template-columns: minmax(0, 1fr) auto">
         <div class="grid gap-1">
-          <h2 class="text-lg font-semibold" style="color: #1a1a1a">Miembros</h2>
+          <h2 class="text-lg font-semibold" style="color: #1a1a1a">
+            {{ 'organizations.members.title' | transloco }}
+          </h2>
           <p class="text-sm" style="color: #64748b">
-            {{ members().length }} persona(s) en la organización.
+            {{ 'organizations.members.count' | transloco: { count: members().length } }}
           </p>
         </div>
         <button
@@ -33,7 +29,7 @@ const LEVEL_LABEL: Record<PermissionLevel, string> = {
           class="rounded-lg px-4 py-2 text-sm font-medium text-white"
           style="background: #0E3B63"
         >
-          Invitar miembro
+          {{ 'organizations.members.invite' | transloco }}
         </button>
       </header>
 
@@ -51,7 +47,11 @@ const LEVEL_LABEL: Record<PermissionLevel, string> = {
             </div>
             <div class="grid gap-0.5">
               <p class="truncate text-sm font-medium" style="color: #1a1a1a">
-                {{ member.profile.preferredName || member.profile.fullName || 'Sin nombre' }}
+                {{
+                  member.profile.preferredName ||
+                    member.profile.fullName ||
+                    ('organizations.members.no_name' | transloco)
+                }}
               </p>
               <p class="truncate text-xs" style="color: #64748b">
                 {{ member.profile.email || '—' }}
@@ -61,7 +61,7 @@ const LEVEL_LABEL: Record<PermissionLevel, string> = {
               class="rounded-full px-3 py-1 text-xs font-medium"
               style="background: #f1f5f9; color: #475569"
             >
-              {{ topRole(member) }}
+              {{ 'organizations.members.roles.' + topRole(member) | transloco }}
             </span>
           </li>
         }
@@ -77,13 +77,13 @@ export class OrganizationMembers {
     return name.charAt(0).toUpperCase();
   }
 
-  protected topRole(member: OrganizationMemberResponse) {
+  /** Highest permission level across all contexts — drives the role badge key. */
+  protected topRole(member: OrganizationMemberResponse): PermissionLevel {
     const levels = Object.values(member.permissions);
-    const highest = levels.reduce<PermissionLevel>(
+    return levels.reduce<PermissionLevel>(
       (best, level) => (this.rank(level) > this.rank(best) ? level : best),
       'none',
     );
-    return LEVEL_LABEL[highest];
   }
 
   private rank(level: PermissionLevel) {

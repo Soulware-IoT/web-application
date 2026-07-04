@@ -49,5 +49,50 @@
     "description": "Estás autenticado. Esta es una página protegida.",
     "logged_in_as": "Conectado como:",
     "sign_out": "Cerrar sesión"
+  },
+  "organizations": {
+    "title": "Organización",
+    "subtitle": "Datos, miembros y suscripción de tu organización.",
+    "loading": "Cargando organización…",
+    "none": "No hay una organización activa.",
+    "details": {
+      "title": "Datos de la organización",
+      "subtitle": "Información general y de contacto.",
+      "owner": "Propietario",
+      "address": "Dirección",
+      "address_line_two": "Piso / oficina",
+      "reference": "Referencia",
+      "missing_address_title": "Falta la dirección",
+      "missing_address_desc": "Te recomendamos agregar la dirección de tu organización para completar su perfil."
+    },
+    "members": {
+      "title": "Miembros",
+      "count": "{{ count }} persona(s) en la organización.",
+      "invite": "Invitar miembro",
+      "no_name": "Sin nombre",
+      "roles": {
+        "none": "Sin acceso",
+        "assignee": "Colaborador",
+        "lieutenant": "Supervisor",
+        "admin": "Administrador"
+      }
+    },
+    "subscription": {
+      "title": "Suscripción",
+      "subtitle": "Plan actual y facturación.",
+      "plan": "Plan",
+      "renews": "Renueva",
+      "ends": "Finaliza",
+      "manage": "Gestionar suscripción",
+      "plans": {
+        "free": "Gratis",
+        "basic": "Básico",
+        "professional": "Profesional"
+      },
+      "status": {
+        "active": "Activa",
+        "canceling": "Se cancelará"
+      }
+    }
   }
 }

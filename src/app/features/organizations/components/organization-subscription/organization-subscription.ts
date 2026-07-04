@@ -1,32 +1,24 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-
-/** Resumen de la suscripción con acceso al portal de facturación. */
-export interface SubscriptionSummary {
-  planName: string;
-  status: 'active' | 'trialing' | 'past_due' | 'canceled';
-  seatsUsed: number;
-  seatsTotal: number;
-  renewsAt: string;
-}
-
-const STATUS_LABEL: Record<SubscriptionSummary['status'], string> = {
-  active: 'Activa',
-  trialing: 'Prueba',
-  past_due: 'Pago pendiente',
-  canceled: 'Cancelada',
-};
+import { DatePipe } from '@angular/common';
+import { TranslocoPipe } from '@jsverse/transloco';
+import { SubscriptionResponse } from '../../../../core/models/subscription.model';
 
 @Component({
   selector: 'app-organization-subscription',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [DatePipe, TranslocoPipe],
   template: `
     <section
       class="grid gap-6 rounded-2xl border p-6"
       style="border-color: #e2e8f0; background: #ffffff"
     >
       <header class="grid gap-1">
-        <h2 class="text-lg font-semibold" style="color: #1a1a1a">Suscripción</h2>
-        <p class="text-sm" style="color: #64748b">Plan actual y facturación.</p>
+        <h2 class="text-lg font-semibold" style="color: #1a1a1a">
+          {{ 'organizations.subscription.title' | transloco }}
+        </h2>
+        <p class="text-sm" style="color: #64748b">
+          {{ 'organizations.subscription.subtitle' | transloco }}
+        </p>
       </header>
 
       <div
@@ -34,48 +26,48 @@ const STATUS_LABEL: Record<SubscriptionSummary['status'], string> = {
         style="background: #0E3B63; grid-template-columns: minmax(0, 1fr) auto"
       >
         <div class="grid gap-1">
-          <p class="text-xs font-medium uppercase tracking-wide" style="color: #9db8d4">Plan</p>
-          <p class="text-xl font-bold text-white">{{ subscription().planName }}</p>
+          <p class="text-xs font-medium uppercase tracking-wide" style="color: #9db8d4">
+            {{ 'organizations.subscription.plan' | transloco }}
+          </p>
+          <p class="text-xl font-bold text-white">
+            {{ 'organizations.subscription.plans.' + subscription().plan | transloco }}
+          </p>
         </div>
         <span
           class="self-start rounded-full px-3 py-1 text-xs font-medium"
           style="background: rgba(255, 255, 255, 0.15); color: #ffffff"
         >
-          {{ statusLabel() }}
+          {{
+            'organizations.subscription.status.' +
+              (subscription().cancelAtPeriodEnd ? 'canceling' : 'active') | transloco
+          }}
         </span>
       </div>
 
-      <dl class="grid gap-4" style="grid-template-columns: repeat(2, minmax(0, 1fr))">
-        <div class="grid gap-1">
+      @if (subscription().currentPeriodEnd; as periodEnd) {
+        <dl class="grid gap-1">
           <dt class="text-xs font-medium uppercase tracking-wide" style="color: #94a3b8">
-            Asientos
+            {{
+              (subscription().cancelAtPeriodEnd
+                ? 'organizations.subscription.ends'
+                : 'organizations.subscription.renews'
+              ) | transloco
+            }}
           </dt>
-          <dd class="text-sm" style="color: #1a1a1a">
-            {{ subscription().seatsUsed }} / {{ subscription().seatsTotal }}
-          </dd>
-        </div>
-        <div class="grid gap-1">
-          <dt class="text-xs font-medium uppercase tracking-wide" style="color: #94a3b8">
-            Renueva
-          </dt>
-          <dd class="text-sm" style="color: #1a1a1a">{{ subscription().renewsAt }}</dd>
-        </div>
-      </dl>
+          <dd class="text-sm" style="color: #1a1a1a">{{ periodEnd | date: 'mediumDate' }}</dd>
+        </dl>
+      }
 
       <button
         type="button"
         class="rounded-lg border px-4 py-2 text-sm font-medium"
         style="border-color: #0E3B63; color: #0E3B63"
       >
-        Gestionar suscripción
+        {{ 'organizations.subscription.manage' | transloco }}
       </button>
     </section>
   `,
 })
 export class OrganizationSubscription {
-  readonly subscription = input.required<SubscriptionSummary>();
-
-  protected statusLabel() {
-    return STATUS_LABEL[this.subscription().status];
-  }
+  readonly subscription = input.required<SubscriptionResponse>();
 }

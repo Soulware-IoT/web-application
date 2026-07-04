@@ -13,9 +13,9 @@ import {
 } from '../models/organization-member.model';
 
 /**
- * Exposes the caller's permission levels in the active organization, derived
- * from the org's member list. This scopes *what the UI offers* — it is never
- * the security boundary; the backend re-checks every request against the DB.
+ * Exposes the caller's own membership (profile + permission levels) in the
+ * active organization, fetched from `/members/me`. Permissions scope *what the
+ * UI offers* — never the security boundary; the backend re-checks every request.
  */
 @Injectable({ providedIn: 'root' })
 export class PermissionService {
@@ -23,6 +23,8 @@ export class PermissionService {
   private readonly supabase = inject(SupabaseService);
   private readonly organizations = inject(OrganizationService);
 
+  /** The caller's own member record in the active org; `null` until loaded. */
+  readonly member = signal<OrganizationMemberResponse | null>(null);
   /** Caller's levels per context in the active org; `none` everywhere until loaded. */
   readonly permissions = signal<Permissions>(NO_PERMISSIONS);
   readonly loading = signal(false);
@@ -32,17 +34,18 @@ export class PermissionService {
   constructor() {
     effect(() => {
       const org = this.organizations.activeOrg();
-      const userId = this.supabase.session()?.user?.id ?? null;
+      const loggedIn = !!this.supabase.session()?.user?.id;
 
-      if (!org || !userId) {
+      if (!org || !loggedIn) {
         this.loadedOrgId = null;
+        this.member.set(null);
         this.permissions.set(NO_PERMISSIONS);
         return;
       }
       if (org.id === this.loadedOrgId) return;
 
       this.loadedOrgId = org.id;
-      this.load(org.id, userId);
+      this.load(org.id);
     });
   }
 
@@ -51,18 +54,19 @@ export class PermissionService {
     return meets(this.permissions()[context], min);
   }
 
-  private load(orgId: string, userId: string): void {
+  private load(orgId: string): void {
     this.loading.set(true);
     this.http
-      .get<OrganizationMemberResponse[]>(`${environment.apiUrl}/organizations/${orgId}/members`)
+      .get<OrganizationMemberResponse>(`${environment.apiUrl}/organizations/${orgId}/members/me`)
       .subscribe({
-        next: (members) => {
-          const me = members.find((m) => m.profile.id === userId);
-          this.permissions.set(me?.permissions ?? NO_PERMISSIONS);
+        next: (me) => {
+          this.member.set(me);
+          this.permissions.set(me.permissions ?? NO_PERMISSIONS);
           this.loading.set(false);
         },
         error: (err) => {
-          console.error('[PermissionService] failed to load members', err);
+          console.error('[PermissionService] failed to load own membership', err);
+          this.member.set(null);
           this.permissions.set(NO_PERMISSIONS);
           this.loading.set(false);
           this.loadedOrgId = null;

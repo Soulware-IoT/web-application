@@ -49,5 +49,50 @@
     "description": "You are authenticated. This is a protected page.",
     "logged_in_as": "Logged in as:",
     "sign_out": "Sign out"
+  },
+  "organizations": {
+    "title": "Organization",
+    "subtitle": "Your organization's details, members and subscription.",
+    "loading": "Loading organization…",
+    "none": "No active organization.",
+    "details": {
+      "title": "Organization details",
+      "subtitle": "General and contact information.",
+      "owner": "Owner",
+      "address": "Address",
+      "address_line_two": "Floor / suite",
+      "reference": "Reference",
+      "missing_address_title": "Address missing",
+      "missing_address_desc": "We recommend adding your organization's address to complete its profile."
+    },
+    "members": {
+      "title": "Members",
+      "count": "{{ count }} person(s) in the organization.",
+      "invite": "Invite member",
+      "no_name": "No name",
+      "roles": {
+        "none": "No access",
+        "assignee": "Contributor",
+        "lieutenant": "Supervisor",
+        "admin": "Administrator"
+      }
+    },
+    "subscription": {
+      "title": "Subscription",
+      "subtitle": "Current plan and billing.",
+      "plan": "Plan",
+      "renews": "Renews",
+      "ends": "Ends",
+      "manage": "Manage subscription",
+      "plans": {
+        "free": "Free",
+        "basic": "Basic",
+        "professional": "Professional"
+      },
+      "status": {
+        "active": "Active",
+        "canceling": "Canceling"
+      }
+    }
   }
 }
