@@ -4,13 +4,24 @@ import { OrganizationService } from '../../core/services/organization.service';
 import { OrganizationMemberService } from '../../core/services/organization-member.service';
 import { SubscriptionService } from '../../core/services/subscription.service';
 import { OrganizationDetails } from './components/organization-details/organization-details';
+import { OrganizationDetailsSkeleton } from './components/organization-details-skeleton/organization-details-skeleton';
 import { OrganizationMembers } from './components/organization-members/organization-members';
+import { OrganizationMembersSkeleton } from './components/organization-members-skeleton/organization-members-skeleton';
 import { OrganizationSubscription } from './components/organization-subscription/organization-subscription';
+import { OrganizationSubscriptionSkeleton } from './components/organization-subscription-skeleton/organization-subscription-skeleton';
 
 @Component({
   selector: 'app-organizations',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [TranslocoPipe, OrganizationDetails, OrganizationMembers, OrganizationSubscription],
+  imports: [
+    TranslocoPipe,
+    OrganizationDetails,
+    OrganizationDetailsSkeleton,
+    OrganizationMembers,
+    OrganizationMembersSkeleton,
+    OrganizationSubscription,
+    OrganizationSubscriptionSkeleton,
+  ],
   template: `
     <div class="grid gap-8 p-8" style="align-content: start">
       <header class="grid gap-1">
@@ -20,7 +31,16 @@ import { OrganizationSubscription } from './components/organization-subscription
         <p class="text-sm" style="color: #64748b">{{ 'organizations.subtitle' | transloco }}</p>
       </header>
 
-      @if (organization(); as org) {
+      @if (loading()) {
+        <div class="grid gap-8" role="status" aria-busy="true">
+          <span class="sr-only">{{ 'organizations.loading' | transloco }}</span>
+          <div class="grid gap-6" style="grid-template-columns: minmax(0, 2fr) minmax(0, 1fr)">
+            <app-organization-details-skeleton />
+            <app-organization-subscription-skeleton />
+          </div>
+          <app-organization-members-skeleton />
+        </div>
+      } @else if (organization(); as org) {
         <div class="grid gap-6" style="grid-template-columns: minmax(0, 2fr) minmax(0, 1fr)">
           <app-organization-details [organization]="org" />
           @if (subscription(); as sub) {
@@ -29,8 +49,6 @@ import { OrganizationSubscription } from './components/organization-subscription
         </div>
 
         <app-organization-members [members]="members()" />
-      } @else if (loading()) {
-        <p class="text-sm" style="color: #64748b">{{ 'organizations.loading' | transloco }}</p>
       } @else {
         <p class="text-sm" style="color: #64748b">{{ 'organizations.none' | transloco }}</p>
       }
