@@ -2,10 +2,10 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { OrganizationService } from '../../../core/services/organization.service';
 import { SubscriptionService } from '../../../core/services/subscription.service';
-import { OrganizationDetails } from '../components/organization-details/organization-details';
-import { OrganizationDetailsSkeleton } from '../components/organization-details-skeleton/organization-details-skeleton';
-import { OrganizationSubscription } from '../components/organization-subscription/organization-subscription';
-import { OrganizationSubscriptionSkeleton } from '../components/organization-subscription-skeleton/organization-subscription-skeleton';
+import { OrganizationDetails } from './components/organization-details/organization-details';
+import { OrganizationDetailsSkeleton } from './components/organization-details-skeleton/organization-details-skeleton';
+import { OrganizationSubscription } from './components/organization-subscription/organization-subscription';
+import { OrganizationSubscriptionSkeleton } from './components/organization-subscription-skeleton/organization-subscription-skeleton';
 
 /** Overview tab: organization details and subscription. */
 @Component({

@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { OrganizationMemberService } from '../../../core/services/organization-member.service';
 import { PermissionService } from '../../../core/services/permission.service';
-import { OrganizationMembersSkeleton } from '../components/organization-members-skeleton/organization-members-skeleton';
+import { OrganizationMembersSkeleton } from './components/organization-members-skeleton/organization-members-skeleton';
 import { MemberListItem } from './components/member-list-item/member-list-item';
 
 /** Members tab: member list (master) + permission panel (detail outlet). */
