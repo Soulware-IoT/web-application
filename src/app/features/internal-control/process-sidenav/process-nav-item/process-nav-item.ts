@@ -4,12 +4,12 @@ import { ControlProcessResponse } from '../../../../core/models/control-process.
 import { ControlProcessService } from '../../../../core/services/control-process.service';
 import { ControlFormatService } from '../../../../core/services/control-format.service';
 import { ModalService } from '../../../../core/modal/modal.service';
-import { RenameProcessModal } from '../rename-process-modal/rename-process-modal';
+import { RenameProcessModal } from './components/rename-process-modal/rename-process-modal';
 import {
   CreateFormatModal,
   CreateFormatResult,
-} from '../create-format-modal/create-format-modal';
-import { FormatNavItem } from '../format-nav-item/format-nav-item';
+} from './components/create-format-modal/create-format-modal';
+import { FormatNavItem } from './components/format-nav-item/format-nav-item';
 
 @Component({
   selector: 'app-process-nav-item',

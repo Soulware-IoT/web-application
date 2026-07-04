@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ModalRef } from '../../../../core/modal/modal-ref';
+import { ModalRef } from '../../../../../../core/modal/modal-ref';
 
 interface RenameProcessData {
   id: string;

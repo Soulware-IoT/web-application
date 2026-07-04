@@ -12,10 +12,10 @@ import {
   LIFECYCLE_ACTIONS,
   LifecycleAction,
   STATUS_COLOR,
-} from '../../../../core/models/control-format.model';
-import { ControlFormatService } from '../../../../core/services/control-format.service';
-import { ModalService } from '../../../../core/modal/modal.service';
-import { ConfirmModal, ConfirmData } from '../../../../core/modal/confirm-modal/confirm-modal';
+} from '../../../../../core/models/control-format.model';
+import { ControlFormatService } from '../../../../../core/services/control-format.service';
+import { ModalService } from '../../../../../core/modal/modal.service';
+import { ConfirmModal, ConfirmData } from '../../../../../core/modal/confirm-modal/confirm-modal';
 
 @Component({
   selector: 'app-format-status-menu',

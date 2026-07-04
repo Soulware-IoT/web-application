@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ProcessSidenav } from "./components/process-sidenav/process-sidenav";
+import { ProcessSidenav } from "./process-sidenav/process-sidenav";
 
 @Component({
   selector: 'app-internal-control',

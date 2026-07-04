@@ -13,9 +13,9 @@ import {
   FIELD_TYPE_COLOR,
   FieldType,
   parseRules,
-} from '../../../../core/models/control-format.model';
-import { ControlRegistryResponse } from '../../../../core/models/control-registry.model';
-import { ControlRegistryService } from '../../../../core/services/control-registry.service';
+} from '../../../../../core/models/control-format.model';
+import { ControlRegistryResponse } from '../../../../../core/models/control-registry.model';
+import { ControlRegistryService } from '../../../../../core/services/control-registry.service';
 
 /** Per-column client-side filter, discriminated by the field type it applies to. */
 type ColumnFilter =

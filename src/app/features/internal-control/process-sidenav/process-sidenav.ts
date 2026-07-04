@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
-import { ControlProcessService } from '../../../../core/services/control-process.service';
-import { ProcessNavItem } from '../process-nav-item/process-nav-item';
+import { ControlProcessService } from '../../../core/services/control-process.service';
+import { ProcessNavItem } from './process-nav-item/process-nav-item';
 
 @Component({
   selector: 'app-process-sidenav',

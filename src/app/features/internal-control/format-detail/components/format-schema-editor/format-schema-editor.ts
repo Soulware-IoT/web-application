@@ -17,9 +17,9 @@ import {
   ValidationRules,
   defaultRulesFor,
   parseRules,
-} from '../../../../core/models/control-format.model';
-import { ControlFormatService } from '../../../../core/services/control-format.service';
-import { UnsavedChangesService } from '../../../../core/unsaved-changes/unsaved-changes.service';
+} from '../../../../../core/models/control-format.model';
+import { ControlFormatService } from '../../../../../core/services/control-format.service';
+import { UnsavedChangesService } from '../../../../../core/unsaved-changes/unsaved-changes.service';
 
 interface EditableField {
   id?: string;

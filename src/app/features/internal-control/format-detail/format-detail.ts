@@ -4,10 +4,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs';
 import { ControlFormatService } from '../../../core/services/control-format.service';
 import { UnsavedChangesService } from '../../../core/unsaved-changes/unsaved-changes.service';
-import { FormatStatusMenu } from '../components/format-status-menu/format-status-menu';
-import { FormatSchemaEditor } from '../components/format-schema-editor/format-schema-editor';
-import { RegistryGrid } from '../components/registry-grid/registry-grid';
-import { FormatDetailSkeleton } from './format-detail-skeleton';
+import { FormatStatusMenu } from './components/format-status-menu/format-status-menu';
+import { FormatSchemaEditor } from './components/format-schema-editor/format-schema-editor';
+import { RegistryGrid } from './components/registry-grid/registry-grid';
+import { FormatDetailSkeleton } from './components/format-detail-skeleton/format-detail-skeleton';
 
 @Component({
   selector: 'app-format-detail',
