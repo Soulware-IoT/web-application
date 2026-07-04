@@ -16,6 +16,7 @@ import {
 } from '../../../../../core/models/control-format.model';
 import { ControlRegistryResponse } from '../../../../../core/models/control-registry.model';
 import { ControlRegistryService } from '../../../../../core/services/control-registry.service';
+import { PermissionService } from '../../../../../core/services/permission.service';
 import { ModalService } from '../../../../../core/modal/modal.service';
 import { AddRegistryModal } from './add-registry-modal/add-registry-modal';
 
@@ -38,12 +39,20 @@ const FILTERABLE: ReadonlySet<FieldType> = new Set<FieldType>(['text', 'number',
 })
 export class RegistryGrid {
   private readonly registryService = inject(ControlRegistryService);
+  private readonly permissions = inject(PermissionService);
   private readonly modal = inject(ModalService);
 
   readonly format = input.required<ControlFormatResponse>();
 
-  /** New registries are only accepted while the format is active. */
-  protected readonly canAdd = computed(() => this.format().status === 'active');
+  /** Reading the registry data requires lieutenant; assignees may only submit. */
+  protected readonly canViewData = computed(() =>
+    this.permissions.has('internalControl', 'lieutenant'),
+  );
+
+  /** New registries are accepted while the format is active, for assignees and up. */
+  protected readonly canAdd = computed(
+    () => this.format().status === 'active' && this.permissions.has('internalControl', 'assignee'),
+  );
 
   /** Placeholder rendered for missing/empty cell values. */
   protected readonly EMPTY = '—';
@@ -92,7 +101,10 @@ export class RegistryGrid {
   });
 
   constructor() {
-    effect(() => this.registryService.loadForFormat(this.format().id));
+    // Only lieutenants+ may read registries; skip the fetch otherwise (would 403).
+    effect(() => {
+      if (this.canViewData()) this.registryService.loadForFormat(this.format().id);
+    });
   }
 
   /** Opens the data-entry modal and appends the resulting registry. */

@@ -1,6 +1,6 @@
 <nav aria-label="Main navigation">
   <ul class="grid gap-0.5 px-3 py-2">
-    @for (item of items; track item.route) {
+    @for (item of visibleItems(); track item.route) {
       <li>
         <a
           [routerLink]="item.route"

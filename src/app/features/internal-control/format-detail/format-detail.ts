@@ -1,8 +1,17 @@
-import { ChangeDetectionStrategy, Component, effect, inject, signal, untracked } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  inject,
+  signal,
+  untracked,
+} from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs';
 import { ControlFormatService } from '../../../core/services/control-format.service';
+import { PermissionService } from '../../../core/services/permission.service';
 import { UnsavedChangesService } from '../../../core/unsaved-changes/unsaved-changes.service';
 import { FormatStatusMenu } from './components/format-status-menu/format-status-menu';
 import { FormatSchemaEditor } from './components/format-schema-editor/format-schema-editor';
@@ -31,9 +40,17 @@ import { FormatDetailSkeleton } from './components/format-detail-skeleton/format
           </div>
         </header>
 
-        <!-- Draft: column designer · Non-draft: data grid -->
+        <!-- Draft: column designer (admin only) · Non-draft: data grid -->
         @if (f.status === 'draft') {
-          <app-format-schema-editor [format]="f" />
+          @if (canManage()) {
+            <app-format-schema-editor [format]="f" />
+          } @else {
+            <div class="grid h-full place-items-center p-8 text-center">
+              <p class="text-sm" style="color: #64748b">
+                Este formato está en borrador. Solo un administrador puede configurarlo.
+              </p>
+            </div>
+          }
         } @else {
           <app-registry-grid [format]="f" />
         }
@@ -49,7 +66,11 @@ export class FormatDetail {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly formatService = inject(ControlFormatService);
+  private readonly permissions = inject(PermissionService);
   private readonly unsaved = inject(UnsavedChangesService);
+
+  /** Schema editing (drafts) requires context admin. */
+  protected readonly canManage = computed(() => this.permissions.has('internalControl', 'admin'));
 
   private readonly formatId = toSignal(
     this.route.paramMap.pipe(map((params) => params.get('formatId'))),

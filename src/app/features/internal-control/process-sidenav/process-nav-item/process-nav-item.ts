@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ControlProcessResponse } from '../../../../core/models/control-process.model';
 import { ControlProcessService } from '../../../../core/services/control-process.service';
 import { ControlFormatService } from '../../../../core/services/control-format.service';
+import { PermissionService } from '../../../../core/services/permission.service';
 import { ModalService } from '../../../../core/modal/modal.service';
 import { RenameProcessModal } from './components/rename-process-modal/rename-process-modal';
 import {
@@ -22,8 +23,12 @@ export class ProcessNavItem {
   private readonly router = inject(Router);
   private readonly processService = inject(ControlProcessService);
   private readonly formatService = inject(ControlFormatService);
+  private readonly permissions = inject(PermissionService);
 
   readonly process = input.required<ControlProcessResponse>();
+
+  /** Creating/renaming processes and formats requires context admin. */
+  protected readonly canManage = computed(() => this.permissions.has('internalControl', 'admin'));
 
   protected readonly expanded = signal(false);
 
