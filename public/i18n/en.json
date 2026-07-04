@@ -57,7 +57,8 @@
     "none": "No active organization.",
     "tabs": {
       "overview": "Overview",
-      "members": "Members"
+      "members": "Members",
+      "invitations": "Invitations"
     },
     "details": {
       "title": "Organization details",
@@ -94,6 +95,29 @@
         "assignee": "Assignee",
         "lieutenant": "Supervisor",
         "admin": "Administrator"
+      }
+    },
+    "invitations": {
+      "title": "Invitations",
+      "subtitle": "Invite people to your organization and track their status.",
+      "loading": "Loading invitations…",
+      "empty": "No invitations yet.",
+      "no_matches": "No invitation matches this status.",
+      "view_denied": "You don't have permission to view this organization's invitations.",
+      "email": "Email of the person to invite",
+      "email_placeholder": "person@email.com",
+      "send": "Send invitation",
+      "sending": "Sending…",
+      "sent": "Invitation sent",
+      "invited_by": "Invited by {{ name }}",
+      "filter_label": "Filter by status",
+      "status_filter": {
+        "all": "All"
+      },
+      "status": {
+        "pending": "Pending",
+        "accepted": "Accepted",
+        "declined": "Declined"
       }
     },
     "subscription": {

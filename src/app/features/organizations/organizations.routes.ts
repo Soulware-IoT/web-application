@@ -12,6 +12,10 @@ export const organizationsRoutes: Routes = [
     loadComponent: () => import('./overview/overview').then((m) => m.Overview),
   },
   {
+    path: 'invitations',
+    loadComponent: () => import('./invitations/invitations').then((m) => m.Invitations),
+  },
+  {
     path: 'members',
     loadComponent: () => import('./members/members').then((m) => m.Members),
     children: [

@@ -38,5 +38,6 @@ export class OrganizationTabs {
   protected readonly tabs = [
     { path: 'overview', labelKey: 'organizations.tabs.overview' },
     { path: 'members', labelKey: 'organizations.tabs.members' },
+    { path: 'invitations', labelKey: 'organizations.tabs.invitations' },
   ];
 }

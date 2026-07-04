@@ -57,7 +57,8 @@
     "none": "No hay una organización activa.",
     "tabs": {
       "overview": "General",
-      "members": "Miembros"
+      "members": "Miembros",
+      "invitations": "Invitaciones"
     },
     "details": {
       "title": "Datos de la organización",
@@ -94,6 +95,29 @@
         "assignee": "Asignado",
         "lieutenant": "Supervisor",
         "admin": "Administrador"
+      }
+    },
+    "invitations": {
+      "title": "Invitaciones",
+      "subtitle": "Invita personas a tu organización y sigue su estado.",
+      "loading": "Cargando invitaciones…",
+      "empty": "Aún no hay invitaciones.",
+      "no_matches": "Ninguna invitación coincide con este estado.",
+      "view_denied": "No tienes permiso para ver las invitaciones de esta organización.",
+      "email": "Correo de la persona a invitar",
+      "email_placeholder": "persona@correo.com",
+      "send": "Enviar invitación",
+      "sending": "Enviando…",
+      "sent": "Invitación enviada",
+      "invited_by": "Invitada por {{ name }}",
+      "filter_label": "Filtrar por estado",
+      "status_filter": {
+        "all": "Todas"
+      },
+      "status": {
+        "pending": "Pendiente",
+        "accepted": "Aceptada",
+        "declined": "Rechazada"
       }
     },
     "subscription": {
