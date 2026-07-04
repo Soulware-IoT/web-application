@@ -6,12 +6,13 @@ import { ControlFormatService } from '../../../core/services/control-format.serv
 import { UnsavedChangesService } from '../../../core/unsaved-changes/unsaved-changes.service';
 import { FormatStatusMenu } from '../components/format-status-menu/format-status-menu';
 import { FormatSchemaEditor } from '../components/format-schema-editor/format-schema-editor';
+import { RegistryGrid } from '../components/registry-grid/registry-grid';
 import { FormatDetailSkeleton } from './format-detail-skeleton';
 
 @Component({
   selector: 'app-format-detail',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [FormatStatusMenu, FormatSchemaEditor, FormatDetailSkeleton],
+  imports: [FormatStatusMenu, FormatSchemaEditor, RegistryGrid, FormatDetailSkeleton],
   template: `
     @if (loading()) {
       <app-format-detail-skeleton />
@@ -34,14 +35,7 @@ import { FormatDetailSkeleton } from './format-detail-skeleton';
         @if (f.status === 'draft') {
           <app-format-schema-editor [format]="f" />
         } @else {
-          <section
-            class="grid place-items-center rounded-lg border border-dashed"
-            style="border-color: #e2e8f0"
-          >
-            <p class="text-sm" style="color: #94a3b8">
-              Aquí se cargará la grilla de registros — próximamente.
-            </p>
-          </section>
+          <app-registry-grid [format]="f" />
         }
       </div>
     } @else {
