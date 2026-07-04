@@ -1,5 +1,6 @@
 import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { TranslocoService } from '@jsverse/transloco';
 import { environment } from '../../../environments/environment';
 import {
   ControlRegistryResponse,
@@ -11,6 +12,7 @@ import { NotificationService, httpErrorMessage } from '../notifications/notifica
 export class ControlRegistryService {
   private readonly http = inject(HttpClient);
   private readonly notifications = inject(NotificationService);
+  private readonly transloco = inject(TranslocoService);
 
   /** Registries already fetched, keyed by their parent format id. */
   readonly registriesByFormat = signal<Record<string, ControlRegistryResponse[]>>({});
@@ -64,7 +66,7 @@ export class ControlRegistryService {
               ...map,
               [formatId]: [...(map[formatId] ?? []), registry],
             }));
-            this.notifications.success('Registro agregado');
+            this.notifications.success(this.transloco.translate('internalControl.notifications.registry_added'));
             resolve(registry);
           },
           error: (err) => {

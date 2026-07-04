@@ -114,6 +114,7 @@ export type LifecycleActionName = 'activate' | 'suspend' | 'resume' | 'cease';
 export interface LifecycleAction {
   /** Matches the endpoint segment: POST /formats/{id}/{action}. */
   action: LifecycleActionName;
+  /** i18n key resolved in the template via the transloco pipe. */
   label: string;
   /** Irreversible transitions require a confirmation step. */
   destructive?: boolean;
@@ -124,14 +125,14 @@ export interface LifecycleAction {
  * never offers an action the server would reject. `ceased` is terminal.
  */
 export const LIFECYCLE_ACTIONS: Record<ControlFormatStatus, LifecycleAction[]> = {
-  draft: [{ action: 'activate', label: 'Activar' }],
+  draft: [{ action: 'activate', label: 'internalControl.lifecycle.activate' }],
   active: [
-    { action: 'suspend', label: 'Suspender' },
-    { action: 'cease', label: 'Cesar', destructive: true },
+    { action: 'suspend', label: 'internalControl.lifecycle.suspend' },
+    { action: 'cease', label: 'internalControl.lifecycle.cease', destructive: true },
   ],
   suspended: [
-    { action: 'resume', label: 'Reanudar' },
-    { action: 'cease', label: 'Cesar', destructive: true },
+    { action: 'resume', label: 'internalControl.lifecycle.resume' },
+    { action: 'cease', label: 'internalControl.lifecycle.cease', destructive: true },
   ],
   ceased: [],
 };

@@ -94,5 +94,124 @@
         "canceling": "Se cancelará"
       }
     }
+  },
+  "internalControl": {
+    "processes": {
+      "header": "Procesos de control",
+      "empty": "No hay procesos de control todavía.",
+      "new_format": "Nuevo formato",
+      "rename_aria": "Renombrar {{ name }}"
+    },
+    "placeholder": "Abre un proceso y selecciona un formato del panel para ver su contenido.",
+    "format": {
+      "loading": "Cargando formato…",
+      "draft_locked": "Este formato está en borrador. Solo un administrador puede configurarlo.",
+      "load_error": "No se pudo cargar el formato."
+    },
+    "lifecycle": {
+      "activate": "Activar",
+      "suspend": "Suspender",
+      "resume": "Reanudar",
+      "cease": "Cesar",
+      "cease_title": "Cesar formato",
+      "cease_confirm": "¿Cesar el formato \"{{ name }}\"? Esta acción no se puede deshacer."
+    },
+    "schema": {
+      "title": "Columnas del formato",
+      "subtitle": "Define la estructura. Se bloquea al activar y no habrá filas hasta entonces.",
+      "add_field": "Agregar campo",
+      "empty": "Sin columnas todavía. Agrega el primer campo.",
+      "move_up": "Subir campo",
+      "move_down": "Bajar campo",
+      "column_name_placeholder": "Nombre de la columna",
+      "field_name_aria": "Nombre del campo {{ n }}",
+      "field_type_aria": "Tipo del campo {{ n }}",
+      "required": "Requerido",
+      "delete_field_aria": "Eliminar campo {{ n }}",
+      "rules": "Reglas",
+      "min_length": "Mín. largo",
+      "max_length": "Máx. largo",
+      "type": "Tipo",
+      "integer": "Entero",
+      "decimal": "Decimal",
+      "min": "Mín.",
+      "max": "Máx.",
+      "options": "Opciones",
+      "option_placeholder": "Opción",
+      "option_aria": "Opción {{ n }}",
+      "remove_option_aria": "Eliminar opción {{ n }}",
+      "add_option": "Agregar opción",
+      "saving": "Guardando…",
+      "save": "Guardar campos"
+    },
+    "field_types": {
+      "text": "Texto",
+      "number": "Número",
+      "boolean": "Sí / No",
+      "date": "Fecha",
+      "select": "Selección"
+    },
+    "registry": {
+      "title": "Registros",
+      "count_filtered": "{{ shown }} de {{ total }}",
+      "unit_one": "registro",
+      "unit_other": "registros",
+      "clear": "Limpiar",
+      "filters": "Filtros",
+      "add": "Agregar registro",
+      "created": "Creado",
+      "filter_contains": "Contiene…",
+      "filter_aria": "Filtrar {{ label }}",
+      "filter_min": "Mín",
+      "filter_max": "Máx",
+      "filter_min_aria": "Filtrar {{ label }}: mínimo",
+      "filter_max_aria": "Filtrar {{ label }}: máximo",
+      "filter_from_aria": "Filtrar {{ label }}: desde",
+      "filter_to_aria": "Filtrar {{ label }}: hasta",
+      "filter_all": "Todas",
+      "caption": "Registros del formato {{ name }}",
+      "empty": "Aún no hay registros.",
+      "no_matches": "Ningún registro coincide con los filtros.",
+      "clear_filters": "Limpiar filtros",
+      "no_permission": "No tienes permiso para ver los registros de este formato.",
+      "can_add_hint": "Puedes agregar uno nuevo.",
+      "bool_yes": "Sí",
+      "bool_no": "No"
+    },
+    "form": {
+      "required_mark": "(requerido)",
+      "select_placeholder": "Seleccionar…",
+      "no_fields": "Este formato no tiene campos definidos.",
+      "cancel": "Cancelar",
+      "add": "Agregar",
+      "create": "Crear",
+      "save": "Guardar",
+      "add_registry_title": "Agregar registro",
+      "new_format_title": "Nuevo formato",
+      "rename_process_title": "Renombrar proceso",
+      "format_name": "Nombre del formato",
+      "sample_fields": "Crear campos de ejemplo",
+      "process_name": "Nombre del proceso",
+      "errors": {
+        "required": "Requerido",
+        "min_length": "Mínimo {{ n }} caracteres",
+        "max_length": "Máximo {{ n }} caracteres",
+        "min": "El valor mínimo es {{ n }}",
+        "max": "El valor máximo es {{ n }}",
+        "integer": "Debe ser un número entero",
+        "pattern": "Formato inválido",
+        "invalid": "Valor inválido"
+      }
+    },
+    "notifications": {
+      "format_activated": "Formato activado",
+      "format_suspended": "Formato suspendido",
+      "format_resumed": "Formato reanudado",
+      "format_ceased": "Formato cesado",
+      "format_created": "Formato creado",
+      "fields_saved": "Campos guardados",
+      "registry_added": "Registro agregado",
+      "process_renamed": "Proceso renombrado"
+    }
   }
 }

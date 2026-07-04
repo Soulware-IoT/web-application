@@ -2,9 +2,11 @@
   <!-- Header -->
   <div class="grid items-start gap-3" style="grid-template-columns: 1fr auto">
     <div class="grid gap-0.5">
-      <h2 class="text-sm font-semibold" style="color: #1a1a1a">Columnas del formato</h2>
+      <h2 class="text-sm font-semibold" style="color: #1a1a1a">
+        {{ 'internalControl.schema.title' | transloco }}
+      </h2>
       <p class="text-xs" style="color: #64748b">
-        Define la estructura. Se bloquea al activar y no habrá filas hasta entonces.
+        {{ 'internalControl.schema.subtitle' | transloco }}
       </p>
     </div>
     <button
@@ -14,14 +16,14 @@
       style="border-color: #e2e8f0; color: #0E3B63"
     >
       <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-      Agregar campo
+      {{ 'internalControl.schema.add_field' | transloco }}
     </button>
   </div>
 
   <!-- Field rows -->
   @if (fields().length === 0) {
     <p class="rounded-md border border-dashed px-3 py-6 text-center text-sm" style="border-color: #cbd5e1; color: #64748b">
-      Sin columnas todavía. Agrega el primer campo.
+      {{ 'internalControl.schema.empty' | transloco }}
     </p>
   } @else {
     <ul class="grid gap-2">
@@ -42,7 +44,7 @@
               type="button"
               (click)="move($index, -1)"
               [disabled]="$first"
-              aria-label="Subir campo"
+              [attr.aria-label]="'internalControl.schema.move_up' | transloco"
               class="grid h-4 w-5 place-items-center rounded-[2px] transition-colors hover:bg-gray-100 disabled:opacity-30"
               style="color: #64748b"
             >
@@ -52,7 +54,7 @@
               type="button"
               (click)="move($index, 1)"
               [disabled]="$last"
-              aria-label="Bajar campo"
+              [attr.aria-label]="'internalControl.schema.move_down' | transloco"
               class="grid h-4 w-5 place-items-center rounded-[2px] transition-colors hover:bg-gray-100 disabled:opacity-30"
               style="color: #64748b"
             >
@@ -65,8 +67,8 @@
             type="text"
             [value]="field.label"
             (input)="setLabel($index, $any($event.target).value)"
-            placeholder="Nombre de la columna"
-            [attr.aria-label]="'Nombre del campo ' + ($index + 1)"
+            [placeholder]="'internalControl.schema.column_name_placeholder' | transloco"
+            [attr.aria-label]="'internalControl.schema.field_name_aria' | transloco: { n: $index + 1 }"
             class="rounded-[3px] border bg-white px-2.5 py-1.5 text-sm font-medium outline-none focus:border-[#0E3B63]"
             style="border-color: #e2e8f0; color: #1a1a1a"
           />
@@ -74,12 +76,12 @@
           <!-- Type -->
           <select
             (change)="setType($index, $any($event.target).value)"
-            [attr.aria-label]="'Tipo del campo ' + ($index + 1)"
+            [attr.aria-label]="'internalControl.schema.field_type_aria' | transloco: { n: $index + 1 }"
             class="rounded-[3px] border bg-white px-2 py-1.5 text-sm outline-none focus:border-[#0E3B63]"
             style="border-color: #e2e8f0; color: #1a1a1a"
           >
             @for (t of types; track t.value) {
-              <option [value]="t.value" [selected]="t.value === field.type">{{ t.label }}</option>
+              <option [value]="t.value" [selected]="t.value === field.type">{{ t.label | transloco }}</option>
             }
           </select>
 
@@ -90,14 +92,14 @@
               [checked]="field.required"
               (change)="setRequired($index, $any($event.target).checked)"
             />
-            Requerido
+            {{ 'internalControl.schema.required' | transloco }}
           </label>
 
           <!-- Delete -->
           <button
             type="button"
             (click)="removeField($index)"
-            [attr.aria-label]="'Eliminar campo ' + ($index + 1)"
+            [attr.aria-label]="'internalControl.schema.delete_field_aria' | transloco: { n: $index + 1 }"
             class="grid h-7 w-7 place-items-center rounded-[2px] transition-colors hover:bg-red-50"
             style="color: #dc2626"
           >
@@ -109,51 +111,51 @@
           @switch (field.type) {
             @case ('text') {
               <div class="flex flex-wrap items-center gap-x-3 gap-y-2 border-t bg-[#f8fafc] py-2.5 pl-9 pr-3 text-xs" style="border-color: #e2e8f0; color: #4A4A4F">
-                <span class="text-[11px] font-semibold uppercase tracking-wide" style="color: #64748b">Reglas</span>
+                <span class="text-[11px] font-semibold uppercase tracking-wide" style="color: #64748b">{{ 'internalControl.schema.rules' | transloco }}</span>
                 <label class="flex items-center gap-1.5">
-                  Mín. largo
+                  {{ 'internalControl.schema.min_length' | transloco }}
                   <input type="number" min="0" [value]="$any(field.rules).minLength ?? ''" (input)="setTextRule($index, 'minLength', $any($event.target).value)" class="w-16 rounded-[3px] border bg-white px-1.5 py-1 outline-none focus:border-[#0E3B63]" style="border-color: #e2e8f0" />
                 </label>
                 <label class="flex items-center gap-1.5">
-                  Máx. largo
+                  {{ 'internalControl.schema.max_length' | transloco }}
                   <input type="number" min="0" [value]="$any(field.rules).maxLength ?? ''" (input)="setTextRule($index, 'maxLength', $any($event.target).value)" class="w-16 rounded-[3px] border bg-white px-1.5 py-1 outline-none focus:border-[#0E3B63]" style="border-color: #e2e8f0" />
                 </label>
               </div>
             }
             @case ('number') {
               <div class="flex flex-wrap items-center gap-x-3 gap-y-2 border-t bg-[#f8fafc] py-2.5 pl-9 pr-3 text-xs" style="border-color: #e2e8f0; color: #4A4A4F">
-                <span class="text-[11px] font-semibold uppercase tracking-wide" style="color: #64748b">Reglas</span>
+                <span class="text-[11px] font-semibold uppercase tracking-wide" style="color: #64748b">{{ 'internalControl.schema.rules' | transloco }}</span>
                 <label class="flex items-center gap-1.5">
-                  Tipo
+                  {{ 'internalControl.schema.type' | transloco }}
                   <select (change)="setNumberKind($index, $any($event.target).value)" class="rounded-[3px] border bg-white px-1.5 py-1 outline-none focus:border-[#0E3B63]" style="border-color: #e2e8f0">
-                    <option value="integer" [selected]="$any(field.rules).numberKind === 'integer'">Entero</option>
-                    <option value="decimal" [selected]="$any(field.rules).numberKind === 'decimal'">Decimal</option>
+                    <option value="integer" [selected]="$any(field.rules).numberKind === 'integer'">{{ 'internalControl.schema.integer' | transloco }}</option>
+                    <option value="decimal" [selected]="$any(field.rules).numberKind === 'decimal'">{{ 'internalControl.schema.decimal' | transloco }}</option>
                   </select>
                 </label>
                 <label class="flex items-center gap-1.5">
-                  Mín.
+                  {{ 'internalControl.schema.min' | transloco }}
                   <input type="number" [value]="$any(field.rules).min ?? ''" (input)="setNumberRule($index, 'min', $any($event.target).value)" class="w-20 rounded-[3px] border bg-white px-1.5 py-1 outline-none focus:border-[#0E3B63]" style="border-color: #e2e8f0" />
                 </label>
                 <label class="flex items-center gap-1.5">
-                  Máx.
+                  {{ 'internalControl.schema.max' | transloco }}
                   <input type="number" [value]="$any(field.rules).max ?? ''" (input)="setNumberRule($index, 'max', $any($event.target).value)" class="w-20 rounded-[3px] border bg-white px-1.5 py-1 outline-none focus:border-[#0E3B63]" style="border-color: #e2e8f0" />
                 </label>
               </div>
             }
             @case ('select') {
               <div class="grid gap-1.5 border-t bg-[#f8fafc] py-2.5 pl-9 pr-3 text-xs" style="border-color: #e2e8f0; color: #4A4A4F">
-                <span class="text-[11px] font-semibold uppercase tracking-wide" style="color: #64748b">Opciones</span>
+                <span class="text-[11px] font-semibold uppercase tracking-wide" style="color: #64748b">{{ 'internalControl.schema.options' | transloco }}</span>
                 @for (option of $any(field.rules).options; track $index) {
                   <div class="flex items-center gap-2">
-                    <input type="text" [value]="option" (input)="setOption(fi, $index, $any($event.target).value)" placeholder="Opción" [attr.aria-label]="'Opción ' + ($index + 1)" class="w-56 rounded-[3px] border bg-white px-1.5 py-1 outline-none focus:border-[#0E3B63]" style="border-color: #e2e8f0" />
-                    <button type="button" (click)="removeOption(fi, $index)" [attr.aria-label]="'Eliminar opción ' + ($index + 1)" class="grid h-6 w-6 place-items-center rounded-[2px] transition-colors hover:bg-red-50" style="color: #dc2626">
+                    <input type="text" [value]="option" (input)="setOption(fi, $index, $any($event.target).value)" [placeholder]="'internalControl.schema.option_placeholder' | transloco" [attr.aria-label]="'internalControl.schema.option_aria' | transloco: { n: $index + 1 }" class="w-56 rounded-[3px] border bg-white px-1.5 py-1 outline-none focus:border-[#0E3B63]" style="border-color: #e2e8f0" />
+                    <button type="button" (click)="removeOption(fi, $index)" [attr.aria-label]="'internalControl.schema.remove_option_aria' | transloco: { n: $index + 1 }" class="grid h-6 w-6 place-items-center rounded-[2px] transition-colors hover:bg-red-50" style="color: #dc2626">
                       <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                     </button>
                   </div>
                 }
                 <button type="button" (click)="addOption(fi)" class="inline-flex w-fit items-center gap-1 rounded-[3px] px-1.5 py-1 font-medium transition-colors hover:bg-gray-100" style="color: #0E3B63">
                   <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                  Agregar opción
+                  {{ 'internalControl.schema.add_option' | transloco }}
                 </button>
               </div>
             }
@@ -172,7 +174,9 @@
       class="rounded-[3px] px-4 py-2 text-sm font-semibold text-white transition-opacity disabled:opacity-50"
       style="background-color: #0E3B63"
     >
-      {{ saving() ? 'Guardando…' : 'Guardar campos' }}
+      {{
+        (saving() ? 'internalControl.schema.saving' : 'internalControl.schema.save') | transloco
+      }}
     </button>
   </div>
 </section>

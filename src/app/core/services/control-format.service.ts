@@ -1,5 +1,6 @@
 import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { TranslocoService } from '@jsverse/transloco';
 import { environment } from '../../../environments/environment';
 import {
   ControlFormatResponse,
@@ -8,17 +9,19 @@ import {
 } from '../models/control-format.model';
 import { NotificationService, httpErrorMessage } from '../notifications/notification.service';
 
-const TRANSITION_MESSAGE: Record<LifecycleActionName, string> = {
-  activate: 'Formato activado',
-  suspend: 'Formato suspendido',
-  resume: 'Formato reanudado',
-  cease: 'Formato cesado',
+/** i18n keys for the toast shown after each lifecycle transition. */
+const TRANSITION_MESSAGE_KEY: Record<LifecycleActionName, string> = {
+  activate: 'internalControl.notifications.format_activated',
+  suspend: 'internalControl.notifications.format_suspended',
+  resume: 'internalControl.notifications.format_resumed',
+  cease: 'internalControl.notifications.format_ceased',
 };
 
 @Injectable({ providedIn: 'root' })
 export class ControlFormatService {
   private readonly http = inject(HttpClient);
   private readonly notifications = inject(NotificationService);
+  private readonly transloco = inject(TranslocoService);
 
   /** Formats already fetched, keyed by their parent process id. */
   readonly formatsByProcess = signal<Record<string, ControlFormatResponse[]>>({});
@@ -77,7 +80,9 @@ export class ControlFormatService {
               ...map,
               [processId]: [...(map[processId] ?? []), format],
             }));
-            this.notifications.success('Formato creado');
+            this.notifications.success(
+              this.transloco.translate('internalControl.notifications.format_created'),
+            );
             resolve(format);
           },
           error: (err) => {
@@ -108,7 +113,9 @@ export class ControlFormatService {
                 [updated.processId]: list.map((f) => (f.id === updated.id ? updated : f)),
               };
             });
-            this.notifications.success('Campos guardados');
+            this.notifications.success(
+              this.transloco.translate('internalControl.notifications.fields_saved'),
+            );
             resolve(updated);
           },
           error: (err) => {
@@ -139,7 +146,7 @@ export class ControlFormatService {
                 [updated.processId]: list.map((f) => (f.id === updated.id ? updated : f)),
               };
             });
-            this.notifications.success(TRANSITION_MESSAGE[action]);
+            this.notifications.success(this.transloco.translate(TRANSITION_MESSAGE_KEY[action]));
             resolve(updated);
           },
           error: (err) => {

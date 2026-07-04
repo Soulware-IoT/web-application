@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
+import { TranslocoPipe, TranslocoService } from '@jsverse/transloco';
 import { ModalRef } from '../../../../../../core/modal/modal-ref';
 import {
   ControlFormatResponse,
@@ -26,11 +27,12 @@ const integerValidator: ValidatorFn = (control) => {
 @Component({
   selector: 'app-add-registry-modal',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, TranslocoPipe],
   templateUrl: './add-registry-modal.html',
 })
 export class AddRegistryModal {
   protected readonly ref = inject(ModalRef) as ModalRef<Record<string, unknown>, AddRegistryData>;
+  private readonly transloco = inject(TranslocoService);
 
   private readonly format = this.ref.data!.format;
 
@@ -67,14 +69,16 @@ export class AddRegistryModal {
     if (!control || control.valid || !(control.touched || control.dirty)) return null;
 
     const errors = control.errors ?? {};
-    if (errors['required']) return 'Requerido';
-    if (errors['minlength']) return `Mínimo ${errors['minlength'].requiredLength} caracteres`;
-    if (errors['maxlength']) return `Máximo ${errors['maxlength'].requiredLength} caracteres`;
-    if (errors['min']) return `El valor mínimo es ${errors['min'].min}`;
-    if (errors['max']) return `El valor máximo es ${errors['max'].max}`;
-    if (errors['integer']) return 'Debe ser un número entero';
-    if (errors['pattern']) return 'Formato inválido';
-    return 'Valor inválido';
+    const t = (key: string, params?: Record<string, unknown>) =>
+      this.transloco.translate(`internalControl.form.errors.${key}`, params);
+    if (errors['required']) return t('required');
+    if (errors['minlength']) return t('min_length', { n: errors['minlength'].requiredLength });
+    if (errors['maxlength']) return t('max_length', { n: errors['maxlength'].requiredLength });
+    if (errors['min']) return t('min', { n: errors['min'].min });
+    if (errors['max']) return t('max', { n: errors['max'].max });
+    if (errors['integer']) return t('integer');
+    if (errors['pattern']) return t('pattern');
+    return t('invalid');
   }
 
   protected save(): void {

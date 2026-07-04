@@ -1,5 +1,6 @@
 import { Injectable, effect, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { TranslocoService } from '@jsverse/transloco';
 import { environment } from '../../../environments/environment';
 import { OrganizationService } from './organization.service';
 import { ControlProcessResponse } from '../models/control-process.model';
@@ -10,6 +11,7 @@ export class ControlProcessService {
   private readonly http = inject(HttpClient);
   private readonly orgService = inject(OrganizationService);
   private readonly notifications = inject(NotificationService);
+  private readonly transloco = inject(TranslocoService);
 
   readonly processes = signal<ControlProcessResponse[] | null>(null);
   readonly loading = signal(true);
@@ -41,7 +43,7 @@ export class ControlProcessService {
           this.processes.update((list) =>
             list?.map((p) => (p.id === id ? updated : p)) ?? list,
           );
-          this.notifications.success('Proceso renombrado');
+          this.notifications.success(this.transloco.translate('internalControl.notifications.process_renamed'));
         },
         error: (err) => {
           console.error('[ControlProcessService] failed to rename control process', err);

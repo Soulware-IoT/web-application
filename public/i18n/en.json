@@ -94,5 +94,124 @@
         "canceling": "Canceling"
       }
     }
+  },
+  "internalControl": {
+    "processes": {
+      "header": "Control processes",
+      "empty": "No control processes yet.",
+      "new_format": "New format",
+      "rename_aria": "Rename {{ name }}"
+    },
+    "placeholder": "Open a process and pick a format from the panel to see its content.",
+    "format": {
+      "loading": "Loading format…",
+      "draft_locked": "This format is a draft. Only an administrator can configure it.",
+      "load_error": "Couldn't load the format."
+    },
+    "lifecycle": {
+      "activate": "Activate",
+      "suspend": "Suspend",
+      "resume": "Resume",
+      "cease": "Cease",
+      "cease_title": "Cease format",
+      "cease_confirm": "Cease the format \"{{ name }}\"? This action can't be undone."
+    },
+    "schema": {
+      "title": "Format columns",
+      "subtitle": "Define the structure. It locks on activation and has no rows until then.",
+      "add_field": "Add field",
+      "empty": "No columns yet. Add the first field.",
+      "move_up": "Move field up",
+      "move_down": "Move field down",
+      "column_name_placeholder": "Column name",
+      "field_name_aria": "Name of field {{ n }}",
+      "field_type_aria": "Type of field {{ n }}",
+      "required": "Required",
+      "delete_field_aria": "Delete field {{ n }}",
+      "rules": "Rules",
+      "min_length": "Min. length",
+      "max_length": "Max. length",
+      "type": "Type",
+      "integer": "Integer",
+      "decimal": "Decimal",
+      "min": "Min.",
+      "max": "Max.",
+      "options": "Options",
+      "option_placeholder": "Option",
+      "option_aria": "Option {{ n }}",
+      "remove_option_aria": "Remove option {{ n }}",
+      "add_option": "Add option",
+      "saving": "Saving…",
+      "save": "Save fields"
+    },
+    "field_types": {
+      "text": "Text",
+      "number": "Number",
+      "boolean": "Yes / No",
+      "date": "Date",
+      "select": "Select"
+    },
+    "registry": {
+      "title": "Records",
+      "count_filtered": "{{ shown }} of {{ total }}",
+      "unit_one": "record",
+      "unit_other": "records",
+      "clear": "Clear",
+      "filters": "Filters",
+      "add": "Add record",
+      "created": "Created",
+      "filter_contains": "Contains…",
+      "filter_aria": "Filter {{ label }}",
+      "filter_min": "Min",
+      "filter_max": "Max",
+      "filter_min_aria": "Filter {{ label }}: minimum",
+      "filter_max_aria": "Filter {{ label }}: maximum",
+      "filter_from_aria": "Filter {{ label }}: from",
+      "filter_to_aria": "Filter {{ label }}: to",
+      "filter_all": "All",
+      "caption": "Records of format {{ name }}",
+      "empty": "No records yet.",
+      "no_matches": "No record matches the filters.",
+      "clear_filters": "Clear filters",
+      "no_permission": "You don't have permission to view this format's records.",
+      "can_add_hint": "You can add a new one.",
+      "bool_yes": "Yes",
+      "bool_no": "No"
+    },
+    "form": {
+      "required_mark": "(required)",
+      "select_placeholder": "Select…",
+      "no_fields": "This format has no defined fields.",
+      "cancel": "Cancel",
+      "add": "Add",
+      "create": "Create",
+      "save": "Save",
+      "add_registry_title": "Add record",
+      "new_format_title": "New format",
+      "rename_process_title": "Rename process",
+      "format_name": "Format name",
+      "sample_fields": "Create sample fields",
+      "process_name": "Process name",
+      "errors": {
+        "required": "Required",
+        "min_length": "Minimum {{ n }} characters",
+        "max_length": "Maximum {{ n }} characters",
+        "min": "The minimum value is {{ n }}",
+        "max": "The maximum value is {{ n }}",
+        "integer": "Must be a whole number",
+        "pattern": "Invalid format",
+        "invalid": "Invalid value"
+      }
+    },
+    "notifications": {
+      "format_activated": "Format activated",
+      "format_suspended": "Format suspended",
+      "format_resumed": "Format resumed",
+      "format_ceased": "Format ceased",
+      "format_created": "Format created",
+      "fields_saved": "Fields saved",
+      "registry_added": "Record added",
+      "process_renamed": "Process renamed"
+    }
   }
 }

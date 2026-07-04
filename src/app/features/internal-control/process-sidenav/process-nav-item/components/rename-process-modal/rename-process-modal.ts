@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { TranslocoPipe } from '@jsverse/transloco';
 import { ModalRef } from '../../../../../../core/modal/modal-ref';
 
 interface RenameProcessData {
@@ -10,12 +11,12 @@ interface RenameProcessData {
 @Component({
   selector: 'app-rename-process-modal',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, TranslocoPipe],
   template: `
     <form class="grid gap-4" [formGroup]="form" (ngSubmit)="save()">
       <div class="grid gap-1.5">
         <label for="process-name" class="text-sm font-medium" style="color: #1a1a1a">
-          Nombre del proceso
+          {{ 'internalControl.form.process_name' | transloco }}
         </label>
         <input
           id="process-name"
@@ -33,7 +34,7 @@ interface RenameProcessData {
           class="rounded-[3px] px-3 py-2 text-sm font-medium transition-colors hover:bg-gray-100"
           style="color: #4A4A4F"
         >
-          Cancelar
+          {{ 'internalControl.form.cancel' | transloco }}
         </button>
         <button
           type="submit"
@@ -41,7 +42,7 @@ interface RenameProcessData {
           class="rounded-[3px] px-3 py-2 text-sm font-semibold text-white transition-opacity disabled:opacity-50"
           style="background-color: #0E3B63"
         >
-          Guardar
+          {{ 'internalControl.form.save' | transloco }}
         </button>
       </div>
     </form>

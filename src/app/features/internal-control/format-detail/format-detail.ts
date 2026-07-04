@@ -17,11 +17,12 @@ import { FormatStatusMenu } from './components/format-status-menu/format-status-
 import { FormatSchemaEditor } from './components/format-schema-editor/format-schema-editor';
 import { RegistryGrid } from './components/registry-grid/registry-grid';
 import { FormatDetailSkeleton } from './components/format-detail-skeleton/format-detail-skeleton';
+import { TranslocoPipe } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-format-detail',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [FormatStatusMenu, FormatSchemaEditor, RegistryGrid, FormatDetailSkeleton],
+  imports: [TranslocoPipe, FormatStatusMenu, FormatSchemaEditor, RegistryGrid, FormatDetailSkeleton],
   template: `
     @if (loading()) {
       <app-format-detail-skeleton />
@@ -47,7 +48,7 @@ import { FormatDetailSkeleton } from './components/format-detail-skeleton/format
           } @else {
             <div class="grid h-full place-items-center p-8 text-center">
               <p class="text-sm" style="color: #64748b">
-                Este formato está en borrador. Solo un administrador puede configurarlo.
+                {{ 'internalControl.format.draft_locked' | transloco }}
               </p>
             </div>
           }
@@ -57,7 +58,9 @@ import { FormatDetailSkeleton } from './components/format-detail-skeleton/format
       </div>
     } @else {
       <div class="grid h-full place-items-center p-8">
-        <p class="text-sm" style="color: #64748b">No se pudo cargar el formato.</p>
+        <p class="text-sm" style="color: #64748b">
+          {{ 'internalControl.format.load_error' | transloco }}
+        </p>
       </div>
     }
   `,

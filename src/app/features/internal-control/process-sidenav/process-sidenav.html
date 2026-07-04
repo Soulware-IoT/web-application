@@ -1,18 +1,20 @@
 <aside
   class="grid h-full overflow-y-auto"
   style="grid-template-rows: auto 1fr; background-color: #fafbfc; border-right: 1px solid #e2e8f0"
-  aria-label="Control processes"
+  [attr.aria-label]="'internalControl.processes.header' | transloco"
 >
   <!-- ── Panel header ──────────────────────────────────────────────────── -->
   <div
     class="grid items-center px-4"
     style="grid-template-columns: 1fr auto; height: 57px; border-bottom: 1px solid #e2e8f0"
   >
-    <h2 class="text-sm font-semibold" style="color: #1a1a1a">Control Processes</h2>
+    <h2 class="text-sm font-semibold" style="color: #1a1a1a">
+      {{ 'internalControl.processes.header' | transloco }}
+    </h2>
   </div>
 
   <!-- ── Process list ──────────────────────────────────────────────────── -->
-  <nav aria-label="Control processes" class="px-2 py-2">
+  <nav [attr.aria-label]="'internalControl.processes.header' | transloco" class="px-2 py-2">
     @if (loading()) {
       <ul class="grid gap-0.5" aria-hidden="true">
         @for (i of [1, 2, 3, 4]; track i) {
@@ -23,7 +25,7 @@
       </ul>
     } @else if (isEmpty()) {
       <p class="px-3 py-6 text-center text-xs" style="color: #4A4A4F">
-        No hay procesos de control todavía.
+        {{ 'internalControl.processes.empty' | transloco }}
       </p>
     } @else {
       <ul class="grid gap-0.5">
