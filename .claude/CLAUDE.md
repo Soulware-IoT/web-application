@@ -22,6 +22,35 @@ You are an expert in TypeScript, Angular, and scalable web application developme
 - It MUST pass all AXE checks.
 - It MUST follow all WCAG AA minimums, including focus management, color contrast, and ARIA attributes.
 
+### Component Directory Structure
+
+When a component's template contains a visually or functionally distinct element, extract it into a named sub-component under a `components/` folder — regardless of size. The goal is that the parent template reads as an explicit description of what is on screen, so developers understand the layout without diving into implementation details.
+
+```
+feature-component/
+  components/
+    part-a/
+      part-a.ts
+      part-a.html       ← external only if template is visually complex
+    part-b/
+      part-b.ts
+  feature-component.ts
+  feature-component.html  ← now a thin composition of sub-components
+```
+
+- Sub-components that are purely presentational for a single feature may inject shared services directly instead of receiving all data as inputs.
+- Pass state via `input()` signals when the sub-component needs to be reusable or decoupled from service internals.
+- The folder hierarchy must reflect actual consumption: if a set of sub-components is only consumed by one parent component, they live inside that parent's folder — not in a sibling `components/` folder at a higher level.
+- Only add a `components/` intermediary folder when there are multiple peer components at that level. A single component does not warrant the extra layer.
+
+### Spacing and Layout
+
+Use `gap` (grid/flex) to space sibling elements. Do **not** use `padding` as a structural tool to push siblings apart — that creates per-element values that diverge over time and break as the layout evolves.
+
+- Sibling spacing → `gap` on the parent grid/flex container.
+- Internal element inset → `padding` on the **container itself**, declared once.
+- Never create a wrapper `<div>` whose sole purpose is to add padding around a child.
+
 ### Components
 
 - Keep components small and focused on a single responsibility

@@ -1,0 +1,57 @@
+<div class="relative">
+  <button
+    type="button"
+    (click)="toggle()"
+    [disabled]="!hasActions()"
+    [attr.aria-haspopup]="hasActions() ? 'menu' : null"
+    [attr.aria-expanded]="hasActions() ? open() : null"
+    class="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold capitalize transition-colors enabled:hover:brightness-95 disabled:cursor-default"
+    style="background-color: #f1f5f9"
+    [style.color]="statusColor()"
+  >
+    <span class="h-2 w-2 rounded-full" [style.background-color]="statusColor()"></span>
+    {{ format().status }}
+    @if (hasActions()) {
+      <svg
+        xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24"
+        stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"
+        class="transition-transform"
+        [style.transform]="open() ? 'rotate(180deg)' : 'none'"
+      ><polyline points="6 9 12 15 18 9"/></svg>
+    }
+  </button>
+
+  @if (open()) {
+    <div
+      role="menu"
+      class="absolute right-0 z-20 mt-1 min-w-40 overflow-hidden rounded-md border bg-white py-1 shadow-lg"
+      style="border-color: #e2e8f0"
+    >
+      @for (action of actions(); track action.action) {
+        <button
+          role="menuitem"
+          type="button"
+          (click)="run(action)"
+          class="flex w-full items-center gap-2.5 px-3 py-1.5 text-left text-sm transition-colors hover:bg-gray-50"
+          [style.color]="action.destructive ? '#dc2626' : '#1a1a1a'"
+        >
+          @switch (action.action) {
+            @case ('activate') {
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            }
+            @case ('resume') {
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            }
+            @case ('suspend') {
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+            }
+            @case ('cease') {
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+            }
+          }
+          {{ action.label }}
+        </button>
+      }
+    </div>
+  }
+</div>

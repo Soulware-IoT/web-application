@@ -1,0 +1,17 @@
+<div class="relative">
+  <app-org-selector-trigger
+    [isLoading]="isLoading()"
+    [open]="open()"
+    [activeOrg]="activeOrg()"
+    (toggled)="toggle()"
+  />
+
+  @if (open()) {
+    <app-org-selector-dropdown
+      [organizations]="organizations()"
+      [activeOrg]="activeOrg()"
+      (orgSelected)="select($event)"
+      (createClicked)="createOrganization()"
+    />
+  }
+</div>

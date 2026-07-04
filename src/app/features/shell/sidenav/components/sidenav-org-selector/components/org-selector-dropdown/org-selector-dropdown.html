@@ -1,0 +1,52 @@
+<div
+  role="listbox"
+  aria-label="Organizations"
+  class="absolute left-0 right-0 z-40 mt-1 overflow-hidden rounded-[4px] border bg-white shadow-lg"
+  style="border-color: #e2e8f0"
+>
+  @if (isEmpty()) {
+    <p class="px-3 py-3 text-xs leading-relaxed" style="color: #4A4A4F">
+      You don't belong to any organization yet. Create one to get started.
+    </p>
+  } @else {
+    @for (org of organizations(); track org.id) {
+      <button
+        type="button"
+        role="option"
+        [attr.aria-selected]="org.id === activeOrg()?.id"
+        (click)="orgSelected.emit(org)"
+        class="grid w-full grid-cols-[24px_1fr_16px] items-center gap-2 px-2.5 py-2 text-left text-sm transition-colors hover:bg-gray-50"
+      >
+        <span
+          class="grid h-6 w-6 place-items-center rounded-[4px] text-[10px] font-bold text-white"
+          style="background-color: #0E3B63" aria-hidden="true"
+        >{{ initial(org.name) }}</span>
+        <span class="truncate" style="color: #1a1a1a">{{ org.name }}</span>
+        @if (org.id === activeOrg()?.id) {
+          <svg
+            xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+            style="color: #0E3B63" aria-hidden="true"
+          >
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
+        }
+      </button>
+    }
+  }
+
+  <button
+    type="button"
+    (click)="createClicked.emit()"
+    class="grid w-full grid-cols-[16px_1fr] items-center gap-2 border-t px-3 py-2.5 text-left text-sm font-medium transition-colors hover:bg-gray-50"
+    style="border-color: #e2e8f0; color: #0E3B63"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"
+    >
+      <line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" />
+    </svg>
+    <span>Create organization</span>
+  </button>
+</div>
