@@ -1,6 +1,9 @@
-import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
-import { TranslocoPipe } from '@jsverse/transloco';
-import { OrganizationResponse } from '../../../../core/models/organization.model';
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
+import { TranslocoPipe, TranslocoService } from '@jsverse/transloco';
+import { OrganizationResponse } from '../../../../../core/models/organization.model';
+import { PermissionService } from '../../../../../core/services/permission.service';
+import { ModalService } from '../../../../../core/modal/modal.service';
+import { EditOrganizationModal } from './components/edit-organization-modal/edit-organization-modal';
 
 /** Datos generales de la organización: identidad y dirección. */
 @Component({
@@ -9,9 +12,21 @@ import { OrganizationResponse } from '../../../../core/models/organization.model
   imports: [TranslocoPipe],
   template: `
     <section
-      class="grid gap-6 rounded-2xl border p-6"
+      class="group relative grid gap-6 rounded-2xl border p-6"
       style="border-color: #e2e8f0; background: #ffffff"
     >
+      @if (true) {
+        <button
+          type="button"
+          (click)="edit()"
+          [attr.aria-label]="'organizations.details.edit.aria' | transloco"
+          class="absolute right-4 top-4 grid h-8 w-8 place-items-center rounded-[3px] opacity-0 transition-opacity hover:bg-black/5 focus-visible:opacity-100 group-hover:opacity-100"
+          style="color: #4A4A4F"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+        </button>
+      }
+
       <header class="grid gap-1">
         <h2 class="text-lg font-semibold" style="color: #1a1a1a">
           {{ 'organizations.details.title' | transloco }}
@@ -72,7 +87,14 @@ import { OrganizationResponse } from '../../../../core/models/organization.model
   `,
 })
 export class OrganizationDetails {
+  private readonly permissions = inject(PermissionService);
+  private readonly modal = inject(ModalService);
+  private readonly transloco = inject(TranslocoService);
+
   readonly organization = input.required<OrganizationResponse>();
+
+  /** Editing organization details requires context admin. */
+  protected readonly canManage = computed(() => this.permissions.has('organizations', 'admin'));
 
   protected readonly initial = computed(() =>
     this.organization().name.charAt(0).toUpperCase(),
@@ -95,4 +117,11 @@ export class OrganizationDetails {
   protected readonly hasAddress = computed(() =>
     this.addressFields().some((field) => !!field.value),
   );
+
+  protected edit(): void {
+    this.modal.open(EditOrganizationModal, {
+      title: this.transloco.translate('organizations.details.edit.title'),
+      data: this.organization(),
+    });
+  }
 }

@@ -68,7 +68,16 @@
       "address_line_two": "Floor / suite",
       "reference": "Reference",
       "missing_address_title": "Address missing",
-      "missing_address_desc": "We recommend adding your organization's address to complete its profile."
+      "missing_address_desc": "We recommend adding your organization's address to complete its profile.",
+      "edit": {
+        "title": "Edit organization",
+        "aria": "Edit organization",
+        "name": "Name",
+        "cancel": "Cancel",
+        "save": "Save",
+        "saving": "Saving…",
+        "saved": "Organization updated"
+      }
     },
     "members": {
       "title": "Members",

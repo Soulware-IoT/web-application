@@ -68,7 +68,16 @@
       "address_line_two": "Piso / oficina",
       "reference": "Referencia",
       "missing_address_title": "Falta la dirección",
-      "missing_address_desc": "Te recomendamos agregar la dirección de tu organización para completar su perfil."
+      "missing_address_desc": "Te recomendamos agregar la dirección de tu organización para completar su perfil.",
+      "edit": {
+        "title": "Editar organización",
+        "aria": "Editar organización",
+        "name": "Nombre",
+        "cancel": "Cancelar",
+        "save": "Guardar",
+        "saving": "Guardando…",
+        "saved": "Organización actualizada"
+      }
     },
     "members": {
       "title": "Miembros",

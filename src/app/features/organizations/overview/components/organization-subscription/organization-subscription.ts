@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { TranslocoPipe } from '@jsverse/transloco';
-import { SubscriptionResponse } from '../../../../core/models/subscription.model';
+import { SubscriptionResponse } from '../../../../../core/models/subscription.model';
 
 @Component({
   selector: 'app-organization-subscription',
