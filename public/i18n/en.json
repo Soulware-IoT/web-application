@@ -55,6 +55,10 @@
     "subtitle": "Your organization's details, members and subscription.",
     "loading": "Loading organization…",
     "none": "No active organization.",
+    "tabs": {
+      "overview": "Overview",
+      "members": "Members"
+    },
     "details": {
       "title": "Organization details",
       "subtitle": "General and contact information.",
@@ -70,9 +74,24 @@
       "count": "{{ count }} person(s) in the organization.",
       "invite": "Invite member",
       "no_name": "No name",
+      "view_denied": "You don't have permission to view this organization's members.",
+      "detail": {
+        "placeholder": "Select a member to view or edit their permissions.",
+        "not_found": "Member not found.",
+        "read_only": "Only an administrator can edit permissions.",
+        "save": "Save",
+        "saving": "Saving…",
+        "saved": "Permissions updated",
+        "admin_locked": "An administrator's permissions can't be changed.",
+        "contexts": {
+          "security": "Security",
+          "organizations": "Organization",
+          "internalControl": "Internal control"
+        }
+      },
       "roles": {
         "none": "No access",
-        "assignee": "Contributor",
+        "assignee": "Assignee",
         "lieutenant": "Supervisor",
         "admin": "Administrator"
       }

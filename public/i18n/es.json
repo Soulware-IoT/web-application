@@ -55,6 +55,10 @@
     "subtitle": "Datos, miembros y suscripción de tu organización.",
     "loading": "Cargando organización…",
     "none": "No hay una organización activa.",
+    "tabs": {
+      "overview": "General",
+      "members": "Miembros"
+    },
     "details": {
       "title": "Datos de la organización",
       "subtitle": "Información general y de contacto.",
@@ -70,9 +74,24 @@
       "count": "{{ count }} persona(s) en la organización.",
       "invite": "Invitar miembro",
       "no_name": "Sin nombre",
+      "view_denied": "No tienes permiso para ver los miembros de esta organización.",
+      "detail": {
+        "placeholder": "Selecciona un miembro para ver o editar sus permisos.",
+        "not_found": "No se encontró el miembro.",
+        "read_only": "Solo un administrador puede editar los permisos.",
+        "save": "Guardar",
+        "saving": "Guardando…",
+        "saved": "Permisos actualizados",
+        "admin_locked": "Los permisos de un administrador no se pueden modificar.",
+        "contexts": {
+          "security": "Seguridad",
+          "organizations": "Organización",
+          "internalControl": "Control interno"
+        }
+      },
       "roles": {
         "none": "Sin acceso",
-        "assignee": "Colaborador",
+        "assignee": "Asignado",
         "lieutenant": "Supervisor",
         "admin": "Administrador"
       }
