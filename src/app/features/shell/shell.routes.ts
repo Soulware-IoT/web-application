@@ -7,15 +7,6 @@ export const shellRoutes: Routes = [
     pathMatch: 'full',
   },
   {
-    // Must precede the `organizations` layout route, whose children would
-    // otherwise swallow the `new` segment.
-    path: 'organizations/new',
-    loadComponent: () =>
-      import('../organizations/create-organization/create-organization').then(
-        (m) => m.CreateOrganization,
-      ),
-  },
-  {
     path: 'organizations',
     loadComponent: () =>
       import('../organizations/organization-layout/organization-layout').then(
