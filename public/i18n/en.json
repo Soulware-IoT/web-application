@@ -175,8 +175,8 @@
         "current": "Current",
         "prices": {
           "free": "Free",
-          "basic": "$9 / mo",
-          "professional": "$29 / mo"
+          "basic": "$5 / mo",
+          "professional": "$20 / mo"
         },
         "card_label": "Card details",
         "card_loading": "Loading the payment form…",

@@ -175,8 +175,8 @@
         "current": "Actual",
         "prices": {
           "free": "Gratis",
-          "basic": "$9 / mes",
-          "professional": "$29 / mes"
+          "basic": "$5 / mes",
+          "professional": "$20 / mes"
         },
         "card_label": "Datos de la tarjeta",
         "card_loading": "Cargando el formulario de pago…",
