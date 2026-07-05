@@ -1,9 +1,11 @@
 <!-- ── Mobile: top bar ───────────────────────────────────────────────────── -->
 <header
-  class="md:hidden sticky top-0 z-40 grid items-center px-5"
-  style="grid-template-columns: 1fr auto; height: 57px; background-color: #fff; border-bottom: 1px solid #e2e8f0"
+  class="md:hidden sticky top-0 z-40 grid items-center gap-1 px-5"
+  style="grid-template-columns: 1fr auto auto; height: 57px; background-color: #fff; border-bottom: 1px solid #e2e8f0"
 >
   <app-sidenav-brand />
+
+  <app-notification-bell />
 
   <button
     type="button"
@@ -47,8 +49,9 @@
   aria-label="Sidebar"
 >
   <div class="grid gap-2 px-3 pt-4 pb-2">
-    <div class="px-2.5">
+    <div class="grid items-center gap-1 px-2.5" style="grid-template-columns: 1fr auto">
       <app-sidenav-brand />
+      <app-notification-bell />
     </div>
     <app-sidenav-org-selector />
   </div>

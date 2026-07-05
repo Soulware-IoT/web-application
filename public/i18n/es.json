@@ -1,4 +1,31 @@
 {
+  "invitations": {
+    "received": {
+      "title": "Tus invitaciones",
+      "bell_label": "Invitaciones ({{ count }} pendientes)",
+      "tabs_label": "Filtrar invitaciones",
+      "tab_pending": "Pendientes",
+      "tab_responded": "Respondidas",
+      "loading": "Cargando invitaciones…",
+      "invited_by": "{{ name }} te invitó",
+      "invited_you": "Te invitaron a una organización",
+      "accept": "Aceptar",
+      "decline": "Rechazar",
+      "empty": {
+        "pending": "No tienes invitaciones pendientes.",
+        "responded": "Aún no has respondido ninguna invitación."
+      }
+    },
+    "notifications": {
+      "accepted": "Invitación aceptada",
+      "declined": "Invitación rechazada"
+    },
+    "status": {
+      "pending": "Pendiente",
+      "accepted": "Aceptada",
+      "declined": "Rechazada"
+    }
+  },
   "common": {
     "email": "Correo",
     "email_invalid": "Ingresa un correo válido.",

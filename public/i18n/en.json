@@ -1,4 +1,31 @@
 {
+  "invitations": {
+    "received": {
+      "title": "Your invitations",
+      "bell_label": "Invitations ({{ count }} pending)",
+      "tabs_label": "Filter invitations",
+      "tab_pending": "Pending",
+      "tab_responded": "Responded",
+      "loading": "Loading invitations…",
+      "invited_by": "{{ name }} invited you",
+      "invited_you": "You were invited to an organization",
+      "accept": "Accept",
+      "decline": "Decline",
+      "empty": {
+        "pending": "You have no pending invitations.",
+        "responded": "You haven't responded to any invitations yet."
+      }
+    },
+    "notifications": {
+      "accepted": "Invitation accepted",
+      "declined": "Invitation declined"
+    },
+    "status": {
+      "pending": "Pending",
+      "accepted": "Accepted",
+      "declined": "Declined"
+    }
+  },
   "common": {
     "email": "Email",
     "email_invalid": "Enter a valid email address.",

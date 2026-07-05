@@ -5,11 +5,12 @@ import { SidenavBrand } from './components/sidenav-brand/sidenav-brand';
 import { SidenavNav } from './components/sidenav-nav/sidenav-nav';
 import { SidenavBottom } from './components/sidenav-bottom/sidenav-bottom';
 import { SidenavOrgSelector } from './components/sidenav-org-selector/sidenav-org-selector';
+import { NotificationBell } from './components/notification-bell/notification-bell';
 
 @Component({
   selector: 'app-sidenav',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [SidenavBrand, SidenavNav, SidenavBottom, SidenavOrgSelector],
+  imports: [SidenavBrand, SidenavNav, SidenavBottom, SidenavOrgSelector, NotificationBell],
   templateUrl: './sidenav.html',
 })
 export class Sidenav implements OnInit {
