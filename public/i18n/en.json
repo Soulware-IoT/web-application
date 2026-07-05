@@ -77,7 +77,11 @@
         "cancel": "Cancel",
         "save": "Save",
         "saving": "Saving…",
-        "saved": "Organization updated"
+        "saved": "Organization updated",
+        "create": "Create",
+        "creating": "Creating…",
+        "created": "Organization created",
+        "create_title": "Create organization"
       }
     },
     "members": {

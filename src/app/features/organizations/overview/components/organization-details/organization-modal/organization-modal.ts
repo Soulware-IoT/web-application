@@ -5,7 +5,7 @@ import { ModalRef } from '../../../../../../core/modal/modal-ref';
 import {
   OrganizationResponse,
 } from '../../../../../../core/models/organization.model';
-import { OrganizationService, UpdateOrganizationRequest } from '../../../../../../core/services/organization.service';
+import { OrganizationService } from '../../../../../../core/services/organization.service';
 import {
   NotificationService,
   httpErrorMessage,
@@ -84,40 +84,51 @@ import {
           class="rounded-[3px] px-3 py-2 text-sm font-semibold text-white transition-opacity disabled:opacity-50"
           style="background-color: #0E3B63"
         >
-          {{
-            (saving() ? 'organizations.details.edit.saving' : 'organizations.details.edit.save')
-              | transloco
-          }}
+          {{ submitLabel() | transloco }}
         </button>
       </div>
     </form>
   `,
 })
-export class EditOrganizationModal {
-  protected readonly ref = inject(ModalRef) as ModalRef<OrganizationResponse, OrganizationResponse>;
+export class OrganizationModal {
+  protected readonly ref = inject(ModalRef) as ModalRef<
+    OrganizationResponse,
+    OrganizationResponse | undefined
+  >;
   private readonly organizationService = inject(OrganizationService);
   private readonly notifications = inject(NotificationService);
   private readonly transloco = inject(TranslocoService);
 
   protected readonly saving = signal(false);
 
-  private readonly organization = this.ref.data as OrganizationResponse;
+  /** The org being edited, or `undefined` when the modal opens in create mode. */
+  private readonly organization = this.ref.data;
+  protected readonly isCreate = !this.organization;
 
   protected readonly form = new FormGroup({
-    name: new FormControl(this.organization.name, {
+    name: new FormControl(this.organization?.name ?? '', {
       nonNullable: true,
       validators: [Validators.required],
     }),
-    lineOne: new FormControl(this.organization.address?.lineOne ?? '', { nonNullable: true }),
-    lineTwo: new FormControl(this.organization.address?.lineTwo ?? '', { nonNullable: true }),
-    reference: new FormControl(this.organization.address?.reference ?? '', { nonNullable: true }),
+    lineOne: new FormControl(this.organization?.address?.lineOne ?? '', { nonNullable: true }),
+    lineTwo: new FormControl(this.organization?.address?.lineTwo ?? '', { nonNullable: true }),
+    reference: new FormControl(this.organization?.address?.reference ?? '', { nonNullable: true }),
   });
+
+  protected submitLabel(): string {
+    if (this.saving()) {
+      return this.isCreate
+        ? 'organizations.details.edit.creating'
+        : 'organizations.details.edit.saving';
+    }
+    return this.isCreate ? 'organizations.details.edit.create' : 'organizations.details.edit.save';
+  }
 
   protected save(): void {
     const name = this.form.controls.name.value.trim();
     if (!name) return;
 
-    const request: UpdateOrganizationRequest = {
+    const request = {
       name,
       address: {
         lineOne: this.form.controls.lineOne.value.trim() || undefined,
@@ -126,13 +137,19 @@ export class EditOrganizationModal {
       },
     };
 
+    const org = this.organization;
+    const request$ = org
+      ? this.organizationService.update(org.id, request)
+      : this.organizationService.create(request);
+    const successKey = org
+      ? 'organizations.details.edit.saved'
+      : 'organizations.details.edit.created';
+
     this.saving.set(true);
-    this.organizationService.update(this.organization.id, request).subscribe({
-      next: (updated) => {
-        this.notifications.success(
-          this.transloco.translate('organizations.details.edit.saved'),
-        );
-        this.ref.close(updated);
+    request$.subscribe({
+      next: (saved) => {
+        this.notifications.success(this.transloco.translate(successKey));
+        this.ref.close(saved);
       },
       error: (err) => {
         this.saving.set(false);

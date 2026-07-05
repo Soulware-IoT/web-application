@@ -10,6 +10,11 @@ export interface UpdateOrganizationRequest {
   address?: Address;
 }
 
+export interface CreateOrganizationRequest {
+  name: string;
+  address?: Address;
+}
+
 @Injectable({ providedIn: 'root' })
 export class OrganizationService {
   private readonly http = inject(HttpClient);
@@ -43,6 +48,18 @@ export class OrganizationService {
   setActive(org: OrganizationResponse): void {
     this.activeOrg.set(org);
     localStorage.setItem(OrganizationService.ACTIVE_KEY, org.id);
+  }
+
+  /** Creates an organization, appends it to the list, and makes it the active org. */
+  create(request: CreateOrganizationRequest) {
+    return this.http
+      .post<OrganizationResponse>(`${environment.apiUrl}/organizations`, request)
+      .pipe(
+        tap((created) => {
+          this.organizations.update((list) => (list ? [...list, created] : [created]));
+          this.setActive(created);
+        }),
+      );
   }
 
   /** Updates an organization and reflects the server's response in the active org and list. */

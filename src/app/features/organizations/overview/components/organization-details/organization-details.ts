@@ -3,7 +3,7 @@ import { TranslocoPipe, TranslocoService } from '@jsverse/transloco';
 import { OrganizationResponse } from '../../../../../core/models/organization.model';
 import { PermissionService } from '../../../../../core/services/permission.service';
 import { ModalService } from '../../../../../core/modal/modal.service';
-import { EditOrganizationModal } from './edit-organization-modal/edit-organization-modal';
+import { OrganizationModal } from './organization-modal/organization-modal';
 
 /** Datos generales de la organización: identidad y dirección. */
 @Component({
@@ -119,7 +119,7 @@ export class OrganizationDetails {
   );
 
   protected edit(): void {
-    this.modal.open(EditOrganizationModal, {
+    this.modal.open(OrganizationModal, {
       title: this.transloco.translate('organizations.details.edit.title'),
       data: this.organization(),
     });
