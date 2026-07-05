@@ -58,7 +58,8 @@
     "tabs": {
       "overview": "Overview",
       "members": "Members",
-      "invitations": "Invitations"
+      "invitations": "Invitations",
+      "subscription": "Subscription"
     },
     "details": {
       "title": "Organization details",
@@ -135,7 +136,40 @@
       "plan": "Plan",
       "renews": "Renews",
       "ends": "Ends",
-      "manage": "Manage subscription",
+      "manage": {
+        "title": "Manage subscription",
+        "subtitle": "Choose a plan for your organization.",
+        "back": "Back",
+        "choose_plan": "Choose a plan",
+        "current": "Current",
+        "prices": {
+          "free": "Free",
+          "basic": "$9 / mo",
+          "professional": "$29 / mo"
+        },
+        "card_label": "Card details",
+        "card_loading": "Loading the payment form…",
+        "card_hint": "Simulated payment (test mode). A Stripe test card is used — nothing is really charged.",
+        "summary": "Summary",
+        "total": "Total",
+        "pay": "Pay",
+        "cancel": "Cancel",
+        "confirm_subscribe": "Subscribe",
+        "confirm_change": "Change plan",
+        "confirm_downgrade": "Downgrade to Free",
+        "resume": "Resume",
+        "resume_notice": "Your plan will cancel on {{date}}.",
+        "saving": "Saving…",
+        "success_changed": "Plan updated",
+        "success_downgraded": "Downgrade to Free scheduled",
+        "success_resumed": "Subscription resumed",
+        "error": "Could not complete the operation",
+        "card_number": "Card number",
+        "card_expiry": "Expiry",
+        "card_cvc": "CVC",
+        "card_name": "Name on card",
+        "summary_hint": "Pick a plan to see your order."
+      },
       "plans": {
         "free": "Free",
         "basic": "Basic",

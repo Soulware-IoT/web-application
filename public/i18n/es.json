@@ -58,7 +58,8 @@
     "tabs": {
       "overview": "General",
       "members": "Miembros",
-      "invitations": "Invitaciones"
+      "invitations": "Invitaciones",
+      "subscription": "Suscripción"
     },
     "details": {
       "title": "Datos de la organización",
@@ -135,7 +136,40 @@
       "plan": "Plan",
       "renews": "Renueva",
       "ends": "Finaliza",
-      "manage": "Gestionar suscripción",
+      "manage": {
+        "title": "Gestionar suscripción",
+        "subtitle": "Elige un plan para tu organización.",
+        "back": "Volver",
+        "choose_plan": "Elegir plan",
+        "current": "Actual",
+        "prices": {
+          "free": "Gratis",
+          "basic": "$9 / mes",
+          "professional": "$29 / mes"
+        },
+        "card_label": "Datos de la tarjeta",
+        "card_loading": "Cargando el formulario de pago…",
+        "card_hint": "Pago simulado (modo de prueba). Se usa una tarjeta de prueba de Stripe; no se cobra nada real.",
+        "summary": "Resumen",
+        "total": "Total",
+        "pay": "Pagar",
+        "cancel": "Cancelar",
+        "confirm_subscribe": "Suscribirse",
+        "confirm_change": "Cambiar plan",
+        "confirm_downgrade": "Bajar a Gratis",
+        "resume": "Reanudar",
+        "resume_notice": "Tu plan se cancelará el {{date}}.",
+        "saving": "Guardando…",
+        "success_changed": "Plan actualizado",
+        "success_downgraded": "Se programó la baja al plan Gratis",
+        "success_resumed": "Suscripción reanudada",
+        "error": "No se pudo completar la operación",
+        "card_number": "Número de tarjeta",
+        "card_expiry": "Vencimiento",
+        "card_cvc": "CVC",
+        "card_name": "Nombre en la tarjeta",
+        "summary_hint": "Elige un plan para ver tu resumen."
+      },
       "plans": {
         "free": "Gratis",
         "basic": "Básico",

@@ -3,7 +3,7 @@ import { TranslocoPipe, TranslocoService } from '@jsverse/transloco';
 import { OrganizationResponse } from '../../../../../core/models/organization.model';
 import { PermissionService } from '../../../../../core/services/permission.service';
 import { ModalService } from '../../../../../core/modal/modal.service';
-import { EditOrganizationModal } from './components/edit-organization-modal/edit-organization-modal';
+import { EditOrganizationModal } from './edit-organization-modal/edit-organization-modal';
 
 /** Datos generales de la organización: identidad y dirección. */
 @Component({

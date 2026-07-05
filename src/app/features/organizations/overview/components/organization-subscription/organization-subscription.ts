@@ -1,12 +1,15 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { SubscriptionResponse } from '../../../../../core/models/subscription.model';
+import { OrganizationService } from '../../../../../core/services/organization.service';
+import { ProfileService } from '../../../../../core/services/profile.service';
 
 @Component({
   selector: 'app-organization-subscription',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [DatePipe, TranslocoPipe],
+  imports: [DatePipe, RouterLink, TranslocoPipe],
   template: `
     <section
       class="grid gap-6 rounded-2xl border p-6"
@@ -58,16 +61,29 @@ import { SubscriptionResponse } from '../../../../../core/models/subscription.mo
         </dl>
       }
 
-      <button
-        type="button"
-        class="rounded-lg border px-4 py-2 text-sm font-medium"
-        style="border-color: #0E3B63; color: #0E3B63"
-      >
-        {{ 'organizations.subscription.manage' | transloco }}
-      </button>
+      @if (canManage()) {
+        <a
+          routerLink="/app/organizations/subscription"
+          class="rounded-lg border px-4 py-2 text-center text-sm font-medium transition-colors hover:bg-[#eef4fb]"
+          style="border-color: #0E3B63; color: #0E3B63"
+        >
+          {{ 'organizations.subscription.manage.title' | transloco }}
+        </a>
+      }
     </section>
   `,
 })
 export class OrganizationSubscription {
+  private readonly profiles = inject(ProfileService);
+  private readonly organizations = inject(OrganizationService);
+
   readonly subscription = input.required<SubscriptionResponse>();
+
+  /** Managing billing is owner-only on the backend, so only show the entry point to the org owner. */
+  protected readonly canManage = computed(() => {
+    const me = this.profiles.profile()?.id;
+    const org = this.organizations.activeOrg();
+    const ownerId = org?.ownedBy ?? org?.owner?.id;
+    return !!me && !!ownerId && me === ownerId;
+  });
 }

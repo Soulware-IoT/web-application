@@ -1,15 +1,15 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TranslocoPipe, TranslocoService } from '@jsverse/transloco';
-import { ModalRef } from '../../../../../../../core/modal/modal-ref';
+import { ModalRef } from '../../../../../../core/modal/modal-ref';
 import {
   OrganizationResponse,
-} from '../../../../../../../core/models/organization.model';
-import { OrganizationService, UpdateOrganizationRequest } from '../../../../../../../core/services/organization.service';
+} from '../../../../../../core/models/organization.model';
+import { OrganizationService, UpdateOrganizationRequest } from '../../../../../../core/services/organization.service';
 import {
   NotificationService,
   httpErrorMessage,
-} from '../../../../../../../core/notifications/notification.service';
+} from '../../../../../../core/notifications/notification.service';
 
 @Component({
   selector: 'app-edit-organization-modal',

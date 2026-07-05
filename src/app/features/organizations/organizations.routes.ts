@@ -12,6 +12,11 @@ export const organizationsRoutes: Routes = [
     loadComponent: () => import('./overview/overview').then((m) => m.Overview),
   },
   {
+    path: 'subscription',
+    loadComponent: () =>
+      import('./manage-subscription/manage-subscription').then((m) => m.ManageSubscription),
+  },
+  {
     path: 'invitations',
     loadComponent: () => import('./invitations/invitations').then((m) => m.Invitations),
   },
