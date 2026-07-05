@@ -22,7 +22,7 @@ import { MemberListItem } from './components/member-list-item/member-list-item';
     } @else if (loading()) {
       <app-organization-members-skeleton />
     } @else {
-      <div class="grid gap-6" style="grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr)">
+      <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]">
         <section
           class="grid content-start gap-6 rounded-2xl border p-6"
           style="border-color: #e2e8f0; background: #ffffff"

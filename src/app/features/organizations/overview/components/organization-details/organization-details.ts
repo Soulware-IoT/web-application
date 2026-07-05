@@ -56,7 +56,7 @@ import { OrganizationModal } from './organization-modal/organization-modal';
       </div>
 
       @if (hasAddress()) {
-        <dl class="grid gap-4" style="grid-template-columns: repeat(2, minmax(0, 1fr))">
+        <dl class="grid gap-4 sm:grid-cols-2">
           @for (field of addressFields(); track field.labelKey) {
             <div class="grid gap-1">
               <dt class="text-xs font-medium uppercase tracking-wide" style="color: #94a3b8">

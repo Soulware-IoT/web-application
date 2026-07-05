@@ -20,7 +20,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
         <div class="h-5 w-40 animate-pulse rounded" style="background: #e2e8f0"></div>
       </div>
 
-      <dl class="grid gap-4" style="grid-template-columns: repeat(2, minmax(0, 1fr))">
+      <dl class="grid gap-4 sm:grid-cols-2">
         @for (row of rows; track $index) {
           <div class="grid gap-1.5">
             <div class="h-3 w-20 animate-pulse rounded" style="background: #eef2f6"></div>

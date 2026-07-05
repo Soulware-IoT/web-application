@@ -24,7 +24,7 @@ import { OrganizationSubscriptionSkeleton } from './components/organization-subs
         @if (loading() || subLoading()) {
           <span class="sr-only">{{ 'organizations.loading' | transloco }}</span>
         }
-        <div class="grid gap-6" style="grid-template-columns: minmax(0, 2fr) minmax(0, 1fr)">
+        <div class="grid gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
           <!-- Details cell -->
           @if (organization(); as org) {
             <app-organization-details [organization]="org" />

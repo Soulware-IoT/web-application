@@ -12,8 +12,7 @@ import { InvitationService } from '../../../../../core/services/invitation.servi
     <form
       [formGroup]="form"
       (ngSubmit)="submit()"
-      class="grid gap-2"
-      style="grid-template-columns: minmax(0, 1fr) auto"
+      class="grid gap-2 sm:grid-cols-[minmax(0,1fr)_auto]"
     >
       <div class="grid gap-1">
         <label for="invite-email" class="sr-only">

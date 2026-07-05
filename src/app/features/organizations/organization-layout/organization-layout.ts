@@ -10,7 +10,7 @@ import { OrganizationTabs } from './components/organization-tabs/organization-ta
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [RouterOutlet, TranslocoPipe, OrganizationTabs],
   template: `
-    <div class="grid gap-6 p-8" style="align-content: start">
+    <div class="grid gap-6 p-4 sm:p-6 lg:p-8" style="align-content: start">
       <header class="grid gap-4">
         <div class="grid gap-1">
           <h1 class="text-3xl font-bold" style="color: #1a1a1a">
