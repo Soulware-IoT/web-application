@@ -1,14 +1,19 @@
-/// Mirrors the backend `OrganizationResponse` schema.
+/// Mirrors the backend `OrganizationResponse` / `Address` schemas.
+import { ProfileSummary } from './organization-member.model';
+
+/** Postal address; every field is optional. */
+export interface Address {
+  lineOne?: string;
+  lineTwo?: string;
+  reference?: string;
+}
+
 export interface OrganizationResponse {
   id: string;
   name: string;
   imageUrl?: string;
-  addressLineOne?: string;
-  addressLineTwo?: string;
-  addressReference?: string;
+  address?: Address;
   ownedBy?: string;
-  createdBy?: string;
+  owner?: ProfileSummary;
   createdAt?: string;
-  updatedBy?: string;
-  updatedAt?: string;
 }

@@ -1,7 +1,7 @@
 /// Mirrors the backend `ProfileResponse` schema. Optional fields are absent
-/// until the user has filled them in.
+/// until the user has filled them in. `id` is the profile id (== auth.users.id).
 export interface ProfileResponse {
-  profileId: string;
+  id: string;
   fullName?: string;
   preferredName?: string;
   email?: string;

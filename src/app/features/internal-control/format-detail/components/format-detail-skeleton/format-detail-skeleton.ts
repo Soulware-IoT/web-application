@@ -1,12 +1,14 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { TranslocoPipe } from '@jsverse/transloco';
 
 /** Loading placeholder that mirrors the format detail layout (header + editor). */
 @Component({
   selector: 'app-format-detail-skeleton',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [TranslocoPipe],
   host: { role: 'status', 'aria-busy': 'true' },
   template: `
-    <span class="sr-only">Cargando formato…</span>
+    <span class="sr-only">{{ 'internalControl.format.loading' | transloco }}</span>
 
     <div class="grid h-full gap-6 p-8" style="grid-template-rows: auto 1fr" aria-hidden="true">
       <!-- Header: name + status pill -->

@@ -7,6 +7,7 @@ import {
   input,
   signal,
 } from '@angular/core';
+import { TranslocoPipe, TranslocoService } from '@jsverse/transloco';
 import {
   ControlFormatResponse,
   LIFECYCLE_ACTIONS,
@@ -21,6 +22,7 @@ import { ConfirmModal, ConfirmData } from '../../../../../core/modal/confirm-mod
 @Component({
   selector: 'app-format-status-menu',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [TranslocoPipe],
   templateUrl: './format-status-menu.html',
   host: {
     '(document:click)': 'onDocumentClick($event)',
@@ -29,6 +31,7 @@ import { ConfirmModal, ConfirmData } from '../../../../../core/modal/confirm-mod
 })
 export class FormatStatusMenu {
   private readonly host = inject(ElementRef);
+  private readonly transloco = inject(TranslocoService);
   private readonly formatService = inject(ControlFormatService);
   private readonly permissions = inject(PermissionService);
   private readonly modal = inject(ModalService);
@@ -61,12 +64,14 @@ export class FormatStatusMenu {
 
     if (action.destructive) {
       const data: ConfirmData = {
-        message: `¿Cesar el formato "${format.name}"? Esta acción no se puede deshacer.`,
-        confirmLabel: 'Cesar',
+        message: this.transloco.translate('internalControl.lifecycle.cease_confirm', {
+          name: format.name,
+        }),
+        confirmLabel: this.transloco.translate('internalControl.lifecycle.cease'),
         destructive: true,
       };
       const confirmed = await this.modal.open<boolean, ConfirmData>(ConfirmModal, {
-        title: 'Cesar formato',
+        title: this.transloco.translate('internalControl.lifecycle.cease_title'),
         data,
       }).closed;
       if (!confirmed) return;

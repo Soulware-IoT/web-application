@@ -7,7 +7,7 @@
           {{ field.label }}
           @if (field.required && field.type !== 'boolean') {
             <span aria-hidden="true" style="color: #dc2626">*</span>
-            <span class="sr-only">(requerido)</span>
+            <span class="sr-only">{{ 'internalControl.form.required_mark' | transloco }}</span>
           }
         </label>
 
@@ -55,7 +55,7 @@
               [style.border-color]="error ? '#dc2626' : '#e2e8f0'"
               style="color: #1a1a1a"
             >
-              <option value="">Seleccionar…</option>
+              <option value="">{{ 'internalControl.form.select_placeholder' | transloco }}</option>
               @for (option of selectOptions[field.key]; track option) {
                 <option [value]="option">{{ option }}</option>
               }
@@ -80,7 +80,9 @@
         }
       </div>
     } @empty {
-      <p class="text-sm" style="color: #64748b">Este formato no tiene campos definidos.</p>
+      <p class="text-sm" style="color: #64748b">
+        {{ 'internalControl.form.no_fields' | transloco }}
+      </p>
     }
   </div>
 
@@ -91,7 +93,7 @@
       class="rounded-[3px] px-3 py-2 text-sm font-medium transition-colors hover:bg-gray-100"
       style="color: #4A4A4F"
     >
-      Cancelar
+      {{ 'internalControl.form.cancel' | transloco }}
     </button>
     <button
       type="submit"
@@ -99,7 +101,7 @@
       class="rounded-[3px] px-3 py-2 text-sm font-semibold text-white transition-opacity disabled:opacity-50"
       style="background-color: #0E3B63"
     >
-      Agregar
+      {{ 'internalControl.form.add' | transloco }}
     </button>
   </div>
 </form>

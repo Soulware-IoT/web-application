@@ -7,6 +7,7 @@ import {
   input,
   signal,
 } from '@angular/core';
+import { TranslocoPipe, TranslocoService } from '@jsverse/transloco';
 import {
   ControlFormatResponse,
   Field,
@@ -35,12 +36,14 @@ const FILTERABLE: ReadonlySet<FieldType> = new Set<FieldType>(['text', 'number',
   selector: 'app-registry-grid',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { class: 'block h-full min-h-0' },
+  imports: [TranslocoPipe],
   templateUrl: './registry-grid.html',
 })
 export class RegistryGrid {
   private readonly registryService = inject(ControlRegistryService);
   private readonly permissions = inject(PermissionService);
   private readonly modal = inject(ModalService);
+  private readonly transloco = inject(TranslocoService);
 
   readonly format = input.required<ControlFormatResponse>();
 
@@ -111,7 +114,7 @@ export class RegistryGrid {
   protected async addRecord(): Promise<void> {
     const format = this.format();
     const ref = this.modal.open<Record<string, unknown>>(AddRegistryModal, {
-      title: 'Agregar registro',
+      title: this.transloco.translate('internalControl.form.add_registry_title'),
       data: { format },
     });
 
@@ -189,7 +192,11 @@ export class RegistryGrid {
 
     switch (field.type) {
       case 'boolean':
-        return raw === true ? 'Sí' : raw === false ? 'No' : String(raw);
+        return raw === true
+          ? this.transloco.translate('internalControl.registry.bool_yes')
+          : raw === false
+            ? this.transloco.translate('internalControl.registry.bool_no')
+            : String(raw);
       case 'date':
         return this.formatDate(String(raw));
       default:

@@ -7,8 +7,11 @@ import {
   signal,
 } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslocoService } from '@jsverse/transloco';
 import { OrganizationService } from '../../../../../core/services/organization.service';
 import { OrganizationResponse } from '../../../../../core/models/organization.model';
+import { ModalService } from '../../../../../core/modal/modal.service';
+import { OrganizationModal } from '../../../../organizations/overview/components/organization-details/organization-modal/organization-modal';
 import { OrgSelectorTrigger } from './components/org-selector-trigger/org-selector-trigger';
 import { OrgSelectorDropdown } from './components/org-selector-dropdown/org-selector-dropdown';
 
@@ -26,6 +29,8 @@ export class SidenavOrgSelector {
   private readonly orgService = inject(OrganizationService);
   private readonly host = inject(ElementRef);
   private readonly router = inject(Router);
+  private readonly modal = inject(ModalService);
+  private readonly transloco = inject(TranslocoService);
 
   protected readonly organizations = this.orgService.organizations;
   protected readonly activeOrg = this.orgService.activeOrg;
@@ -50,7 +55,13 @@ export class SidenavOrgSelector {
 
   protected createOrganization(): void {
     this.close();
-    this.router.navigateByUrl('/app/organizations/new');
+    const ref = this.modal.open<OrganizationResponse>(OrganizationModal, {
+      title: this.transloco.translate('organizations.details.edit.create_title'),
+    });
+    ref.closed.then((created) => {
+      // The service already made the new org active; land on its overview.
+      if (created) this.router.navigateByUrl('/app/organizations');
+    });
   }
 
   protected onDocumentClick(event: MouseEvent): void {

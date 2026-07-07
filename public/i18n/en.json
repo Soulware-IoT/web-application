@@ -1,4 +1,31 @@
 {
+  "invitations": {
+    "received": {
+      "title": "Your invitations",
+      "bell_label": "Invitations ({{ count }} pending)",
+      "tabs_label": "Filter invitations",
+      "tab_pending": "Pending",
+      "tab_responded": "Responded",
+      "loading": "Loading invitations…",
+      "invited_by": "{{ name }} invited you",
+      "invited_you": "You were invited to an organization",
+      "accept": "Accept",
+      "decline": "Decline",
+      "empty": {
+        "pending": "You have no pending invitations.",
+        "responded": "You haven't responded to any invitations yet."
+      }
+    },
+    "notifications": {
+      "accepted": "Invitation accepted",
+      "declined": "Invitation declined"
+    },
+    "status": {
+      "pending": "Pending",
+      "accepted": "Accepted",
+      "declined": "Declined"
+    }
+  },
   "common": {
     "email": "Email",
     "email_invalid": "Enter a valid email address.",
@@ -49,5 +76,279 @@
     "description": "You are authenticated. This is a protected page.",
     "logged_in_as": "Logged in as:",
     "sign_out": "Sign out"
+  },
+  "organizations": {
+    "title": "Organization",
+    "subtitle": "Your organization's details, members and subscription.",
+    "loading": "Loading organization…",
+    "none": "No active organization.",
+    "tabs": {
+      "overview": "Overview",
+      "members": "Members",
+      "invitations": "Invitations",
+      "subscription": "Subscription",
+      "invoices": "Invoices"
+    },
+    "details": {
+      "title": "Organization details",
+      "subtitle": "General and contact information.",
+      "owner": "Owner",
+      "address": "Address",
+      "address_line_two": "Floor / suite",
+      "reference": "Reference",
+      "missing_address_title": "Address missing",
+      "missing_address_desc": "We recommend adding your organization's address to complete its profile.",
+      "edit": {
+        "title": "Edit organization",
+        "aria": "Edit organization",
+        "name": "Name",
+        "cancel": "Cancel",
+        "save": "Save",
+        "saving": "Saving…",
+        "saved": "Organization updated",
+        "create": "Create",
+        "creating": "Creating…",
+        "created": "Organization created",
+        "create_title": "Create organization"
+      }
+    },
+    "members": {
+      "title": "Members",
+      "count": "{{ count }} person(s) in the organization.",
+      "invite": "Invite member",
+      "no_name": "No name",
+      "view_denied": "You don't have permission to view this organization's members.",
+      "detail": {
+        "placeholder": "Select a member to view or edit their permissions.",
+        "not_found": "Member not found.",
+        "read_only": "Only an administrator can edit permissions.",
+        "save": "Save",
+        "saving": "Saving…",
+        "saved": "Permissions updated",
+        "admin_locked": "An administrator's permissions can't be changed.",
+        "contexts": {
+          "security": "Security",
+          "organizations": "Organization",
+          "internalControl": "Internal control"
+        }
+      },
+      "roles": {
+        "none": "No access",
+        "assignee": "Assignee",
+        "lieutenant": "Supervisor",
+        "admin": "Administrator"
+      }
+    },
+    "invitations": {
+      "title": "Invitations",
+      "subtitle": "Invite people to your organization and track their status.",
+      "loading": "Loading invitations…",
+      "empty": "No invitations yet.",
+      "no_matches": "No invitation matches this status.",
+      "view_denied": "You don't have permission to view this organization's invitations.",
+      "email": "Email of the person to invite",
+      "email_placeholder": "person@email.com",
+      "send": "Send invitation",
+      "sending": "Sending…",
+      "sent": "Invitation sent",
+      "invited_by": "Invited by {{ name }}",
+      "filter_label": "Filter by status",
+      "status_filter": {
+        "all": "All"
+      },
+      "status": {
+        "pending": "Pending",
+        "accepted": "Accepted",
+        "declined": "Declined"
+      }
+    },
+    "subscription": {
+      "title": "Subscription",
+      "subtitle": "Current plan and billing.",
+      "plan": "Plan",
+      "renews": "Renews",
+      "ends": "Ends",
+      "manage": {
+        "title": "Manage subscription",
+        "subtitle": "Choose a plan for your organization.",
+        "back": "Back",
+        "choose_plan": "Choose a plan",
+        "current": "Current",
+        "prices": {
+          "free": "Free",
+          "basic": "$5 / mo",
+          "professional": "$15 / mo"
+        },
+        "card_label": "Card details",
+        "card_loading": "Loading the payment form…",
+        "card_hint": "Simulated payment (test mode). A Stripe test card is used — nothing is really charged.",
+        "summary": "Summary",
+        "total": "Total",
+        "pay": "Pay",
+        "cancel": "Cancel",
+        "confirm_subscribe": "Subscribe",
+        "confirm_change": "Change plan",
+        "confirm_downgrade": "Downgrade to Free",
+        "resume": "Resume",
+        "resume_notice": "Your plan switches to {{plan}} on {{date}}.",
+        "saving": "Saving…",
+        "success_changed": "Plan updated",
+        "success_downgraded": "Downgrade to Free scheduled",
+        "success_resumed": "Subscription resumed",
+        "error": "Could not complete the operation",
+        "card_number": "Card number",
+        "card_expiry": "Expiry",
+        "card_cvc": "CVC",
+        "card_name": "Name on card",
+        "summary_hint": "Pick a plan to see your order.",
+        "upgrade_note": "Charged today, discounted for the unused time on your current plan.",
+        "downgrade_note": "Takes effect on {{date}}."
+      },
+      "plans": {
+        "free": "Free",
+        "basic": "Basic",
+        "professional": "Professional"
+      },
+      "status": {
+        "active": "Active",
+        "scheduled": "Scheduled"
+      },
+      "pending_notice": "Switches to {{plan}}"
+    },
+    "invoices": {
+      "title": "Invoices",
+      "subtitle": "Your organization's billing history.",
+      "empty": "No invoices yet.",
+      "no_number": "No number",
+      "view": "View",
+      "download": "PDF",
+      "view_denied": "Only the organization owner can view invoices.",
+      "status": {
+        "paid": "Paid",
+        "open": "Open",
+        "void": "Void",
+        "uncollectible": "Uncollectible",
+        "draft": "Draft"
+      }
+    }
+  },
+  "internalControl": {
+    "processes": {
+      "header": "Control processes",
+      "empty": "No control processes yet.",
+      "new_format": "New format",
+      "rename_aria": "Rename {{ name }}"
+    },
+    "placeholder": "Open a process and pick a format from the panel to see its content.",
+    "format": {
+      "loading": "Loading format…",
+      "draft_locked": "This format is a draft. Only an administrator can configure it.",
+      "load_error": "Couldn't load the format."
+    },
+    "lifecycle": {
+      "activate": "Activate",
+      "suspend": "Suspend",
+      "resume": "Resume",
+      "cease": "Cease",
+      "cease_title": "Cease format",
+      "cease_confirm": "Cease the format \"{{ name }}\"? This action can't be undone."
+    },
+    "schema": {
+      "title": "Format columns",
+      "subtitle": "Define the structure. It locks on activation and has no rows until then.",
+      "add_field": "Add field",
+      "empty": "No columns yet. Add the first field.",
+      "move_up": "Move field up",
+      "move_down": "Move field down",
+      "column_name_placeholder": "Column name",
+      "field_name_aria": "Name of field {{ n }}",
+      "field_type_aria": "Type of field {{ n }}",
+      "required": "Required",
+      "delete_field_aria": "Delete field {{ n }}",
+      "rules": "Rules",
+      "min_length": "Min. length",
+      "max_length": "Max. length",
+      "type": "Type",
+      "integer": "Integer",
+      "decimal": "Decimal",
+      "min": "Min.",
+      "max": "Max.",
+      "options": "Options",
+      "option_placeholder": "Option",
+      "option_aria": "Option {{ n }}",
+      "remove_option_aria": "Remove option {{ n }}",
+      "add_option": "Add option",
+      "saving": "Saving…",
+      "save": "Save fields"
+    },
+    "field_types": {
+      "text": "Text",
+      "number": "Number",
+      "boolean": "Yes / No",
+      "date": "Date",
+      "select": "Select"
+    },
+    "registry": {
+      "title": "Records",
+      "count_filtered": "{{ shown }} of {{ total }}",
+      "unit_one": "record",
+      "unit_other": "records",
+      "clear": "Clear",
+      "filters": "Filters",
+      "add": "Add record",
+      "created": "Created",
+      "filter_contains": "Contains…",
+      "filter_aria": "Filter {{ label }}",
+      "filter_min": "Min",
+      "filter_max": "Max",
+      "filter_min_aria": "Filter {{ label }}: minimum",
+      "filter_max_aria": "Filter {{ label }}: maximum",
+      "filter_from_aria": "Filter {{ label }}: from",
+      "filter_to_aria": "Filter {{ label }}: to",
+      "filter_all": "All",
+      "caption": "Records of format {{ name }}",
+      "empty": "No records yet.",
+      "no_matches": "No record matches the filters.",
+      "clear_filters": "Clear filters",
+      "no_permission": "You don't have permission to view this format's records.",
+      "can_add_hint": "You can add a new one.",
+      "bool_yes": "Yes",
+      "bool_no": "No"
+    },
+    "form": {
+      "required_mark": "(required)",
+      "select_placeholder": "Select…",
+      "no_fields": "This format has no defined fields.",
+      "cancel": "Cancel",
+      "add": "Add",
+      "create": "Create",
+      "save": "Save",
+      "add_registry_title": "Add record",
+      "new_format_title": "New format",
+      "rename_process_title": "Rename process",
+      "format_name": "Format name",
+      "sample_fields": "Create sample fields",
+      "process_name": "Process name",
+      "errors": {
+        "required": "Required",
+        "min_length": "Minimum {{ n }} characters",
+        "max_length": "Maximum {{ n }} characters",
+        "min": "The minimum value is {{ n }}",
+        "max": "The maximum value is {{ n }}",
+        "integer": "Must be a whole number",
+        "pattern": "Invalid format",
+        "invalid": "Invalid value"
+      }
+    },
+    "notifications": {
+      "format_activated": "Format activated",
+      "format_suspended": "Format suspended",
+      "format_resumed": "Format resumed",
+      "format_ceased": "Format ceased",
+      "format_created": "Format created",
+      "fields_saved": "Fields saved",
+      "registry_added": "Record added",
+      "process_renamed": "Process renamed"
+    }
   }
 }

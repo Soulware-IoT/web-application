@@ -1,8 +1,19 @@
 import { Injectable, effect, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { SupabaseService } from './supabase.service';
-import { OrganizationResponse } from '../models/organization.model';
+import { Address, OrganizationResponse } from '../models/organization.model';
+
+export interface UpdateOrganizationRequest {
+  name: string;
+  address?: Address;
+}
+
+export interface CreateOrganizationRequest {
+  name: string;
+  address?: Address;
+}
 
 @Injectable({ providedIn: 'root' })
 export class OrganizationService {
@@ -37,6 +48,32 @@ export class OrganizationService {
   setActive(org: OrganizationResponse): void {
     this.activeOrg.set(org);
     localStorage.setItem(OrganizationService.ACTIVE_KEY, org.id);
+  }
+
+  /** Creates an organization, appends it to the list, and makes it the active org. */
+  create(request: CreateOrganizationRequest) {
+    return this.http
+      .post<OrganizationResponse>(`${environment.apiUrl}/organizations`, request)
+      .pipe(
+        tap((created) => {
+          this.organizations.update((list) => (list ? [...list, created] : [created]));
+          this.setActive(created);
+        }),
+      );
+  }
+
+  /** Updates an organization and reflects the server's response in the active org and list. */
+  update(id: string, request: UpdateOrganizationRequest) {
+    return this.http
+      .patch<OrganizationResponse>(`${environment.apiUrl}/organizations/${id}`, request)
+      .pipe(
+        tap((updated) => {
+          this.organizations.update((list) =>
+            list?.map((o) => (o.id === id ? updated : o)) ?? list,
+          );
+          if (this.activeOrg()?.id === id) this.activeOrg.set(updated);
+        }),
+      );
   }
 
   private load(): void {

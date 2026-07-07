@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, inject, input, signal } from '@angular/core';
+import { TranslocoPipe, TranslocoService } from '@jsverse/transloco';
 import { Router } from '@angular/router';
 import { ControlProcessResponse } from '../../../../core/models/control-process.model';
 import { ControlProcessService } from '../../../../core/services/control-process.service';
@@ -15,7 +16,7 @@ import { FormatNavItem } from './components/format-nav-item/format-nav-item';
 @Component({
   selector: 'app-process-nav-item',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [FormatNavItem],
+  imports: [TranslocoPipe, FormatNavItem],
   templateUrl: './process-nav-item.html',
 })
 export class ProcessNavItem {
@@ -24,6 +25,7 @@ export class ProcessNavItem {
   private readonly processService = inject(ControlProcessService);
   private readonly formatService = inject(ControlFormatService);
   private readonly permissions = inject(PermissionService);
+  private readonly transloco = inject(TranslocoService);
 
   readonly process = input.required<ControlProcessResponse>();
 
@@ -46,7 +48,7 @@ export class ProcessNavItem {
   protected async edit(): Promise<void> {
     const process = this.process();
     const ref = this.modal.open<string>(RenameProcessModal, {
-      title: 'Renombrar proceso',
+      title: this.transloco.translate('internalControl.form.rename_process_title'),
       data: { id: process.id, name: process.name },
     });
 
@@ -59,7 +61,7 @@ export class ProcessNavItem {
   protected async createFormat(): Promise<void> {
     const processId = this.process().id;
     const ref = this.modal.open<CreateFormatResult>(CreateFormatModal, {
-      title: 'Nuevo formato',
+      title: this.transloco.translate('internalControl.form.new_format_title'),
     });
 
     const result = await ref.closed;

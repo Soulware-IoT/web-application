@@ -9,6 +9,7 @@ import {
   linkedSignal,
   signal,
 } from '@angular/core';
+import { TranslocoPipe } from '@jsverse/transloco';
 import {
   ControlFormatResponse,
   FIELD_TYPE_COLOR,
@@ -29,17 +30,19 @@ interface EditableField {
   rules: ValidationRules;
 }
 
+/** `label` holds an i18n key resolved in the template via the transloco pipe. */
 export const FIELD_TYPES: { value: FieldType; label: string }[] = [
-  { value: 'text', label: 'Texto' },
-  { value: 'number', label: 'Número' },
-  { value: 'boolean', label: 'Sí / No' },
-  { value: 'date', label: 'Fecha' },
-  { value: 'select', label: 'Selección' },
+  { value: 'text', label: 'internalControl.field_types.text' },
+  { value: 'number', label: 'internalControl.field_types.number' },
+  { value: 'boolean', label: 'internalControl.field_types.boolean' },
+  { value: 'date', label: 'internalControl.field_types.date' },
+  { value: 'select', label: 'internalControl.field_types.select' },
 ];
 
 @Component({
   selector: 'app-format-schema-editor',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [TranslocoPipe],
   templateUrl: './format-schema-editor.html',
 })
 export class FormatSchemaEditor {

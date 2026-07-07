@@ -8,14 +8,12 @@ export const shellRoutes: Routes = [
   },
   {
     path: 'organizations',
-    loadComponent: () => import('../organizations/organizations').then((m) => m.Organizations),
-  },
-  {
-    path: 'organizations/new',
     loadComponent: () =>
-      import('../organizations/create-organization/create-organization').then(
-        (m) => m.CreateOrganization,
+      import('../organizations/organization-layout/organization-layout').then(
+        (m) => m.OrganizationLayout,
       ),
+    loadChildren: () =>
+      import('../organizations/organizations.routes').then((m) => m.organizationsRoutes),
   },
   {
     path: 'internal-control',
