@@ -41,8 +41,8 @@ import { ProfileService } from '../../../../../core/services/profile.service';
           style="background: rgba(255, 255, 255, 0.15); color: #ffffff"
         >
           {{
-            'organizations.subscription.status.' +
-              (subscription().cancelAtPeriodEnd ? 'canceling' : 'active') | transloco
+            'organizations.subscription.status.' + (pendingPlan() ? 'scheduled' : 'active')
+              | transloco
           }}
         </span>
       </div>
@@ -51,13 +51,24 @@ import { ProfileService } from '../../../../../core/services/profile.service';
         <dl class="grid gap-1">
           <dt class="text-xs font-medium uppercase tracking-wide" style="color: #94a3b8">
             {{
-              (subscription().cancelAtPeriodEnd
+              (pendingPlan()
                 ? 'organizations.subscription.ends'
                 : 'organizations.subscription.renews'
               ) | transloco
             }}
           </dt>
           <dd class="text-sm" style="color: #1a1a1a">{{ periodEnd | date: 'mediumDate' }}</dd>
+          @if (pendingPlan(); as next) {
+            <dd class="text-sm" style="color: #64748b">
+              {{
+                'organizations.subscription.pending_notice'
+                  | transloco
+                    : {
+                        plan: 'organizations.subscription.plans.' + next | transloco,
+                      }
+              }}
+            </dd>
+          }
         </dl>
       }
 
@@ -78,6 +89,12 @@ export class OrganizationSubscription {
   private readonly organizations = inject(OrganizationService);
 
   readonly subscription = input.required<SubscriptionResponse>();
+
+  /** The tier scheduled for `currentPeriodEnd`, or null when no downgrade is pending. */
+  protected readonly pendingPlan = computed(() => {
+    const sub = this.subscription();
+    return sub.pendingPlan && sub.pendingPlan !== sub.plan ? sub.pendingPlan : null;
+  });
 
   /** Managing billing is owner-only on the backend, so only show the entry point to the org owner. */
   protected readonly canManage = computed(() => {

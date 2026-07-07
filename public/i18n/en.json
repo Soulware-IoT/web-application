@@ -86,7 +86,8 @@
       "overview": "Overview",
       "members": "Members",
       "invitations": "Invitations",
-      "subscription": "Subscription"
+      "subscription": "Subscription",
+      "invoices": "Invoices"
     },
     "details": {
       "title": "Organization details",
@@ -176,7 +177,7 @@
         "prices": {
           "free": "Free",
           "basic": "$5 / mo",
-          "professional": "$20 / mo"
+          "professional": "$15 / mo"
         },
         "card_label": "Card details",
         "card_loading": "Loading the payment form…",
@@ -189,7 +190,7 @@
         "confirm_change": "Change plan",
         "confirm_downgrade": "Downgrade to Free",
         "resume": "Resume",
-        "resume_notice": "Your plan will cancel on {{date}}.",
+        "resume_notice": "Your plan switches to {{plan}} on {{date}}.",
         "saving": "Saving…",
         "success_changed": "Plan updated",
         "success_downgraded": "Downgrade to Free scheduled",
@@ -199,7 +200,9 @@
         "card_expiry": "Expiry",
         "card_cvc": "CVC",
         "card_name": "Name on card",
-        "summary_hint": "Pick a plan to see your order."
+        "summary_hint": "Pick a plan to see your order.",
+        "upgrade_note": "Charged today, discounted for the unused time on your current plan.",
+        "downgrade_note": "Takes effect on {{date}}."
       },
       "plans": {
         "free": "Free",
@@ -208,7 +211,24 @@
       },
       "status": {
         "active": "Active",
-        "canceling": "Canceling"
+        "scheduled": "Scheduled"
+      },
+      "pending_notice": "Switches to {{plan}}"
+    },
+    "invoices": {
+      "title": "Invoices",
+      "subtitle": "Your organization's billing history.",
+      "empty": "No invoices yet.",
+      "no_number": "No number",
+      "view": "View",
+      "download": "PDF",
+      "view_denied": "Only the organization owner can view invoices.",
+      "status": {
+        "paid": "Paid",
+        "open": "Open",
+        "void": "Void",
+        "uncollectible": "Uncollectible",
+        "draft": "Draft"
       }
     }
   },

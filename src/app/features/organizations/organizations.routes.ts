@@ -21,6 +21,10 @@ export const organizationsRoutes: Routes = [
     loadComponent: () => import('./invitations/invitations').then((m) => m.Invitations),
   },
   {
+    path: 'invoices',
+    loadComponent: () => import('./invoices/invoices').then((m) => m.Invoices),
+  },
+  {
     path: 'members',
     loadComponent: () => import('./members/members').then((m) => m.Members),
     children: [

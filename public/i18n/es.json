@@ -86,7 +86,8 @@
       "overview": "General",
       "members": "Miembros",
       "invitations": "Invitaciones",
-      "subscription": "Suscripción"
+      "subscription": "Suscripción",
+      "invoices": "Facturas"
     },
     "details": {
       "title": "Datos de la organización",
@@ -176,7 +177,7 @@
         "prices": {
           "free": "Gratis",
           "basic": "$5 / mes",
-          "professional": "$20 / mes"
+          "professional": "$15 / mes"
         },
         "card_label": "Datos de la tarjeta",
         "card_loading": "Cargando el formulario de pago…",
@@ -189,7 +190,7 @@
         "confirm_change": "Cambiar plan",
         "confirm_downgrade": "Bajar a Gratis",
         "resume": "Reanudar",
-        "resume_notice": "Tu plan se cancelará el {{date}}.",
+        "resume_notice": "Tu plan cambia a {{plan}} el {{date}}.",
         "saving": "Guardando…",
         "success_changed": "Plan actualizado",
         "success_downgraded": "Se programó la baja al plan Gratis",
@@ -199,7 +200,9 @@
         "card_expiry": "Vencimiento",
         "card_cvc": "CVC",
         "card_name": "Nombre en la tarjeta",
-        "summary_hint": "Elige un plan para ver tu resumen."
+        "summary_hint": "Elige un plan para ver tu resumen.",
+        "upgrade_note": "Se cobra hoy, con descuento por el tiempo restante de tu plan actual.",
+        "downgrade_note": "El cambio se aplica el {{date}}."
       },
       "plans": {
         "free": "Gratis",
@@ -208,7 +211,24 @@
       },
       "status": {
         "active": "Activa",
-        "canceling": "Se cancelará"
+        "scheduled": "Programada"
+      },
+      "pending_notice": "Cambia al plan {{plan}}"
+    },
+    "invoices": {
+      "title": "Facturas",
+      "subtitle": "Historial de facturación de tu organización.",
+      "empty": "Todavía no hay facturas.",
+      "no_number": "Sin número",
+      "view": "Ver",
+      "download": "PDF",
+      "view_denied": "Solo el propietario de la organización puede ver las facturas.",
+      "status": {
+        "paid": "Pagada",
+        "open": "Pendiente",
+        "void": "Anulada",
+        "uncollectible": "Incobrable",
+        "draft": "Borrador"
       }
     }
   },

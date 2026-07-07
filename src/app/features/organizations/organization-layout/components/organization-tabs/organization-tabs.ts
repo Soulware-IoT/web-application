@@ -40,5 +40,6 @@ export class OrganizationTabs {
     { path: 'members', labelKey: 'organizations.tabs.members' },
     { path: 'invitations', labelKey: 'organizations.tabs.invitations' },
     { path: 'subscription', labelKey: 'organizations.tabs.subscription' },
+    { path: 'invoices', labelKey: 'organizations.tabs.invoices' },
   ];
 }

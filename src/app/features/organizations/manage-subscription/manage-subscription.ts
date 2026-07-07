@@ -27,8 +27,9 @@ const PLANS: readonly SubscriptionPlan[] = ['free', 'basic', 'professional'];
 
 /**
  * Full-page checkout / management view for the active org's subscription, rendered inside the
- * organization layout (owner-only). Subscribe (collecting a card off FREE), switch paid plans,
- * downgrade at period end, or resume a pending cancellation via the subscription endpoints.
+ * organization layout (owner-only). Subscribe (collecting a card off FREE), upgrade immediately
+ * (paid upfront, discounted for unused time), downgrade at period end, or resume a scheduled
+ * downgrade via the subscription endpoints.
  */
 @Component({
   selector: 'app-manage-subscription',
@@ -48,7 +49,7 @@ const PLANS: readonly SubscriptionPlan[] = ['free', 'basic', 'professional'];
               </p>
             </header>
 
-            @if (sub.cancelAtPeriodEnd) {
+            @if (pendingPlan(); as next) {
               <div
                 class="grid items-center gap-3 rounded-xl border p-4"
                 style="border-color: #fde68a; background: #fffbeb; grid-template-columns: minmax(0, 1fr) auto"
@@ -56,7 +57,11 @@ const PLANS: readonly SubscriptionPlan[] = ['free', 'basic', 'professional'];
                 <p class="text-sm" style="color: #92400e">
                   {{
                     'organizations.subscription.manage.resume_notice'
-                      | transloco: { date: (sub.currentPeriodEnd | date: 'mediumDate') }
+                      | transloco
+                        : {
+                            plan: 'organizations.subscription.plans.' + next | transloco,
+                            date: (sub.currentPeriodEnd | date: 'mediumDate'),
+                          }
                   }}
                 </p>
                 <button
@@ -121,6 +126,15 @@ const PLANS: readonly SubscriptionPlan[] = ['free', 'basic', 'professional'];
                   <span>{{ 'organizations.subscription.manage.total' | transloco }}</span>
                   <span>{{ 'organizations.subscription.manage.prices.' + selectedPlan() | transloco }}</span>
                 </div>
+                <p class="text-xs" style="color: #64748b">
+                  {{
+                    (isUpgrade()
+                      ? 'organizations.subscription.manage.upgrade_note'
+                      : 'organizations.subscription.manage.downgrade_note'
+                    )
+                      | transloco: { date: (subscription()?.currentPeriodEnd | date: 'mediumDate') }
+                  }}
+                </p>
               </div>
             } @else {
               <p class="text-sm" style="color: #64748b">
@@ -179,11 +193,24 @@ export class ManageSubscription {
   protected readonly isChange = computed(
     () => this.selectedPlan() !== (this.subscription()?.plan ?? 'free'),
   );
+  /** The tier scheduled for `currentPeriodEnd`, or null when no downgrade is pending. */
+  protected readonly pendingPlan = computed(() => {
+    const sub = this.subscription();
+    return sub?.pendingPlan && sub.pendingPlan !== sub.plan ? sub.pendingPlan : null;
+  });
   /** A card is required only when the org has no Stripe subscription yet (currently FREE) and moves to a paid plan. */
   protected readonly needsCard = computed(
     () => (this.subscription()?.plan ?? 'free') === 'free' && this.selectedPlan() !== 'free',
   );
   protected readonly showSummary = computed(() => this.isChange() && this.selectedPlan() !== 'free');
+  /**
+   * Whether the selection is a higher tier than the current plan. Upgrades apply immediately and are
+   * charged upfront (with a discount for the unused time); downgrades take effect at period end.
+   */
+  protected readonly isUpgrade = computed(() => {
+    const current = this.subscription()?.plan ?? 'free';
+    return PLANS.indexOf(this.selectedPlan()) > PLANS.indexOf(current);
+  });
   /** When a card is required, the pay button waits until the (simulated) card fields are filled. */
   protected readonly cardComplete = computed(() => this.cardField()?.complete() ?? false);
 

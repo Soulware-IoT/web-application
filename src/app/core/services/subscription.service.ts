@@ -3,7 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { OrganizationService } from './organization.service';
-import { SubscriptionPlan, SubscriptionResponse } from '../models/subscription.model';
+import {
+  InvoiceResponse,
+  SubscriptionPlan,
+  SubscriptionResponse,
+} from '../models/subscription.model';
 
 /** Subscription of the active organization, reloaded when the active org changes. */
 @Injectable({ providedIn: 'root' })
@@ -47,6 +51,13 @@ export class SubscriptionService {
         {},
       )
       .pipe(tap((sub) => this.applyIfActive(orgId, sub)));
+  }
+
+  /** Past invoices for the org's subscription, newest first from Stripe. Fetched on demand. */
+  listInvoices(orgId: string) {
+    return this.http.get<InvoiceResponse[]>(
+      `${environment.apiUrl}/organizations/${orgId}/subscription/invoices`,
+    );
   }
 
   private applyIfActive(orgId: string, sub: SubscriptionResponse): void {
