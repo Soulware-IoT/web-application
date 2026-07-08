@@ -30,7 +30,8 @@
     "email": "Email",
     "email_invalid": "Enter a valid email address.",
     "password": "Password",
-    "or": "or"
+    "or": "or",
+    "cancel": "Cancel"
   },
   "auth": {
     "login": {
@@ -349,6 +350,129 @@
       "fields_saved": "Fields saved",
       "registry_added": "Record added",
       "process_renamed": "Process renamed"
+    }
+  },
+  "security": {
+    "title": "Security",
+    "subtitle": "The devices watching over the organization.",
+    "tabs": {
+      "management": "Management",
+      "readings": "Live readings"
+    },
+    "iot": {
+      "title": "IoT devices",
+      "subtitle": "The organization's connected sensors.",
+      "empty": "No IoT devices yet.",
+      "load_error": "Could not load devices.",
+      "code": "Code",
+      "updated": "Device updated",
+      "claim": {
+        "code": "Device code",
+        "code_placeholder": "Device code",
+        "name": "Device name",
+        "name_placeholder": "Device name",
+        "submit": "Claim device",
+        "claiming": "Claiming…",
+        "claimed": "Device claimed",
+        "quota_full": "Your plan's device quota is full. Upgrade the plan to claim more devices."
+      },
+      "actions": {
+        "edit": "Edit",
+        "activate": "Activate",
+        "deactivate": "Deactivate",
+        "deactivate_title": "Deactivate device",
+        "deactivate_confirm": "\"{{ name }}\" will stop reporting readings. Deactivate it?"
+      },
+      "edit": {
+        "title": "Edit device",
+        "name": "Name",
+        "temperature": "Temperature thresholds (°C)",
+        "gas": "Gas thresholds (PPM)",
+        "warn": "Warning",
+        "crit": "Critical",
+        "order_error": "The warning threshold must be below the critical one.",
+        "save": "Save changes",
+        "saving": "Saving…"
+      },
+      "servo": {
+        "start": "Start servo",
+        "stop": "Stop servo",
+        "sent": "Command sent"
+      },
+      "thresholds_summary": "Temp {{ tempWarn }}/{{ tempCrit }} °C · Gas {{ gasWarn }}/{{ gasCrit }} PPM"
+    },
+    "quota": {
+      "label": "Quota",
+      "usage": "{{ used }} of {{ limit }}",
+      "full": "Quota full",
+      "unlimited": "{{ used }} · unlimited"
+    },
+    "status": {
+      "provisioned": "Provisioned",
+      "active": "Active",
+      "inactive": "Inactive",
+      "label": "Activation status"
+    },
+    "readings": {
+      "none": "No readings yet.",
+      "temperature": "{{ value }} °C",
+      "gas": "{{ value }} PPM",
+      "stream": {
+        "idle": "Offline",
+        "connecting": "Connecting…",
+        "live": "Live",
+        "reconnecting": "Reconnecting…"
+      },
+      "severity": {
+        "safe": "Safe",
+        "warning": "Warning",
+        "critical": "Critical"
+      },
+      "title": "Live readings",
+      "subtitle": "Real-time measurements streamed from your sensors.",
+      "empty": "No IoT devices to monitor yet.",
+      "view_live": "View live readings",
+      "select_device": "Devices",
+      "temperature_title": "Temperature (°C)",
+      "gas_title": "Gas (PPM)",
+      "waiting": "Waiting for readings…"
+    },
+    "edge": {
+      "load_error": "Could not load the edge device.",
+      "empty": "No edge device registered yet.",
+      "code": "Code",
+      "registered": "Edge device registered",
+      "updated": "Edge device updated",
+      "register": {
+        "title": "Register the edge device",
+        "one_per_org": "Each organization has a single edge device. Enter the code printed on yours to register it.",
+        "code": "Device code",
+        "code_placeholder": "Device code",
+        "name": "Device name",
+        "name_placeholder": "Device name",
+        "submit": "Register",
+        "registering": "Registering…"
+      },
+      "actions": {
+        "rename": "Rename",
+        "activate": "Activate",
+        "deactivate": "Deactivate",
+        "deactivate_title": "Deactivate edge device",
+        "deactivate_confirm": "\"{{ name }}\" will stop relaying readings from every sensor. Deactivate it?"
+      },
+      "rename": {
+        "title": "Rename edge device",
+        "name": "Name",
+        "save": "Save changes",
+        "saving": "Saving…"
+      }
+    },
+    "view_denied": "You don't have permission to view this section.",
+    "presence": {
+      "online": "Online",
+      "offline": "Offline",
+      "unknown": "No signal",
+      "since": "Since {{ time }}"
     }
   }
 }
