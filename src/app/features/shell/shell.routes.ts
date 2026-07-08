@@ -24,5 +24,6 @@ export const shellRoutes: Routes = [
   {
     path: 'security',
     loadComponent: () => import('../security/security').then((m) => m.Security),
+    loadChildren: () => import('../security/security.routes').then((m) => m.securityRoutes),
   },
 ];

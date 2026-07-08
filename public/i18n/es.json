@@ -30,7 +30,8 @@
     "email": "Correo",
     "email_invalid": "Ingresa un correo válido.",
     "password": "Contraseña",
-    "or": "o"
+    "or": "o",
+    "cancel": "Cancelar"
   },
   "auth": {
     "login": {
@@ -349,6 +350,129 @@
       "fields_saved": "Campos guardados",
       "registry_added": "Registro agregado",
       "process_renamed": "Proceso renombrado"
+    }
+  },
+  "security": {
+    "title": "Seguridad",
+    "subtitle": "Los dispositivos que vigilan la organización.",
+    "tabs": {
+      "management": "Gestión",
+      "readings": "Lecturas en vivo"
+    },
+    "iot": {
+      "title": "Dispositivos IoT",
+      "subtitle": "Sensores conectados de la organización.",
+      "empty": "Aún no hay dispositivos IoT.",
+      "load_error": "No se pudieron cargar los dispositivos.",
+      "code": "Código",
+      "updated": "Dispositivo actualizado",
+      "claim": {
+        "code": "Código del dispositivo",
+        "code_placeholder": "Código del dispositivo",
+        "name": "Nombre del dispositivo",
+        "name_placeholder": "Nombre del dispositivo",
+        "submit": "Reclamar dispositivo",
+        "claiming": "Reclamando…",
+        "claimed": "Dispositivo reclamado",
+        "quota_full": "El cupo de dispositivos de tu plan está completo. Mejora el plan para reclamar más dispositivos."
+      },
+      "actions": {
+        "edit": "Editar",
+        "activate": "Activar",
+        "deactivate": "Desactivar",
+        "deactivate_title": "Desactivar dispositivo",
+        "deactivate_confirm": "\"{{ name }}\" dejará de reportar lecturas. ¿Deseas desactivarlo?"
+      },
+      "edit": {
+        "title": "Editar dispositivo",
+        "name": "Nombre",
+        "temperature": "Umbrales de temperatura (°C)",
+        "gas": "Umbrales de gas (PPM)",
+        "warn": "Advertencia",
+        "crit": "Crítico",
+        "order_error": "El umbral de advertencia debe ser menor que el crítico.",
+        "save": "Guardar cambios",
+        "saving": "Guardando…"
+      },
+      "servo": {
+        "start": "Iniciar servo",
+        "stop": "Detener servo",
+        "sent": "Comando enviado"
+      },
+      "thresholds_summary": "Temp {{ tempWarn }}/{{ tempCrit }} °C · Gas {{ gasWarn }}/{{ gasCrit }} PPM"
+    },
+    "quota": {
+      "label": "Cupo",
+      "usage": "{{ used }} de {{ limit }}",
+      "full": "Cupo completo",
+      "unlimited": "{{ used }} · ilimitado"
+    },
+    "status": {
+      "provisioned": "Aprovisionado",
+      "active": "Activo",
+      "inactive": "Inactivo",
+      "label": "Estado de activación"
+    },
+    "readings": {
+      "none": "Aún no hay lecturas.",
+      "temperature": "{{ value }} °C",
+      "gas": "{{ value }} PPM",
+      "stream": {
+        "idle": "Desconectado",
+        "connecting": "Conectando…",
+        "live": "En vivo",
+        "reconnecting": "Reconectando…"
+      },
+      "severity": {
+        "safe": "Seguro",
+        "warning": "Advertencia",
+        "critical": "Crítico"
+      },
+      "title": "Lecturas en vivo",
+      "subtitle": "Mediciones en tiempo real transmitidas por tus sensores.",
+      "empty": "Aún no hay dispositivos IoT para monitorear.",
+      "view_live": "Ver lecturas en vivo",
+      "select_device": "Dispositivos",
+      "temperature_title": "Temperatura (°C)",
+      "gas_title": "Gas (PPM)",
+      "waiting": "Esperando lecturas…"
+    },
+    "edge": {
+      "load_error": "No se pudo cargar el dispositivo Edge.",
+      "empty": "Aún no hay un dispositivo Edge registrado.",
+      "code": "Código",
+      "registered": "Dispositivo Edge registrado",
+      "updated": "Dispositivo Edge actualizado",
+      "register": {
+        "title": "Registrar el dispositivo Edge",
+        "one_per_org": "Cada organización tiene un único dispositivo Edge. Ingresa el código impreso en el tuyo para registrarlo.",
+        "code": "Código del dispositivo",
+        "code_placeholder": "Código del dispositivo",
+        "name": "Nombre del dispositivo",
+        "name_placeholder": "Nombre del dispositivo",
+        "submit": "Registrar",
+        "registering": "Registrando…"
+      },
+      "actions": {
+        "rename": "Renombrar",
+        "activate": "Activar",
+        "deactivate": "Desactivar",
+        "deactivate_title": "Desactivar dispositivo Edge",
+        "deactivate_confirm": "\"{{ name }}\" dejará de enviar las lecturas de todos los sensores. ¿Deseas desactivarlo?"
+      },
+      "rename": {
+        "title": "Renombrar dispositivo Edge",
+        "name": "Nombre",
+        "save": "Guardar cambios",
+        "saving": "Guardando…"
+      }
+    },
+    "view_denied": "No tienes permiso para ver esta sección.",
+    "presence": {
+      "online": "En línea",
+      "offline": "Desconectado",
+      "unknown": "Sin señal",
+      "since": "Desde {{ time }}"
     }
   }
 }
