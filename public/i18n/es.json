@@ -1,0 +1,478 @@
+{
+  "invitations": {
+    "received": {
+      "title": "Tus invitaciones",
+      "bell_label": "Invitaciones ({{ count }} pendientes)",
+      "tabs_label": "Filtrar invitaciones",
+      "tab_pending": "Pendientes",
+      "tab_responded": "Respondidas",
+      "loading": "Cargando invitaciones…",
+      "invited_by": "{{ name }} te invitó",
+      "invited_you": "Te invitaron a una organización",
+      "accept": "Aceptar",
+      "decline": "Rechazar",
+      "empty": {
+        "pending": "No tienes invitaciones pendientes.",
+        "responded": "Aún no has respondido ninguna invitación."
+      }
+    },
+    "notifications": {
+      "accepted": "Invitación aceptada",
+      "declined": "Invitación rechazada"
+    },
+    "status": {
+      "pending": "Pendiente",
+      "accepted": "Aceptada",
+      "declined": "Rechazada"
+    }
+  },
+  "common": {
+    "email": "Correo",
+    "email_invalid": "Ingresa un correo válido.",
+    "password": "Contraseña",
+    "or": "o",
+    "cancel": "Cancelar"
+  },
+  "auth": {
+    "login": {
+      "title": "Iniciar sesión",
+      "submit": "Iniciar sesión",
+      "submitting": "Entrando…",
+      "no_account": "¿No tienes cuenta?",
+      "register_link": "Regístrate"
+    },
+    "register": {
+      "title": "Crear cuenta",
+      "submit": "Crear cuenta",
+      "submitting": "Creando…",
+      "password_min": "La contraseña debe tener al menos 6 caracteres.",
+      "confirm_password": "Confirmar contraseña",
+      "confirm_password_required": "Confirma tu contraseña.",
+      "passwords_mismatch": "Las contraseñas no coinciden.",
+      "success": "Revisa tu correo para confirmar tu cuenta.",
+      "has_account": "¿Ya tienes cuenta?",
+      "login_link": "Inicia sesión"
+    },
+    "callback": {
+      "loading": "Procesando…",
+      "opening_app": "Abriendo la app…",
+      "error_title": "Error de autenticación",
+      "back_to_login": "Volver al inicio",
+      "open_app_title": "Abre la app",
+      "open_app_desc": "No pudimos abrir la app de Cocina360. ¿Está instalada en este dispositivo?",
+      "download_app": "Descargar la app",
+      "continue_browser": "Continuar en el navegador"
+    },
+    "google": {
+      "label": "Continuar con Google",
+      "connecting": "Conectando…"
+    },
+    "password_toggle": {
+      "show": "Mostrar contraseña",
+      "hide": "Ocultar contraseña"
+    }
+  },
+  "dashboard": {
+    "title": "Panel principal",
+    "description": "Estás autenticado. Esta es una página protegida.",
+    "logged_in_as": "Conectado como:",
+    "sign_out": "Cerrar sesión"
+  },
+  "organizations": {
+    "title": "Organización",
+    "subtitle": "Datos, miembros y suscripción de tu organización.",
+    "loading": "Cargando organización…",
+    "none": "No hay una organización activa.",
+    "tabs": {
+      "overview": "General",
+      "members": "Miembros",
+      "invitations": "Invitaciones",
+      "subscription": "Suscripción",
+      "invoices": "Facturas"
+    },
+    "details": {
+      "title": "Datos de la organización",
+      "subtitle": "Información general y de contacto.",
+      "owner": "Propietario",
+      "address": "Dirección",
+      "address_line_two": "Piso / oficina",
+      "reference": "Referencia",
+      "missing_address_title": "Falta la dirección",
+      "missing_address_desc": "Te recomendamos agregar la dirección de tu organización para completar su perfil.",
+      "edit": {
+        "title": "Editar organización",
+        "aria": "Editar organización",
+        "name": "Nombre",
+        "cancel": "Cancelar",
+        "save": "Guardar",
+        "saving": "Guardando…",
+        "saved": "Organización actualizada",
+        "create": "Crear",
+        "creating": "Creando…",
+        "created": "Organización creada",
+        "create_title": "Crear organización"
+      }
+    },
+    "members": {
+      "title": "Miembros",
+      "count": "{{ count }} persona(s) en la organización.",
+      "invite": "Invitar miembro",
+      "no_name": "Sin nombre",
+      "view_denied": "No tienes permiso para ver los miembros de esta organización.",
+      "detail": {
+        "placeholder": "Selecciona un miembro para ver o editar sus permisos.",
+        "not_found": "No se encontró el miembro.",
+        "read_only": "Solo un administrador puede editar los permisos.",
+        "save": "Guardar",
+        "saving": "Guardando…",
+        "saved": "Permisos actualizados",
+        "admin_locked": "Los permisos de un administrador no se pueden modificar.",
+        "contexts": {
+          "security": "Seguridad",
+          "organizations": "Organización",
+          "internalControl": "Control interno"
+        }
+      },
+      "roles": {
+        "none": "Sin acceso",
+        "assignee": "Asignado",
+        "lieutenant": "Supervisor",
+        "admin": "Administrador"
+      }
+    },
+    "invitations": {
+      "title": "Invitaciones",
+      "subtitle": "Invita personas a tu organización y sigue su estado.",
+      "loading": "Cargando invitaciones…",
+      "empty": "Aún no hay invitaciones.",
+      "no_matches": "Ninguna invitación coincide con este estado.",
+      "view_denied": "No tienes permiso para ver las invitaciones de esta organización.",
+      "email": "Correo de la persona a invitar",
+      "email_placeholder": "persona@correo.com",
+      "send": "Enviar invitación",
+      "sending": "Enviando…",
+      "sent": "Invitación enviada",
+      "invited_by": "Invitada por {{ name }}",
+      "filter_label": "Filtrar por estado",
+      "status_filter": {
+        "all": "Todas"
+      },
+      "status": {
+        "pending": "Pendiente",
+        "accepted": "Aceptada",
+        "declined": "Rechazada"
+      }
+    },
+    "subscription": {
+      "title": "Suscripción",
+      "subtitle": "Plan actual y facturación.",
+      "plan": "Plan",
+      "renews": "Renueva",
+      "ends": "Finaliza",
+      "manage": {
+        "title": "Gestionar suscripción",
+        "subtitle": "Elige un plan para tu organización.",
+        "back": "Volver",
+        "choose_plan": "Elegir plan",
+        "current": "Actual",
+        "prices": {
+          "free": "Gratis",
+          "basic": "$5 / mes",
+          "professional": "$15 / mes"
+        },
+        "card_label": "Datos de la tarjeta",
+        "card_loading": "Cargando el formulario de pago…",
+        "card_hint": "Pago simulado (modo de prueba). Se usa una tarjeta de prueba de Stripe; no se cobra nada real.",
+        "summary": "Resumen",
+        "total": "Total",
+        "pay": "Pagar",
+        "cancel": "Cancelar",
+        "confirm_subscribe": "Suscribirse",
+        "confirm_change": "Cambiar plan",
+        "confirm_downgrade": "Bajar a Gratis",
+        "resume": "Reanudar",
+        "resume_notice": "Tu plan cambia a {{plan}} el {{date}}.",
+        "saving": "Guardando…",
+        "success_changed": "Plan actualizado",
+        "success_downgraded": "Se programó la baja al plan Gratis",
+        "success_resumed": "Suscripción reanudada",
+        "error": "No se pudo completar la operación",
+        "card_number": "Número de tarjeta",
+        "card_expiry": "Vencimiento",
+        "card_cvc": "CVC",
+        "card_name": "Nombre en la tarjeta",
+        "summary_hint": "Elige un plan para ver tu resumen.",
+        "upgrade_note": "Se cobra hoy, con descuento por el tiempo restante de tu plan actual.",
+        "downgrade_note": "El cambio se aplica el {{date}}."
+      },
+      "plans": {
+        "free": "Gratis",
+        "basic": "Básico",
+        "professional": "Profesional"
+      },
+      "status": {
+        "active": "Activa",
+        "scheduled": "Programada"
+      },
+      "pending_notice": "Cambia al plan {{plan}}"
+    },
+    "invoices": {
+      "title": "Facturas",
+      "subtitle": "Historial de facturación de tu organización.",
+      "empty": "Todavía no hay facturas.",
+      "no_number": "Sin número",
+      "view": "Ver",
+      "download": "PDF",
+      "view_denied": "Solo el propietario de la organización puede ver las facturas.",
+      "status": {
+        "paid": "Pagada",
+        "open": "Pendiente",
+        "void": "Anulada",
+        "uncollectible": "Incobrable",
+        "draft": "Borrador"
+      }
+    }
+  },
+  "internalControl": {
+    "processes": {
+      "header": "Procesos de control",
+      "empty": "No hay procesos de control todavía.",
+      "new_format": "Nuevo formato",
+      "rename_aria": "Renombrar {{ name }}"
+    },
+    "placeholder": "Abre un proceso y selecciona un formato del panel para ver su contenido.",
+    "format": {
+      "loading": "Cargando formato…",
+      "draft_locked": "Este formato está en borrador. Solo un administrador puede configurarlo.",
+      "load_error": "No se pudo cargar el formato."
+    },
+    "lifecycle": {
+      "activate": "Activar",
+      "suspend": "Suspender",
+      "resume": "Reanudar",
+      "cease": "Cesar",
+      "cease_title": "Cesar formato",
+      "cease_confirm": "¿Cesar el formato \"{{ name }}\"? Esta acción no se puede deshacer."
+    },
+    "schema": {
+      "title": "Columnas del formato",
+      "subtitle": "Define la estructura. Se bloquea al activar y no habrá filas hasta entonces.",
+      "add_field": "Agregar campo",
+      "empty": "Sin columnas todavía. Agrega el primer campo.",
+      "move_up": "Subir campo",
+      "move_down": "Bajar campo",
+      "column_name_placeholder": "Nombre de la columna",
+      "field_name_aria": "Nombre del campo {{ n }}",
+      "field_type_aria": "Tipo del campo {{ n }}",
+      "required": "Requerido",
+      "delete_field_aria": "Eliminar campo {{ n }}",
+      "rules": "Reglas",
+      "min_length": "Mín. largo",
+      "max_length": "Máx. largo",
+      "type": "Tipo",
+      "integer": "Entero",
+      "decimal": "Decimal",
+      "min": "Mín.",
+      "max": "Máx.",
+      "options": "Opciones",
+      "option_placeholder": "Opción",
+      "option_aria": "Opción {{ n }}",
+      "remove_option_aria": "Eliminar opción {{ n }}",
+      "add_option": "Agregar opción",
+      "saving": "Guardando…",
+      "save": "Guardar campos"
+    },
+    "field_types": {
+      "text": "Texto",
+      "number": "Número",
+      "boolean": "Sí / No",
+      "date": "Fecha",
+      "select": "Selección"
+    },
+    "registry": {
+      "title": "Registros",
+      "count_filtered": "{{ shown }} de {{ total }}",
+      "unit_one": "registro",
+      "unit_other": "registros",
+      "clear": "Limpiar",
+      "filters": "Filtros",
+      "add": "Agregar registro",
+      "created": "Creado",
+      "filter_contains": "Contiene…",
+      "filter_aria": "Filtrar {{ label }}",
+      "filter_min": "Mín",
+      "filter_max": "Máx",
+      "filter_min_aria": "Filtrar {{ label }}: mínimo",
+      "filter_max_aria": "Filtrar {{ label }}: máximo",
+      "filter_from_aria": "Filtrar {{ label }}: desde",
+      "filter_to_aria": "Filtrar {{ label }}: hasta",
+      "filter_all": "Todas",
+      "caption": "Registros del formato {{ name }}",
+      "empty": "Aún no hay registros.",
+      "no_matches": "Ningún registro coincide con los filtros.",
+      "clear_filters": "Limpiar filtros",
+      "no_permission": "No tienes permiso para ver los registros de este formato.",
+      "can_add_hint": "Puedes agregar uno nuevo.",
+      "bool_yes": "Sí",
+      "bool_no": "No"
+    },
+    "form": {
+      "required_mark": "(requerido)",
+      "select_placeholder": "Seleccionar…",
+      "no_fields": "Este formato no tiene campos definidos.",
+      "cancel": "Cancelar",
+      "add": "Agregar",
+      "create": "Crear",
+      "save": "Guardar",
+      "add_registry_title": "Agregar registro",
+      "new_format_title": "Nuevo formato",
+      "rename_process_title": "Renombrar proceso",
+      "format_name": "Nombre del formato",
+      "sample_fields": "Crear campos de ejemplo",
+      "process_name": "Nombre del proceso",
+      "errors": {
+        "required": "Requerido",
+        "min_length": "Mínimo {{ n }} caracteres",
+        "max_length": "Máximo {{ n }} caracteres",
+        "min": "El valor mínimo es {{ n }}",
+        "max": "El valor máximo es {{ n }}",
+        "integer": "Debe ser un número entero",
+        "pattern": "Formato inválido",
+        "invalid": "Valor inválido"
+      }
+    },
+    "notifications": {
+      "format_activated": "Formato activado",
+      "format_suspended": "Formato suspendido",
+      "format_resumed": "Formato reanudado",
+      "format_ceased": "Formato cesado",
+      "format_created": "Formato creado",
+      "fields_saved": "Campos guardados",
+      "registry_added": "Registro agregado",
+      "process_renamed": "Proceso renombrado"
+    }
+  },
+  "security": {
+    "title": "Seguridad",
+    "subtitle": "Los dispositivos que vigilan la organización.",
+    "tabs": {
+      "management": "Gestión",
+      "readings": "Lecturas en vivo"
+    },
+    "iot": {
+      "title": "Dispositivos IoT",
+      "subtitle": "Sensores conectados de la organización.",
+      "empty": "Aún no hay dispositivos IoT.",
+      "load_error": "No se pudieron cargar los dispositivos.",
+      "code": "Código",
+      "updated": "Dispositivo actualizado",
+      "claim": {
+        "code": "Código del dispositivo",
+        "code_placeholder": "Código del dispositivo",
+        "name": "Nombre del dispositivo",
+        "name_placeholder": "Nombre del dispositivo",
+        "submit": "Reclamar dispositivo",
+        "claiming": "Reclamando…",
+        "claimed": "Dispositivo reclamado",
+        "quota_full": "El cupo de dispositivos de tu plan está completo. Mejora el plan para reclamar más dispositivos."
+      },
+      "actions": {
+        "edit": "Editar",
+        "activate": "Activar",
+        "deactivate": "Desactivar",
+        "deactivate_title": "Desactivar dispositivo",
+        "deactivate_confirm": "\"{{ name }}\" dejará de reportar lecturas. ¿Deseas desactivarlo?"
+      },
+      "edit": {
+        "title": "Editar dispositivo",
+        "name": "Nombre",
+        "temperature": "Umbrales de temperatura (°C)",
+        "gas": "Umbrales de gas (PPM)",
+        "warn": "Advertencia",
+        "crit": "Crítico",
+        "order_error": "El umbral de advertencia debe ser menor que el crítico.",
+        "save": "Guardar cambios",
+        "saving": "Guardando…"
+      },
+      "servo": {
+        "start": "Iniciar servo",
+        "stop": "Detener servo",
+        "sent": "Comando enviado"
+      },
+      "thresholds_summary": "Temp {{ tempWarn }}/{{ tempCrit }} °C · Gas {{ gasWarn }}/{{ gasCrit }} PPM"
+    },
+    "quota": {
+      "label": "Cupo",
+      "usage": "{{ used }} de {{ limit }}",
+      "full": "Cupo completo",
+      "unlimited": "{{ used }} · ilimitado"
+    },
+    "status": {
+      "provisioned": "Aprovisionado",
+      "active": "Activo",
+      "inactive": "Inactivo",
+      "label": "Estado de activación"
+    },
+    "readings": {
+      "none": "Aún no hay lecturas.",
+      "temperature": "{{ value }} °C",
+      "gas": "{{ value }} PPM",
+      "stream": {
+        "idle": "Desconectado",
+        "connecting": "Conectando…",
+        "live": "En vivo",
+        "reconnecting": "Reconectando…"
+      },
+      "severity": {
+        "safe": "Seguro",
+        "warning": "Advertencia",
+        "critical": "Crítico"
+      },
+      "title": "Lecturas en vivo",
+      "subtitle": "Mediciones en tiempo real transmitidas por tus sensores.",
+      "empty": "Aún no hay dispositivos IoT para monitorear.",
+      "view_live": "Ver lecturas en vivo",
+      "select_device": "Dispositivos",
+      "temperature_title": "Temperatura (°C)",
+      "gas_title": "Gas (PPM)",
+      "waiting": "Esperando lecturas…"
+    },
+    "edge": {
+      "load_error": "No se pudo cargar el dispositivo Edge.",
+      "empty": "Aún no hay un dispositivo Edge registrado.",
+      "code": "Código",
+      "registered": "Dispositivo Edge registrado",
+      "updated": "Dispositivo Edge actualizado",
+      "register": {
+        "title": "Registrar el dispositivo Edge",
+        "one_per_org": "Cada organización tiene un único dispositivo Edge. Ingresa el código impreso en el tuyo para registrarlo.",
+        "code": "Código del dispositivo",
+        "code_placeholder": "Código del dispositivo",
+        "name": "Nombre del dispositivo",
+        "name_placeholder": "Nombre del dispositivo",
+        "submit": "Registrar",
+        "registering": "Registrando…"
+      },
+      "actions": {
+        "rename": "Renombrar",
+        "activate": "Activar",
+        "deactivate": "Desactivar",
+        "deactivate_title": "Desactivar dispositivo Edge",
+        "deactivate_confirm": "\"{{ name }}\" dejará de enviar las lecturas de todos los sensores. ¿Deseas desactivarlo?"
+      },
+      "rename": {
+        "title": "Renombrar dispositivo Edge",
+        "name": "Nombre",
+        "save": "Guardar cambios",
+        "saving": "Guardando…"
+      }
+    },
+    "view_denied": "No tienes permiso para ver esta sección.",
+    "presence": {
+      "online": "En línea",
+      "offline": "Desconectado",
+      "unknown": "Sin señal",
+      "since": "Desde {{ time }}"
+    }
+  }
+}

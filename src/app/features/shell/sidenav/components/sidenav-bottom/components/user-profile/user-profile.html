@@ -1,0 +1,52 @@
+<div class="grid" style="grid-template-areas: 'stack'">
+
+  <!-- skeleton -->
+  <div
+    class="grid grid-cols-[36px_1fr] items-center gap-3 transition-opacity duration-500 ease-in-out"
+    style="grid-area: stack"
+    [style.opacity]="loading() ? '1' : '0'"
+    [class.pointer-events-none]="!loading()"
+    aria-hidden="true"
+  >
+    <div class="h-9 w-9 animate-pulse rounded-full bg-gray-200"></div>
+    <div class="grid gap-1.5">
+      <div class="h-3 w-28 animate-pulse rounded bg-gray-200"></div>
+      <div class="h-2.5 w-36 animate-pulse rounded bg-gray-200"></div>
+    </div>
+  </div>
+
+  <!-- content -->
+  <div
+    class="grid grid-cols-[36px_1fr] items-center gap-3"
+    style="grid-area: stack"
+    [class.animate-fade-in]="!loading()"
+    [style.opacity]="loading() ? '0' : null"
+    [class.pointer-events-none]="loading()"
+    [attr.aria-hidden]="loading() || null"
+  >
+    <div
+      class="grid h-9 w-9 place-items-center overflow-hidden rounded-full text-xs font-bold text-white"
+      style="background-color: #0E3B63"
+      [attr.aria-label]="name()"
+    >
+      @if (showAvatar()) {
+        <img
+          [src]="avatarSrc()"
+          [alt]="name()"
+          width="36"
+          height="36"
+          class="h-9 w-9 object-cover"
+          referrerpolicy="no-referrer"
+          (error)="onAvatarError()"
+        />
+      } @else {
+        {{ initials() }}
+      }
+    </div>
+    <div class="grid">
+      <span class="truncate text-sm font-semibold leading-tight" style="color: #1a1a1a">{{ name() }}</span>
+      <span class="truncate text-xs" style="color: #4A4A4F">{{ email() }}</span>
+    </div>
+  </div>
+
+</div>

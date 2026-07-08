@@ -1,0 +1,74 @@
+<button
+  type="button"
+  (click)="toggled.emit()"
+  [attr.aria-expanded]="open()"
+  aria-haspopup="listbox"
+  aria-label="Select organization"
+  [disabled]="isLoading()"
+  class="grid w-full grid-cols-[1fr_16px] items-center gap-2 rounded-[4px] border px-2.5 py-2 text-left transition-colors hover:bg-gray-50 disabled:opacity-60"
+  style="border-color: #e2e8f0"
+>
+  <div class="grid" style="grid-template-areas: 'stack'">
+
+    <!-- skeleton -->
+    <div
+      class="grid grid-cols-[28px_1fr] items-center gap-2 transition-opacity duration-500 ease-in-out"
+      style="grid-area: stack"
+      [style.opacity]="isLoading() ? '1' : '0'"
+      [class.pointer-events-none]="!isLoading()"
+      aria-hidden="true"
+    >
+      <span class="h-7 w-7 animate-pulse rounded-[4px] bg-gray-200"></span>
+      <span class="grid gap-1.5">
+        <span class="h-3 w-24 animate-pulse rounded bg-gray-200"></span>
+        <span class="h-2 w-16 animate-pulse rounded bg-gray-200"></span>
+      </span>
+    </div>
+
+    <!-- active org -->
+    @if (activeOrg(); as org) {
+      <div
+        class="grid grid-cols-[28px_1fr] items-center gap-2"
+        style="grid-area: stack"
+        [class.animate-fade-in]="!isLoading()"
+        [style.opacity]="isLoading() ? '0' : null"
+        [class.pointer-events-none]="isLoading()"
+      >
+        <span
+          class="grid h-7 w-7 place-items-center rounded-[4px] text-xs font-bold text-white"
+          style="background-color: #0E3B63"
+          aria-hidden="true"
+        >{{ initial(org.name) }}</span>
+        <span class="grid">
+          <span class="truncate text-sm font-semibold leading-tight" style="color: #1a1a1a">{{ org.name }}</span>
+          <span class="truncate text-[11px]" style="color: #4A4A4F">Organization</span>
+        </span>
+      </div>
+    } @else {
+      <!-- no org -->
+      <div
+        class="grid grid-cols-[28px_1fr] items-center gap-2"
+        style="grid-area: stack"
+        [class.animate-fade-in]="!isLoading()"
+        [style.opacity]="isLoading() ? '0' : null"
+        [class.pointer-events-none]="isLoading()"
+      >
+        <span
+          class="grid h-7 w-7 place-items-center rounded-[4px] text-xs font-bold"
+          style="background-color: #f1f5f9; color: #4A4A4F"
+          aria-hidden="true"
+        >–</span>
+        <span class="truncate text-sm font-medium" style="color: #4A4A4F">No organization</span>
+      </div>
+    }
+
+  </div>
+
+  <svg
+    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24"
+    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+    style="color: #4A4A4F" aria-hidden="true"
+  >
+    <polyline points="6 9 12 15 18 9" />
+  </svg>
+</button>
