@@ -1,10 +1,12 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslocoPipe } from '@jsverse/transloco';
 import { SupabaseService } from '../../../../../../../core/services/supabase.service';
 
 @Component({
   selector: 'app-sign-out-button',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [TranslocoPipe],
   template: `
     <button
       type="button"
@@ -23,7 +25,7 @@ import { SupabaseService } from '../../../../../../../core/services/supabase.ser
         <polyline points="16 17 21 12 16 7"/>
         <line x1="21" y1="12" x2="9" y2="12"/>
       </svg>
-      <span>Sign out</span>
+      <span>{{ 'dashboard.sign_out' | transloco }}</span>
     </button>
   `,
 })

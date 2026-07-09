@@ -31,7 +31,34 @@
     "email_invalid": "Ingresa un correo válido.",
     "password": "Contraseña",
     "or": "o",
-    "cancel": "Cancelar"
+    "cancel": "Cancelar",
+    "close": "Cerrar",
+    "close_notification": "Cerrar notificación",
+    "language": {
+      "switch_aria": "Cambiar idioma",
+      "en": "Inglés",
+      "es": "Español"
+    }
+  },
+  "shell": {
+    "nav": {
+      "toggle_aria": "Alternar navegación",
+      "sidebar_aria": "Barra lateral",
+      "main_nav_aria": "Navegación principal",
+      "organizations": "Organización",
+      "internal_control": "Control interno",
+      "security": "Seguridad"
+    },
+    "brand": {
+      "home_aria": "Inicio de Cocina360"
+    },
+    "org_selector": {
+      "aria": "Organizaciones",
+      "select_aria": "Seleccionar organización",
+      "org_label": "Organización",
+      "none": "Sin organización",
+      "empty": "Todavía no perteneces a ninguna organización. Crea una para comenzar."
+    }
   },
   "auth": {
     "login": {

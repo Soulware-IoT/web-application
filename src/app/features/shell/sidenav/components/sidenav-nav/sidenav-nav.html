@@ -1,4 +1,4 @@
-<nav aria-label="Main navigation">
+<nav [attr.aria-label]="'shell.nav.main_nav_aria' | transloco">
   <ul class="grid gap-0.5 px-3 py-2">
     @for (item of visibleItems(); track item.route) {
       <li>
@@ -9,7 +9,7 @@
           style="grid-template-columns: 20px 1fr; color: #4A4A4F"
         >
           <span [innerHTML]="item.icon"></span>
-          <span>{{ item.label }}</span>
+          <span>{{ item.labelKey | transloco }}</span>
         </a>
       </li>
     }
