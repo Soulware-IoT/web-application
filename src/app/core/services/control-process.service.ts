@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { TranslocoService } from '@jsverse/transloco';
 import { environment } from '../../../environments/environment';
 import { OrganizationService } from './organization.service';
-import { ControlProcessResponse } from '../models/control-process.model';
+import { ControlProcessResponse, CreateControlProcessRequest } from '../models/control-process.model';
 import { NotificationService, httpErrorMessage } from '../notifications/notification.service';
 
 @Injectable({ providedIn: 'root' })
@@ -31,6 +31,35 @@ export class ControlProcessService {
         this.processes.set(null);
         this.loading.set(true);
       }
+    });
+  }
+
+  /** Creates a control process under the active organization and appends it to the list. */
+  create(name: string): Promise<ControlProcessResponse | null> {
+    const orgId = this.orgService.activeOrg()?.id;
+    if (!orgId) return Promise.resolve(null);
+
+    return new Promise((resolve) => {
+      const body: CreateControlProcessRequest = { name };
+      this.http
+        .post<ControlProcessResponse>(
+          `${environment.apiUrl}/organizations/${orgId}/control-processes`,
+          body,
+        )
+        .subscribe({
+          next: (created) => {
+            this.processes.update((list) => [...(list ?? []), created]);
+            this.notifications.success(
+              this.transloco.translate('internalControl.notifications.process_created'),
+            );
+            resolve(created);
+          },
+          error: (err) => {
+            console.error('[ControlProcessService] failed to create control process', err);
+            this.notifications.error(httpErrorMessage(err));
+            resolve(null);
+          },
+        });
     });
   }
 
