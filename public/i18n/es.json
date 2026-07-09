@@ -238,6 +238,7 @@
       "header": "Procesos de control",
       "empty": "No hay procesos de control todavía.",
       "new_format": "Nuevo formato",
+      "new_process": "Nuevo proceso",
       "rename_aria": "Renombrar {{ name }}"
     },
     "placeholder": "Abre un proceso y selecciona un formato del panel para ver su contenido.",
@@ -326,6 +327,7 @@
       "save": "Guardar",
       "add_registry_title": "Agregar registro",
       "new_format_title": "Nuevo formato",
+      "new_process_title": "Nuevo proceso",
       "rename_process_title": "Renombrar proceso",
       "format_name": "Nombre del formato",
       "sample_fields": "Crear campos de ejemplo",
@@ -349,7 +351,8 @@
       "format_created": "Formato creado",
       "fields_saved": "Campos guardados",
       "registry_added": "Registro agregado",
-      "process_renamed": "Proceso renombrado"
+      "process_renamed": "Proceso renombrado",
+      "process_created": "Proceso creado"
     }
   },
   "security": {

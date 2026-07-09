@@ -238,6 +238,7 @@
       "header": "Control processes",
       "empty": "No control processes yet.",
       "new_format": "New format",
+      "new_process": "New process",
       "rename_aria": "Rename {{ name }}"
     },
     "placeholder": "Open a process and pick a format from the panel to see its content.",
@@ -326,6 +327,7 @@
       "save": "Save",
       "add_registry_title": "Add record",
       "new_format_title": "New format",
+      "new_process_title": "New process",
       "rename_process_title": "Rename process",
       "format_name": "Format name",
       "sample_fields": "Create sample fields",
@@ -349,7 +351,8 @@
       "format_created": "Format created",
       "fields_saved": "Fields saved",
       "registry_added": "Record added",
-      "process_renamed": "Process renamed"
+      "process_renamed": "Process renamed",
+      "process_created": "Process created"
     }
   },
   "security": {
