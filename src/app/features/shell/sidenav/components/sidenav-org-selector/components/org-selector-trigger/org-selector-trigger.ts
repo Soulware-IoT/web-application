@@ -1,9 +1,11 @@
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+import { TranslocoPipe } from '@jsverse/transloco';
 import { OrganizationResponse } from '../../../../../../../core/models/organization.model';
 
 @Component({
   selector: 'app-org-selector-trigger',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [TranslocoPipe],
   templateUrl: './org-selector-trigger.html',
 })
 export class OrgSelectorTrigger {

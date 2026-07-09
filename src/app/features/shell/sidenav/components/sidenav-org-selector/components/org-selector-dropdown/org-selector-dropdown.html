@@ -1,12 +1,12 @@
 <div
   role="listbox"
-  aria-label="Organizations"
+  [attr.aria-label]="'shell.org_selector.aria' | transloco"
   class="absolute left-0 right-0 z-40 mt-1 overflow-hidden rounded-[4px] border bg-white shadow-lg"
   style="border-color: #e2e8f0"
 >
   @if (isEmpty()) {
     <p class="px-3 py-3 text-xs leading-relaxed" style="color: #4A4A4F">
-      You don't belong to any organization yet. Create one to get started.
+      {{ 'shell.org_selector.empty' | transloco }}
     </p>
   } @else {
     @for (org of organizations(); track org.id) {
@@ -47,6 +47,6 @@
     >
       <line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" />
     </svg>
-    <span>Create organization</span>
+    <span>{{ 'organizations.details.edit.create_title' | transloco }}</span>
   </button>
 </div>

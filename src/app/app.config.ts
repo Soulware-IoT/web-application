@@ -4,6 +4,7 @@ import { provideRouter } from '@angular/router';
 import { provideTransloco } from '@jsverse/transloco';
 import { routes } from './app.routes';
 import { TranslocoHttpLoader } from './core/i18n/transloco-loader';
+import { getPersistedLang } from './core/i18n/persisted-lang';
 import { authInterceptor } from './core/interceptors/auth.interceptor';
 import { languageInterceptor } from './core/interceptors/language.interceptor';
 
@@ -15,7 +16,7 @@ export const appConfig: ApplicationConfig = {
     provideTransloco({
       config: {
         availableLangs: ['en', 'es'],
-        defaultLang: 'en',
+        defaultLang: getPersistedLang(),
         fallbackLang: 'en',
         reRenderOnLangChange: true,
         prodMode: false,
