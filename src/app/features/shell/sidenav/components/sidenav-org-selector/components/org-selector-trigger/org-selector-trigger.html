@@ -3,7 +3,7 @@
   (click)="toggled.emit()"
   [attr.aria-expanded]="open()"
   aria-haspopup="listbox"
-  aria-label="Select organization"
+  [attr.aria-label]="'shell.org_selector.select_aria' | transloco"
   [disabled]="isLoading()"
   class="grid w-full grid-cols-[1fr_16px] items-center gap-2 rounded-[4px] border px-2.5 py-2 text-left transition-colors hover:bg-gray-50 disabled:opacity-60"
   style="border-color: #e2e8f0"
@@ -41,7 +41,7 @@
         >{{ initial(org.name) }}</span>
         <span class="grid">
           <span class="truncate text-sm font-semibold leading-tight" style="color: #1a1a1a">{{ org.name }}</span>
-          <span class="truncate text-[11px]" style="color: #4A4A4F">Organization</span>
+          <span class="truncate text-[11px]" style="color: #4A4A4F">{{ 'shell.org_selector.org_label' | transloco }}</span>
         </span>
       </div>
     } @else {
@@ -58,7 +58,7 @@
           style="background-color: #f1f5f9; color: #4A4A4F"
           aria-hidden="true"
         >–</span>
-        <span class="truncate text-sm font-medium" style="color: #4A4A4F">No organization</span>
+        <span class="truncate text-sm font-medium" style="color: #4A4A4F">{{ 'shell.org_selector.none' | transloco }}</span>
       </div>
     }
 

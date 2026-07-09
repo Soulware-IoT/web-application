@@ -27,7 +27,7 @@
       <button
         type="button"
         (click)="ref.close()"
-        aria-label="Cerrar"
+        [attr.aria-label]="'common.close' | transloco"
         class="grid h-7 w-7 place-items-center rounded-[2px] transition-colors hover:bg-gray-100"
         style="color: #4A4A4F"
       >

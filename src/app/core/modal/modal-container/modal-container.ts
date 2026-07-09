@@ -11,6 +11,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { NgComponentOutlet } from '@angular/common';
+import { TranslocoPipe } from '@jsverse/transloco';
 import { ModalRef } from '../modal-ref';
 
 let nextId = 0;
@@ -18,7 +19,7 @@ let nextId = 0;
 @Component({
   selector: 'app-modal-container',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NgComponentOutlet],
+  imports: [NgComponentOutlet, TranslocoPipe],
   templateUrl: './modal-container.html',
   host: {
     '(keydown.escape)': 'ref.close()',
